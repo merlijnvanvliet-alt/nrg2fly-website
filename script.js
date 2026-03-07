@@ -85,8 +85,32 @@ if (statEls.length > 0 && 'IntersectionObserver' in window) {
 /* ===== CONTACT FORM HANDLER ===== */
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
-  contactForm.addEventListener('submit', (e) => {
+  const SUPABASE_URL = 'https://fygduixgwnrvzckyjmdo.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2R1aXhnd25ydnpja3lqbWRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MDYxMzMsImV4cCI6MjA4ODQ4MjEzM30.ZNcuzfHKpvWRJ2q5jJ-N7q8FubU7rm-sJvxixCPCdh8';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
+    submitBtn.textContent = 'Sending…';
+    submitBtn.disabled = true;
+
+    const { error } = await supabase.from('contact_submissions').insert({
+      name:         contactForm.name.value.trim(),
+      email:        contactForm.email.value.trim(),
+      organisation: contactForm.organisation.value.trim() || null,
+      subject:      contactForm.subject.value,
+      message:      contactForm.message.value.trim(),
+    });
+
+    if (error) {
+      submitBtn.textContent = 'Something went wrong — try again';
+      submitBtn.disabled = false;
+      console.error(error);
+      return;
+    }
+
     const success = document.getElementById('form-success');
     contactForm.style.display = 'none';
     if (success) success.style.display = 'block';
