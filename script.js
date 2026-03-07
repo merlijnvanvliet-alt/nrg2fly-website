@@ -96,12 +96,13 @@ if (contactForm) {
     submitBtn.textContent = 'Sending…';
     submitBtn.disabled = true;
 
+    const els = contactForm.elements;
     const { error } = await supabase.from('contact_submissions').insert({
-      name:         contactForm.name.value.trim(),
-      email:        contactForm.email.value.trim(),
-      organisation: contactForm.organisation.value.trim() || null,
-      subject:      contactForm.subject.value,
-      message:      contactForm.message.value.trim(),
+      name:         els['name'].value.trim(),
+      email:        els['email'].value.trim(),
+      organisation: els['organisation'].value.trim() || null,
+      subject:      els['subject'].value,
+      message:      els['message'].value.trim(),
     });
 
     if (error) {
