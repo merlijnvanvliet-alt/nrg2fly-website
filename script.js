@@ -32,7 +32,7 @@ if (hamburger && navLinks) {
 
   // Close menu on outside click
   document.addEventListener('click', (e) => {
-    if (!header.contains(e.target) && navLinks.classList.contains('open')) {
+    if (!header.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('open')) {
       navLinks.classList.remove('open');
       hamburger.classList.remove('open');
       hamburger.setAttribute('aria-expanded', 'false');
@@ -262,5 +262,109 @@ if ('IntersectionObserver' in window) {
     if (href === page || (page === '' && href === 'index.html')) {
       link.classList.add('active');
     }
+  });
+})();
+
+/* ===== SITE SEARCH ===== */
+const SEARCH_INDEX = [
+  // Home
+  { title: 'Home', page: 'Home', url: 'index.html', body: 'electric aviation infrastructure Europe 4200 airports charging mission' },
+  { title: 'Our Mission', page: 'Home', url: 'index.html#mission', body: 'airports prepare electric traffic energy hubs transition climate infrastructure' },
+  { title: 'Project Eurocharge', page: 'Home', url: 'index.html', body: 'pan-European charging standards interoperability Elaad OEM manufacturers standardisation' },
+  { title: 'Infrastructure Assessment', page: 'Home', url: 'index.html', body: 'audit airport infrastructure electric aircraft charging scale assessment' },
+  { title: 'Energy Hub Development', page: 'Home', url: 'index.html', body: 'grid connections renewable energy contracts battery storage self-sufficient energy hubs' },
+  { title: 'Regulatory & Operational Support', page: 'Home', url: 'index.html', body: 'regulatory landscape electric aviation guidance experts operational frameworks' },
+  { title: 'Network & Partnerships', page: 'Home', url: 'index.html', body: 'airports manufacturers airlines energy providers ecosystem regional electric aviation' },
+  { title: 'Partners & Investors', page: 'Home', url: 'index.html', body: 'Fastned Horizon Maxem Future Friendly Fund Electric Flying Connection partners investors' },
+  { title: 'ChangeInc Transition Award 2025', page: 'Home', url: 'index.html', body: 'ChangeInc award 2025 sustainability Netherlands innovator energy transition recognition' },
+  // About
+  { title: 'About & Team', page: 'About', url: 'about.html', body: 'multidisciplinary team aviation energy technology experts electric aviation Europe people' },
+  { title: 'Jacco Bink — Consulting Director', page: 'About', url: 'about.html', body: 'KLM Alliander aviation energy systems consulting director charging infrastructure Netherlands' },
+  { title: 'Merlijn van Vliet — Partnerships Director', page: 'About', url: 'about.html', body: 'E-Flight Academy Electric Flying Connection brand strategy partnerships director pilot' },
+  { title: 'Tristan Oppeneer — Charging Infra Consultant', page: 'About', url: 'about.html', body: 'charging infrastructure standardisation open protocols interoperability standards pilot consultant' },
+  { title: 'Giel Jan Koek — E-Aviation Consultant', page: 'About', url: 'about.html', body: 'aviation consultant operational processes Commercial Pilot License Teuge Airport electric' },
+  { title: 'Ed Meijer — Technical Consultant', page: 'About', url: 'about.html', body: 'IT infrastructure project management energy installations technical consultant airports' },
+  { title: 'Tessa Jongerius — Intern', page: 'About', url: 'about.html', body: 'intern sustainable transformation aviation pilot emerging professional' },
+  { title: 'Jurjen de Jong — Founder', page: 'About', url: 'about.html', body: 'GreenFlux eMobility 150 million charging sessions co-founded NRG2fly 2022 Electric Flying Connection Accenture' },
+  { title: 'Maarten Steinbuch — Founder', page: 'About', url: 'about.html', body: 'TU/e professor scientist e-mobility sustainability keynote speaker Eindhoven Engine serial entrepreneur' },
+  { title: 'Jeroen Kroonen — Founder', page: 'About', url: 'about.html', body: 'sustainable mobility airport energy systems grid solar Noord-Brabant co-founder Provincie' },
+  // Network
+  { title: 'Join the Network', page: 'Network', url: 'network.html', body: 'NRG2fly network airports energy providers aviation experts electric aviation infrastructure join' },
+  { title: 'Network Benefits', page: 'Network', url: 'network.html', body: 'expertise partnerships funding opportunities electric aviation sector member access benefits' },
+  // Jobs
+  { title: 'Job Openings', page: 'Jobs', url: 'jobs.html', body: 'careers team NRG2fly electric aviation Europe Lelystad Teuge Airport vacatures' },
+  { title: 'Regional Director — Belgium & France', page: 'Jobs', url: 'jobs.html#regional-director-belgium-france', body: 'Belgium France market strategy airport operators DGAC French Dutch full-time remote' },
+  { title: 'Regional Director — Scandinavia', page: 'Jobs', url: 'jobs.html#regional-director-scandinavia', body: 'Denmark Norway Sweden Finland Nordic Avinor Swedavia Finavia electric aviation full-time remote' },
+  { title: 'Regional Director — DACH', page: 'Jobs', url: 'jobs.html#regional-director-dach', body: 'Germany Austria Switzerland DACH airports ADV DFS renewable energy infrastructure full-time remote' },
+  { title: 'Aviation Energy Consultant', page: 'Jobs', url: 'jobs.html#aviation-energy-consultant', body: 'Lelystad Teuge Airport energy infrastructure assessment charging electric aircraft grid full-time' },
+  // Contact
+  { title: 'Contact', page: 'Contact', url: 'contact.html', body: 'get in touch question network job opening partnership message jacco@nrg2fly.com Lelystad Teuge' },
+];
+
+(function initSearch() {
+  const toggleBtn = document.getElementById('search-toggle');
+  const overlay = document.getElementById('search-overlay');
+  const input = document.getElementById('search-input');
+  const results = document.getElementById('search-results');
+  const closeBtn = document.getElementById('search-close');
+
+  if (!toggleBtn || !overlay) return;
+
+  const hint = '<p class="search-hint">Type to search pages, sections, and team members…</p>';
+
+  function openSearch() {
+    overlay.classList.add('open');
+    results.innerHTML = hint;
+    input.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeSearch() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    input.value = '';
+    results.innerHTML = '';
+  }
+
+  toggleBtn.addEventListener('click', openSearch);
+  closeBtn.addEventListener('click', closeSearch);
+
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeSearch();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && overlay.classList.contains('open')) {
+      closeSearch();
+    }
+    if ((e.key === '/' || ((e.metaKey || e.ctrlKey) && e.key === 'k')) && !overlay.classList.contains('open')) {
+      const tag = document.activeElement && document.activeElement.tagName;
+      if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+      e.preventDefault();
+      openSearch();
+    }
+  });
+
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { results.innerHTML = hint; return; }
+
+    const matches = SEARCH_INDEX.filter(item =>
+      item.title.toLowerCase().includes(q) ||
+      item.body.toLowerCase().includes(q) ||
+      item.page.toLowerCase().includes(q)
+    );
+
+    if (matches.length === 0) {
+      results.innerHTML = '<p class="search-no-results">No results found.</p>';
+      return;
+    }
+
+    results.innerHTML = matches.map(item =>
+      `<a class="search-result-item" href="${item.url}">
+        <p class="search-result-page">${item.page}</p>
+        <p class="search-result-title">${item.title}</p>
+      </a>`
+    ).join('');
   });
 })();
