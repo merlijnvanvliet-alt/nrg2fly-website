@@ -92,41 +92,27 @@ async function main() {
 
   const page = await context.newPage();
 
-  // Login
-  console.log('Logging in to LinkedIn...');
-  await page.goto('https://www.linkedin.com/login', { waitUntil: 'domcontentloaded', timeout: 30000 });
-  await sleep(2000);
-  await page.fill('#username', process.env.LINKEDIN_EMAIL);
-  await sleep(800);
-  await page.fill('#password', process.env.LINKEDIN_PASSWORD);
-  await sleep(800);
-  await page.click('[type="submit"]');
+  // Load session cookies instead of logging in
+  console.log('Loading LinkedIn session cookies...');
+  const cookiesJson = process.env.LINKEDIN_COOKIES;
+  if (!cookiesJson) throw new Error('LINKEDIN_COOKIES secret not set');
+  const cookies = JSON.parse(cookiesJson);
+  await context.addCookies(cookies);
+  console.log(`Loaded ${cookies.length} cookies`);
 
-  // Wait for URL to change (don't rely on navigation event)
-  try {
-    await page.waitForFunction(
-      () => !window.location.href.includes('/login'),
-      { timeout: 20000 }
-    );
-  } catch {
-    // Still on login page — might be slow or captcha
-  }
-  await sleep(4000);
+  // Verify session is valid
+  await page.goto('https://www.linkedin.com/feed', { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await sleep(3000);
 
   const url = page.url();
-  console.log('After login URL:', url);
+  console.log('After cookie load URL:', url);
 
-  // Save screenshot for debugging
   await page.screenshot({ path: 'login-debug.png', fullPage: false });
-  console.log('Screenshot saved');
 
-  if (url.includes('/login')) {
-    throw new Error('Still on login page after submit — wrong credentials or captcha shown');
+  if (url.includes('/login') || url.includes('/authwall') || url.includes('checkpoint')) {
+    throw new Error('Cookies expired or invalid — re-run save-cookies.js locally to refresh');
   }
-  if (url.includes('checkpoint') || url.includes('challenge') || url.includes('verify')) {
-    throw new Error('LinkedIn security checkpoint triggered — manual verification needed');
-  }
-  console.log('Logged in successfully');
+  console.log('Session valid — logged in via cookies');
 
   // Scrape each company
   const snapshot = {
