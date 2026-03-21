@@ -1,0 +1,15 @@
+{
+  "name": "linkedin-scraper",
+  "version": "1.0.0",
+  "description": "Weekly LinkedIn follower tracker for NRG2fly",
+  "main": "scrape.js",
+  "scripts": {
+    "scrape": "node scrape.js"
+  },
+  "dependencies": {
+    "playwright-extra": "^4.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "playwright": "^1.42.0",
+    "basic-ftp": "^5.0.5"
+  }
+}
