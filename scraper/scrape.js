@@ -12,7 +12,7 @@ const COMPANIES = [
   { name: 'Beta Technologies', slug: 'beta-air-llc' },
   { name: 'Joby Aviation',     slug: 'jobyaviation' },
   { name: 'Green Aero Hub',    slug: 'greenaviationhub' },
-  { name: 'Albatros EU',       slug: 'albatros-horizon-europe' },
+  { name: 'Albatross',          slug: 'albatross-holding' },
 ];
 
 const DATA_FILE = path.join(__dirname, 'linkedin-data.json');
