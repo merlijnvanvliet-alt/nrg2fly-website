@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News — NRG2fly</title>
+  <meta name="description" content="The latest news from NRG2fly — updates on electric aviation infrastructure, charging standards, and our expanding network across Europe.">
+  <meta property="og:title" content="News — NRG2fly">
+  <meta property="og:description" content="The latest news from NRG2fly on electric aviation infrastructure, charging standards, and our expanding European network.">
+  <meta property="og:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <meta property="og:url" content="https://nrg2fly.com/news.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260319" />
+  <style>
+    /* ===== NEWS PAGE ===== */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    .news-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform var(--transition), box-shadow var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .news-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.14);
+    }
+    .news-card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--sage);
+    }
+    .news-card-img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: var(--sage);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+    }
+    .news-card-body {
+      padding: 1.25rem 1.5rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .news-card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.6rem;
+    }
+    .news-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: var(--sage);
+      color: var(--green);
+    }
+    .news-badge--Award     { background: #fffbe6; color: #a07c00; }
+    .news-badge--Partnership { background: #e8f0fe; color: #1a56ba; }
+    .news-badge--Product   { background: #e6f4ea; color: #1e6e3e; }
+    .news-badge--Event     { background: #fce8d5; color: #b54a00; }
+    .news-badge--Press     { background: #f0e6fa; color: #6b28a8; }
+    .news-badge--Update    { background: #f0f0f0; color: #555; }
+    .news-card-date {
+      font-size: 0.82rem;
+      color: var(--text-light);
+    }
+    .news-card-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.1rem, 2vw, 1.25rem);
+      color: var(--dark);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .news-card-intro {
+      font-size: 0.9rem;
+      color: var(--text-light);
+      line-height: 1.6;
+      flex: 1;
+      margin-bottom: 0;
+    }
+    .news-card-link {
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .news-card-link svg { transition: transform var(--transition); }
+    .news-card:hover .news-card-link svg { transform: translateX(3px); }
+
+    /* Filter bar */
+    .news-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .filter-btn {
+      background: none;
+      border: 2px solid #ddd;
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all var(--transition);
+      color: var(--text-light);
+    }
+    .filter-btn:hover,
+    .filter-btn.active {
+      border-color: var(--green);
+      color: var(--green);
+      background: var(--sage);
+    }
+
+    /* Loading / empty states */
+    .news-loading,
+    .news-empty {
+      text-align: center;
+      padding: 4rem 1rem;
+      color: var(--text-light);
+    }
+    .news-loading-spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #eee;
+      border-top-color: var(--green);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto 1rem;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 600px) {
+      .news-grid { grid-template-columns: 1fr; }
+    }
+
+    .news-card { cursor: pointer; }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KNYPSR7BS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6KNYPSR7BS');
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header light" aria-label="Main navigation">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="NRG2fly — Home">
+        <img class="logo-mark" src="NRG2FLY_icon_RGB.png" alt="NRG2fly" />
+        <img class="logo-full" src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Home</a></li>
+        <li><a href="network.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Join the Network</a></li>
+        <li><a href="about.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">About</a></li>
+        <li><a href="news.html" class="nav-link active" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">News</a></li>
+        <li><a href="whitepapers.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Contact</a></li>
+        <li>
+          <button class="search-btn" id="search-toggle" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== PAGE HERO ===== -->
+    <section class="page-hero" aria-labelledby="news-heading">
+      <p class="section-label" style="text-align:center;">Latest Updates</p>
+      <h1 id="news-heading">News</h1>
+      <p>Milestones, partnerships, and insights from NRG2fly and the world of electric aviation.</p>
+    </section>
+
+    <!-- ===== NEWS SECTION ===== -->
+    <section class="section" aria-label="News articles">
+      <div class="container">
+
+        <!-- Filter buttons -->
+        <div class="news-filters" id="news-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Partnership">Partnership</button>
+          <button class="filter-btn" data-filter="Award">Award</button>
+          <button class="filter-btn" data-filter="Product">Product</button>
+          <button class="filter-btn" data-filter="Event">Event</button>
+          <button class="filter-btn" data-filter="Press">Press</button>
+          <button class="filter-btn" data-filter="Update">Update</button>
+        </div>
+
+        <!-- Articles grid -->
+        <div class="news-grid" id="news-grid">
+          <div class="news-loading" id="news-loading">
+            <div class="news-loading-spinner"></div>
+            <p>Loading news…</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
+        <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="network.html">Join the Network</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
+          <li><a href="jobs.html">Job Openings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:jacco@nrg2fly.com">jacco@nrg2fly.com</a></li>
+          <li><a href="contact.html">Send a Message</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 NRG2fly. All rights reserved.</span>
+      <span>Lelystad Airport · Teuge Airport</span>
+    </div>
+  </footer>
+
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search site">
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="search-input" placeholder="Search NRG2fly…" autocomplete="off" aria-label="Search query" />
+        <button class="search-close" id="search-close" aria-label="Close search">&times;</button>
+      </div>
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    /* ===== NEWS LOADER ===== */
+    (function () {
+      const grid    = document.getElementById('news-grid');
+      const loading = document.getElementById('news-loading');
+      const apiUrl  = 'news-data.json';
+
+      const CATEGORY_ICONS = {
+        Award: '🏆', Partnership: '🤝', Product: '⚡', Event: '📅', Press: '📰', Update: '🔔'
+      };
+
+      let allArticles = [];
+      let activeFilter = 'all';
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        const d = new Date(iso);
+        return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+
+      function renderCard(article) {
+        const imgHtml = article.image
+          ? `<img class="news-card-img" src="${article.image}" alt="${article.title}" loading="lazy" />`
+          : `<div class="news-card-img-placeholder">${CATEGORY_ICONS[article.category] || '📰'}</div>`;
+
+        return `
+          <a class="news-card" href="news/${article.slug}.html">
+            ${imgHtml}
+            <div class="news-card-body">
+              <div class="news-card-meta">
+                ${article.category ? `<span class="news-badge news-badge--${article.category}">${article.category}</span>` : ''}
+                <span class="news-card-date">${formatDate(article.date)}</span>
+              </div>
+              <h2 class="news-card-title">${article.title}</h2>
+              ${article.intro ? `<p class="news-card-intro">${article.intro}</p>` : ''}
+            </div>
+          </a>`;
+      }
+
+      function renderGrid(articles) {
+        if (articles.length === 0) {
+          grid.innerHTML = '<p class="news-empty" style="grid-column:1/-1;">No articles found in this category.</p>';
+          return;
+        }
+        grid.innerHTML = articles.map(renderCard).join('');
+      }
+
+      function applyFilter(filter) {
+        activeFilter = filter;
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.filter === filter);
+        });
+        const filtered = filter === 'all' ? allArticles : allArticles.filter(a => a.category === filter);
+        renderGrid(filtered);
+      }
+
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyFilter(btn.dataset.filter));
+      });
+
+      fetch(apiUrl)
+        .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+        .then(data => {
+          allArticles = data;
+          loading.remove();
+          applyFilter(activeFilter);
+        })
+        .catch(err => {
+          loading.innerHTML = `<p style="color:var(--text-light);">Could not load news. (${err.message})</p>`;
+          console.error('News load error:', err);
+        });
+    })();
+  </script>
+</body>
+</html>

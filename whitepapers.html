@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Whitepapers — NRG2fly</title>
+  <meta name="description" content="Free whitepapers on electric aviation infrastructure. Practical knowledge for airports ready to electrify — from GSE charging to Megawatt aircraft chargers.">
+  <meta property="og:title" content="Whitepapers — NRG2fly">
+  <meta property="og:description" content="Free whitepapers on electric aviation infrastructure. Practical knowledge for airports ready to electrify — GSE charging to Megawatt aircraft chargers.">
+  <meta property="og:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <meta property="og:url" content="https://nrg2fly.com/whitepapers.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260319" />
+  <style>
+    /* ===== WHITEPAPER PAGE HERO ===== */
+    .wp-hero {
+      background: var(--dark);
+      padding: calc(var(--nav-height) + 4rem) 1.5rem 4.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .wp-hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      opacity: 0.75;
+      pointer-events: none;
+    }
+    .wp-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.28) 0%, rgba(10,10,10,0.42) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .wp-hero .section-label {
+      color: var(--yellow);
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+    }
+    .wp-hero h1 {
+      color: var(--white);
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 16px rgba(0,0,0,0.55);
+    }
+    .wp-hero p {
+      color: rgba(255,255,255,0.88);
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin: 0 auto;
+      line-height: 1.8;
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    }
+
+    /* ===== CARDS SECTION ===== */
+    .wp-cards-section {
+      padding: var(--section-padding);
+      background: var(--sage);
+    }
+    .wp-cards-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      margin-top: 2.5rem;
+    }
+
+    /* Individual card */
+    .wp-card {
+      background: var(--white);
+      border-radius: 12px;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 8rem 1fr;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .wp-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.13);
+    }
+
+    /* Number column */
+    .wp-card-num-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .wp-card--available .wp-card-num-col { background: var(--green); }
+    .wp-card--coming .wp-card-num-col { background: #2c2c2c; }
+
+    .wp-card-num {
+      font-family: var(--font-heading);
+      font-size: 4.5rem;
+      font-weight: 700;
+      line-height: 1;
+      color: rgba(255,255,255,0.18);
+      user-select: none;
+    }
+
+
+    /* Card body */
+    .wp-card-body {
+      padding: 2rem 2.25rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .wp-card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.6rem;
+    }
+    .wp-status {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 0.22rem 0.7rem;
+      border-radius: 100px;
+      flex-shrink: 0;
+    }
+    .wp-status--available { background: #d4edda; color: #155724; }
+    .wp-status--coming    { background: #fff3cd; color: #856404; }
+
+    .wp-subtitle {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin: 0;
+    }
+    .wp-card-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+      color: var(--dark);
+      line-height: 1.25;
+      margin-bottom: 0.85rem;
+    }
+    .wp-card-text {
+      font-size: 0.93rem;
+      color: var(--text-light);
+      line-height: 1.8;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+    /* Share strip */
+    .wp-share {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid #eee;
+    }
+    .wp-download-count {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin: 0.25rem 0 0.75rem;
+      min-height: 1em;
+    }
+    .wp-share-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-light);
+      margin-right: 0.15rem;
+    }
+    .wp-share-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1.5px solid transparent;
+      cursor: pointer;
+      transition: all .2s ease;
+      background: none;
+    }
+    .wp-share-btn--linkedin { background: #0a66c2; color: #fff; }
+    .wp-share-btn--linkedin:hover { background: #004182; }
+    .wp-share-btn--x { background: #000; color: #fff; }
+    .wp-share-btn--x:hover { background: #333; }
+    .wp-share-btn--mail { background: var(--sage); color: var(--green); border-color: var(--green); }
+    .wp-share-btn--mail:hover { background: var(--green); color: #fff; }
+    .wp-share-btn--copy { border-color: #ddd; color: var(--text); }
+    .wp-share-btn--copy:hover { border-color: var(--green); color: var(--green); }
+
+    .wp-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-bottom: 1.5rem;
+    }
+    .wp-tag {
+      font-size: 0.73rem;
+      font-weight: 600;
+      color: var(--green);
+      background: var(--sage);
+      border: 1.5px solid rgba(83,105,66,0.22);
+      padding: 0.18rem 0.6rem;
+      border-radius: 100px;
+    }
+
+    /* ===== CONTACT SECTION ===== */
+    .wp-contact-section {
+      padding: var(--section-padding);
+      background: var(--dark);
+    }
+    .wp-contact-section .section-label { color: var(--yellow); }
+    .wp-contact-section h2 { color: var(--white); }
+    .wp-contact-section > .container > p {
+      color: rgba(255,255,255,0.65);
+      max-width: 620px;
+    }
+
+    .wp-contact-cards {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      margin-top: 2.75rem;
+    }
+    .wp-contact-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2.25rem 2rem 2rem;
+      text-align: center;
+      transition: background var(--transition), border-color var(--transition);
+    }
+    .wp-contact-card:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: rgba(255,255,255,0.2);
+    }
+    .wp-contact-photo {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      margin-bottom: 1.25rem;
+      border: 3px solid rgba(255,215,54,0.5);
+    }
+    .wp-contact-name {
+      font-family: var(--font-heading);
+      font-size: 1.35rem;
+      color: var(--white);
+      margin-bottom: 0.2rem;
+    }
+    .wp-contact-role {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 1.25rem;
+    }
+    .wp-contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      align-items: center;
+    }
+    .wp-contact-link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--yellow);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0.85;
+      transition: opacity var(--transition);
+    }
+    .wp-contact-link:hover { opacity: 1; text-decoration: underline; }
+
+    .wp-secondary-cta {
+      margin-top: 3rem;
+      text-align: center;
+    }
+    .wp-secondary-cta p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .wp-card { grid-template-columns: 5.5rem 1fr; }
+      .wp-card-num { font-size: 3rem; }
+      .wp-card-body { padding: 1.5rem 1.5rem; }
+      .wp-contact-cards { grid-template-columns: 1fr; max-width: 420px; margin-left: auto; margin-right: auto; }
+    }
+    @media (max-width: 480px) {
+      .wp-card { grid-template-columns: 1fr; }
+      .wp-card-num-col { flex-direction: row; padding: 1rem 1.5rem; justify-content: flex-start; gap: 1rem; }
+      .wp-card-num { font-size: 2.5rem; }
+    }
+  </style>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KNYPSR7BS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6KNYPSR7BS');
+  </script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" aria-label="Main navigation">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="NRG2fly — Home">
+        <img class="logo-mark" src="NRG2FLY_icon_RGB.png" alt="NRG2fly" />
+        <img class="logo-full" src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Home</a></li>
+        <li><a href="network.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Join the Network</a></li>
+        <li><a href="about.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">About</a></li>
+        <li><a href="news.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">News</a></li>
+        <li><a href="whitepapers.html" class="nav-link active" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Contact</a></li>
+        <li>
+          <button class="search-btn" id="search-toggle" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="wp-hero" aria-labelledby="wp-heading">
+      <video class="wp-hero-video" autoplay muted loop playsinline poster="images/Lelystad_airside.jpg">
+        <source src="video/whitepapers.mp4" type="video/mp4" />
+      </video>
+      <p class="section-label">Knowledge Hub</p>
+      <h1 id="wp-heading">Whitepapers</h1>
+      <p>We believe that sharing knowledge accelerates the transition. Our whitepapers give airports, energy providers, and policymakers the practical insights they need to electrify — grounded in real operational experience from the field.</p>
+    </section>
+
+    <!-- ===== WHITEPAPER CARDS ===== -->
+    <section class="wp-cards-section" aria-labelledby="series-heading">
+      <div class="container">
+        <p class="section-label">The Series</p>
+        <h2 id="series-heading">NRG2fly Whitepaper Series</h2>
+        <p class="section-intro">Practical knowledge for airports ready to make the electric transition.</p>
+
+        <div class="wp-cards-list">
+
+          <!-- CARD 01 -->
+          <article class="wp-card wp-card--available" aria-labelledby="wp1-title">
+            <div class="wp-card-num-col">
+<div class="wp-card-num" aria-hidden="true">01</div>
+            </div>
+            <div class="wp-card-body">
+              <div class="wp-card-header">
+                <span class="wp-status wp-status--available">Available Now</span>
+                <p class="wp-subtitle">Ground Support Equipment</p>
+              </div>
+              <h3 class="wp-card-title" id="wp1-title">GSE Electrification: From Sustainability Win to Electric Aviation Readiness</h3>
+              <p class="wp-card-text">Ground Support Equipment represents the fastest and most cost-effective entry point for airport electrification. This whitepaper shows how GSE chargers — when designed correctly — double as the foundation for future aircraft charging infrastructure. A practical guide for airport operations managers and sustainability leads.</p>
+              <div class="wp-tags">
+                <span class="wp-tag">GSE</span>
+                <span class="wp-tag">Infrastructure</span>
+                <span class="wp-tag">Airports</span>
+                <span class="wp-tag">Practical Guide</span>
+              </div>
+              <a href="docs/20260317_Whitepaper_GSE_ENG.pdf" target="_blank" rel="noopener noreferrer" class="btn btn--primary" onclick="trackWpDownload('GSE Electrification')">Download Free PDF</a>
+              <div class="wp-share">
+                <span class="wp-share-label">Share</span>
+                <a class="wp-share-btn wp-share-btn--linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html&title=GSE+Electrification%3A+From+Sustainability+Win+to+Electric+Aviation+Readiness&summary=Free+whitepaper+by+NRG2fly+%E2%80%94+how+GSE+chargers+form+the+foundation+for+future+aircraft+charging+infrastructure." target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+                <a class="wp-share-btn wp-share-btn--x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html%23wp1-title&text=GSE+Electrification%3A+From+Sustainability+Win+to+Electric+Aviation+Readiness+%E2%80%94+NRG2fly" target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  X
+                </a>
+                <a class="wp-share-btn wp-share-btn--mail" href="mailto:?subject=NRG2fly%20Whitepaper%3A%20GSE%20Electrification&body=Check%20out%20this%20free%20whitepaper%20from%20NRG2fly%3A%0A%0Ahttps%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html%23wp1-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                  Email
+                </a>
+                <button class="wp-share-btn wp-share-btn--copy" onclick="copyWpLink('https://www.nrg2fly.com/whitepapers.html#wp1-title', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  <span>Copy link</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 02 -->
+          <article class="wp-card wp-card--coming" aria-labelledby="wp2-title">
+            <div class="wp-card-num-col">
+<div class="wp-card-num" aria-hidden="true">02</div>
+            </div>
+            <div class="wp-card-body">
+              <div class="wp-card-header">
+                <span class="wp-status wp-status--coming">Coming Soon</span>
+                <p class="wp-subtitle">Charging Infrastructure Design</p>
+              </div>
+              <h3 class="wp-card-title" id="wp2-title">The Perfect Plug Point: Optimal Aircraft Charging Locations for Airports and OEMs</h3>
+              <p class="wp-card-text">Where you put the plug shapes everything downstream — apron layout, grid load, turnaround times, and aircraft certification paths. This whitepaper maps the key variables that determine optimal plug placement for both greenfield and retrofit airport environments.</p>
+              <div class="wp-tags">
+                <span class="wp-tag">Charging Design</span>
+                <span class="wp-tag">OEMs</span>
+                <span class="wp-tag">Airports</span>
+                <span class="wp-tag">Standards</span>
+              </div>
+              <a href="mailto:jacco@nrg2fly.com?subject=Whitepaper%2002%20%E2%80%94%20Notify%20me" class="btn btn--outline">Notify Me When Available</a>
+              <div class="wp-share">
+                <span class="wp-share-label">Share</span>
+                <a class="wp-share-btn wp-share-btn--linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html&title=The+Perfect+Plug+Point%3A+Optimal+Aircraft+Charging+Locations+for+Airports+and+OEMs&summary=Upcoming+whitepaper+by+NRG2fly+%E2%80%94+mapping+the+key+variables+that+determine+optimal+plug+placement+for+electric+aircraft." target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+                <a class="wp-share-btn wp-share-btn--x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html%23wp2-title&text=The+Perfect+Plug+Point%3A+Optimal+Aircraft+Charging+Locations+%E2%80%94+NRG2fly" target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  X
+                </a>
+                <a class="wp-share-btn wp-share-btn--mail" href="mailto:?subject=NRG2fly%20Whitepaper%3A%20The%20Perfect%20Plug%20Point&body=Check%20out%20this%20upcoming%20whitepaper%20from%20NRG2fly%3A%0A%0Ahttps%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html%23wp2-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                  Email
+                </a>
+                <button class="wp-share-btn wp-share-btn--copy" onclick="copyWpLink('https://www.nrg2fly.com/whitepapers.html#wp2-title', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  <span>Copy link</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- CARD 03 -->
+          <article class="wp-card wp-card--coming" aria-labelledby="wp3-title">
+            <div class="wp-card-num-col">
+<div class="wp-card-num" aria-hidden="true">03</div>
+            </div>
+            <div class="wp-card-body">
+              <div class="wp-card-header">
+                <span class="wp-status wp-status--coming">Coming Soon</span>
+                <p class="wp-subtitle">Charging Technology</p>
+              </div>
+              <h3 class="wp-card-title" id="wp3-title">Mobile Megawatt Charging: Designing the Ideal Mobile Charger for Electric Aviation</h3>
+              <p class="wp-card-text">Fixed infrastructure is not always feasible or fast enough. Mobile Megawatt Chargers offer airports a flexible, deployable solution for high-power electric aircraft charging. This whitepaper defines the technical and operational requirements for next-generation mobile charging units — informed by NRG2fly's hands-on experience with the first Megawatt Aircraft Charger demonstrator.</p>
+              <div class="wp-tags">
+                <span class="wp-tag">Mobile Charging</span>
+                <span class="wp-tag">Megawatt</span>
+                <span class="wp-tag">Technology</span>
+                <span class="wp-tag">Operations</span>
+              </div>
+              <a href="mailto:jacco@nrg2fly.com?subject=Whitepaper%2003%20%E2%80%94%20Notify%20me" class="btn btn--outline">Notify Me When Available</a>
+              <div class="wp-share">
+                <span class="wp-share-label">Share</span>
+                <a class="wp-share-btn wp-share-btn--linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html&title=Mobile+Megawatt+Charging%3A+Designing+the+Ideal+Mobile+Charger+for+Electric+Aviation&summary=Upcoming+whitepaper+by+NRG2fly+%E2%80%94+technical+and+operational+requirements+for+next-generation+mobile+charging+units." target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                  LinkedIn
+                </a>
+                <a class="wp-share-btn wp-share-btn--x" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html%23wp3-title&text=Mobile+Megawatt+Charging%3A+Designing+the+Ideal+Mobile+Charger+%E2%80%94+NRG2fly" target="_blank" rel="noopener noreferrer">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  X
+                </a>
+                <a class="wp-share-btn wp-share-btn--mail" href="mailto:?subject=NRG2fly%20Whitepaper%3A%20Mobile%20Megawatt%20Charging&body=Check%20out%20this%20upcoming%20whitepaper%20from%20NRG2fly%3A%0A%0Ahttps%3A%2F%2Fwww.nrg2fly.com%2Fwhitepapers.html%23wp3-title">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                  Email
+                </a>
+                <button class="wp-share-btn wp-share-btn--copy" onclick="copyWpLink('https://www.nrg2fly.com/whitepapers.html#wp3-title', this)">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+                  <span>Copy link</span>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="wp-contact-section" aria-labelledby="wp-contact-heading">
+      <div class="container">
+        <p class="section-label">Go Deeper</p>
+        <h2 id="wp-contact-heading">Want to discuss any of these topics?</h2>
+        <p>Our whitepapers are starting points. If you want to go deeper — whether you're an airport planner, aircraft manufacturer, or policymaker — reach out to Jacco or Merlijn directly. We're happy to talk through the details.</p>
+
+        <div class="wp-contact-cards">
+
+          <div class="wp-contact-card">
+            <img class="wp-contact-photo" src="Team/JaccoBink.png" alt="Jacco Bink" />
+            <h3 class="wp-contact-name">Jacco Bink</h3>
+            <p class="wp-contact-role">Consulting Director, NRG2fly</p>
+            <div class="wp-contact-links">
+              <a class="wp-contact-link" href="mailto:jacco@nrg2fly.com">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                jacco@nrg2fly.com
+              </a>
+              <a class="wp-contact-link" href="https://www.linkedin.com/in/jacco-bink-ba6254/" target="_blank" rel="noopener noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+            </div>
+            <a href="https://www.linkedin.com/in/jacco-bink-ba6254/" target="_blank" rel="noopener noreferrer" class="btn btn--primary" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Connect with Jacco</a>
+          </div>
+
+          <div class="wp-contact-card">
+            <img class="wp-contact-photo" src="Team/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" />
+            <h3 class="wp-contact-name">Merlijn van Vliet</h3>
+            <p class="wp-contact-role">Partnerships Director, NRG2fly</p>
+            <div class="wp-contact-links">
+              <a class="wp-contact-link" href="mailto:merlijn@nrg2fly.com">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                merlijn@nrg2fly.com
+              </a>
+              <a class="wp-contact-link" href="https://www.linkedin.com/in/merlijnvanvliet" target="_blank" rel="noopener noreferrer">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+            </div>
+            <a href="https://www.linkedin.com/in/merlijnvanvliet" target="_blank" rel="noopener noreferrer" class="btn btn--primary" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Connect with Merlijn</a>
+          </div>
+
+        </div>
+
+        <div class="wp-secondary-cta">
+          <p>Or use our contact form for general enquiries.</p>
+          <a href="contact.html" class="btn btn--outline">Go to Contact Form</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
+        <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="network.html">Join the Network</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
+          <li><a href="jobs.html">Job Openings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:jacco@nrg2fly.com">jacco@nrg2fly.com</a></li>
+          <li><a href="contact.html">Send a Message</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 NRG2fly. All rights reserved.</span>
+      <span>Lelystad Airport · Teuge Airport</span>
+    </div>
+  </footer>
+
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search site">
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="search-input" placeholder="Search NRG2fly…" autocomplete="off" aria-label="Search query" />
+        <button class="search-close" id="search-close" aria-label="Close search">&times;</button>
+      </div>
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="script.js"></script>
+  <script>
+    const SUPABASE_URL = 'https://fygduixgwnrvzckyjmdo.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2R1aXhnd25ydnpja3lqbWRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MDYxMzMsImV4cCI6MjA4ODQ4MjEzM30.ZNcuzfHKpvWRJ2q5jJ-N7q8FubU7rm-sJvxixCPCdh8';
+    const wpSb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    async function trackWpDownload(whitepaper) {
+      await wpSb.from('whitepaper_downloads').insert({ whitepaper });
+    }
+
+
+    function copyWpLink(url, btn) {
+      navigator.clipboard.writeText(url).then(function () {
+        var span = btn.querySelector('span');
+        span.textContent = 'Copied!';
+        setTimeout(function () { span.textContent = 'Copy link'; }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

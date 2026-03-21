@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NRG2fly — Team Hub</title>
+  <link rel="icon" type="image/png" href="../NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ── */
+    :root {
+      --sand:    #f5efe0;
+      --sand-2:  #ede4cc;
+      --sand-3:  #e0d4b4;
+      --warm:    #c8a96e;
+      --gold:    #ffd936;
+      --green:   #536942;
+      --dark:    #2a2318;
+      --text:    #3d3320;
+      --muted:   #7a6e5a;
+      --white:   #ffffff;
+      --radius:  10px;
+      --shadow:  0 2px 16px rgba(80,60,20,.10);
+      --trans:   0.2s ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--sand);
+      color: var(--text);
+      min-height: 100vh;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--dark);
+      padding: .75rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .topbar img { height: 28px; }
+    .topbar-title {
+      font-family: 'Forum', serif;
+      color: var(--gold);
+      font-size: 1.05rem;
+      letter-spacing: .04em;
+    }
+    .topbar-badge {
+      margin-left: auto;
+      background: #3d3320;
+      color: var(--warm);
+      font-size: .7rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .25rem .7rem;
+      border-radius: 20px;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .page { max-width: 960px; margin: 0 auto; padding: 2.5rem 1.5rem 4rem; }
+
+    h1 {
+      font-family: 'Forum', serif;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--dark);
+      margin-bottom: .4rem;
+    }
+    .subtitle { color: var(--muted); font-size: .95rem; margin-bottom: 2.5rem; }
+
+    /* ── SECTION WRAPPER ── */
+    .section {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 1.75rem 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .section-label {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--warm);
+      margin-bottom: .6rem;
+    }
+    .section h2 {
+      font-family: 'Forum', serif;
+      font-size: 1.25rem;
+      color: var(--dark);
+      margin-bottom: 1.25rem;
+    }
+
+    /* ── CALL TOGGLE ── */
+    .toggle-tabs {
+      display: flex;
+      gap: .5rem;
+      margin-bottom: 1.5rem;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: .65rem 1rem;
+      border: 2px solid var(--sand-3);
+      background: var(--sand);
+      border-radius: var(--radius);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: var(--trans);
+      text-align: center;
+    }
+    .tab-btn.active {
+      background: var(--dark);
+      border-color: var(--dark);
+      color: var(--gold);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    /* ── EMAIL CARD ── */
+    .email-card {
+      border: 1.5px solid var(--sand-3);
+      border-radius: var(--radius);
+      margin-bottom: 1rem;
+      overflow: hidden;
+    }
+    .email-card:last-child { margin-bottom: 0; }
+
+    .email-header {
+      background: var(--sand);
+      padding: .7rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+    }
+    .email-header-info { flex: 1; }
+    .email-label {
+      font-weight: 600;
+      font-size: .85rem;
+      color: var(--dark);
+    }
+    .email-desc {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      padding: .4rem .9rem;
+      border: none;
+      border-radius: 6px;
+      background: var(--dark);
+      color: var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--trans);
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .copy-btn:hover { background: var(--green); color: var(--white); }
+    .copy-btn.copied { background: var(--green); color: var(--white); }
+
+    .email-body {
+      padding: 1rem;
+      font-size: .83rem;
+      line-height: 1.65;
+      color: var(--text);
+      white-space: pre-wrap;
+      background: var(--white);
+    }
+    .email-subject {
+      font-size: .78rem;
+      color: var(--muted);
+      padding: .5rem 1rem;
+      background: #faf6ed;
+      border-top: 1px solid var(--sand-3);
+      border-bottom: 1px solid var(--sand-3);
+    }
+    .email-subject strong { color: var(--dark); }
+
+    /* ── QUICK LINKS ── */
+    .links-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .75rem;
+    }
+    .link-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: .85rem 1rem;
+      border: 1.5px solid var(--sand-3);
+      border-radius: var(--radius);
+      background: var(--sand);
+      gap: .75rem;
+      transition: var(--trans);
+    }
+    .link-card:hover { border-color: var(--warm); background: #fdf6e8; }
+    .link-card-info { flex: 1; min-width: 0; }
+    .link-card-name {
+      font-weight: 600;
+      font-size: .85rem;
+      color: var(--dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .link-card-url {
+      font-size: .73rem;
+      color: var(--muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .link-actions { display: flex; gap: .4rem; flex-shrink: 0; }
+    .icon-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 6px;
+      border: none;
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--trans);
+      font-size: .8rem;
+    }
+    .icon-btn:hover { background: var(--dark); color: var(--gold); }
+    .icon-btn.copied { background: var(--green); color: var(--white); }
+
+    /* ── LOGOS ── */
+    .logos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+      align-items: center;
+    }
+    .logo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: .5rem;
+    }
+    .logo-box {
+      background: var(--sand);
+      border: 1.5px solid var(--sand-3);
+      border-radius: var(--radius);
+      padding: .75rem 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 110px;
+      min-height: 60px;
+      transition: var(--trans);
+      cursor: pointer;
+      position: relative;
+    }
+    .logo-box:hover { border-color: var(--warm); background: #fdf6e8; }
+    .logo-box img { max-height: 38px; max-width: 110px; object-fit: contain; }
+    .logo-label {
+      font-size: .72rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    .logo-download {
+      font-size: .7rem;
+      color: var(--warm);
+      font-weight: 600;
+      text-decoration: underline;
+      cursor: pointer;
+      text-align: center;
+    }
+    .logo-download:hover { color: var(--green); }
+
+    /* ── COMPANY INFO ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: .75rem;
+    }
+    .info-item {
+      background: var(--sand);
+      border: 1.5px solid var(--sand-3);
+      border-radius: var(--radius);
+      padding: .85rem 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: .2rem;
+    }
+    .info-key {
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--warm);
+    }
+    .info-value {
+      font-size: .88rem;
+      color: var(--dark);
+      font-weight: 500;
+    }
+    .info-copy {
+      margin-top: .4rem;
+      align-self: flex-start;
+    }
+    .info-copy.copy-btn { font-size: .72rem; padding: .3rem .65rem; }
+
+    /* ── TOAST ── */
+    .toast {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--dark);
+      color: var(--gold);
+      padding: .6rem 1.4rem;
+      border-radius: 30px;
+      font-size: .83rem;
+      font-weight: 600;
+      pointer-events: none;
+      transition: transform .3s cubic-bezier(.34,1.56,.64,1), opacity .3s;
+      opacity: 0;
+      z-index: 999;
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+    /* ── CHANNELS ── */
+    .channel-block {
+      border: 1.5px solid var(--sand-3);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .channel-header {
+      display: flex;
+      align-items: center;
+      gap: .85rem;
+      padding: .9rem 1rem;
+      background: var(--sand);
+      flex-wrap: wrap;
+    }
+    .channel-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: white;
+    }
+    .channel-icon--li { background: #0a66c2; }
+    .channel-icon--yt { background: #ff0000; }
+    .channel-meta { flex: 1; min-width: 0; }
+    .channel-name { font-weight: 700; font-size: .88rem; color: var(--dark); }
+    .channel-url { font-size: .73rem; color: var(--muted); }
+    .channel-stats { text-align: center; padding: 0 .5rem; }
+    .channel-stat-value { font-size: 1.15rem; font-weight: 700; color: var(--dark); line-height: 1.1; }
+    .channel-stat-label { font-size: .68rem; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+    .channel-note {
+      padding: .6rem 1rem;
+      font-size: .78rem;
+      color: var(--muted);
+      background: var(--white);
+      border-top: 1px solid var(--sand-3);
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+      flex-wrap: wrap;
+    }
+    .followers-input {
+      border: 1.5px solid var(--sand-3);
+      border-radius: 6px;
+      padding: .25rem .6rem;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .78rem;
+      color: var(--dark);
+      background: var(--sand);
+      width: 110px;
+      outline: none;
+    }
+    .followers-input:focus { border-color: var(--warm); }
+
+    /* YouTube grid */
+    .yt-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: .75rem;
+      padding: .75rem 1rem 1rem;
+      background: var(--white);
+      border-top: 1px solid var(--sand-3);
+    }
+    .yt-card {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1.5px solid var(--sand-3);
+      background: var(--sand);
+      transition: var(--trans);
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+    }
+    .yt-card:hover { border-color: var(--warm); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(80,60,20,.10); }
+    .yt-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      background: var(--sand-2);
+      flex-shrink: 0;
+    }
+    .yt-info {
+      padding: .5rem .6rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .yt-title {
+      font-size: .75rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      flex: 1;
+    }
+    .yt-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: .4rem;
+      gap: .3rem;
+    }
+    .yt-badge {
+      display: inline-block;
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      padding: .15rem .4rem;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .yt-badge--short { background: #ff0000; color: white; }
+    .yt-badge--video { background: var(--dark); color: var(--gold); }
+    .yt-copy {
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
+      border: 1.5px solid var(--sand-3);
+      background: var(--white);
+      color: var(--muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: var(--trans);
+    }
+    .yt-copy:hover { background: var(--dark); color: var(--gold); border-color: var(--dark); }
+    .yt-copy.copied { background: var(--green); color: white; border-color: var(--green); }
+    @media (max-width: 500px) {
+      .yt-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    /* ── PREVIEW CARDS ── */
+    .preview-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .preview-card {
+      display: flex;
+      border: 1.5px solid var(--sand-3);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--white);
+      transition: var(--trans);
+    }
+    .preview-card:hover { border-color: var(--warm); box-shadow: 0 2px 12px rgba(80,60,20,.08); }
+    .preview-thumb {
+      width: 140px;
+      flex-shrink: 0;
+      background: var(--sand-2);
+      overflow: hidden;
+    }
+    .preview-thumb a { display: block; width: 100%; height: 100%; }
+    .preview-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .2s;
+    }
+    .preview-thumb a:hover img { transform: scale(1.04); }
+    .preview-body {
+      flex: 1;
+      padding: 1rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: .5rem;
+      min-width: 0;
+    }
+    .preview-top { display: flex; flex-direction: column; gap: .2rem; }
+    .preview-name {
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--dark);
+    }
+    .preview-desc {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+    .preview-url {
+      font-size: .73rem;
+      color: var(--warm);
+      font-weight: 500;
+    }
+    .preview-updated {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .7rem;
+      color: var(--muted);
+      margin-top: .35rem;
+    }
+    .preview-updated svg { flex-shrink: 0; }
+    .preview-actions {
+      display: flex;
+      gap: .5rem;
+      align-items: center;
+    }
+    @media (max-width: 560px) {
+      .preview-card { flex-direction: column; }
+      .preview-thumb { width: 100%; aspect-ratio: 16/9; height: auto; }
+      .preview-thumb a { height: 100%; }
+    }
+
+    /* ── LANG TOGGLE ── */
+    .lang-toggle {
+      display: flex;
+      gap: .3rem;
+      background: var(--sand);
+      border: 1.5px solid var(--sand-3);
+      border-radius: 8px;
+      padding: .25rem;
+    }
+    .lang-btn {
+      padding: .3rem .75rem;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      color: var(--muted);
+      cursor: pointer;
+      transition: var(--trans);
+    }
+    .lang-btn.active {
+      background: var(--dark);
+      color: var(--gold);
+    }
+
+    .link-card-desc {
+      font-size: .73rem;
+      color: var(--muted);
+      margin-top: .1rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .section { padding: 1.25rem; }
+      .links-grid { grid-template-columns: 1fr; }
+      .info-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOPBAR -->
+  <div class="topbar">
+    <img src="../NRG2FLY_icon_RGB.png" alt="NRG2fly" />
+    <span class="topbar-title">Team Hub</span>
+    <span class="topbar-badge">Intern</span>
+  </div>
+
+  <main class="page">
+
+    <h1>Team Hub</h1>
+    <p class="subtitle">Alles wat je nodig hebt voor calls, meetings en klantcontact — op één plek.</p>
+
+    <!-- ── SPECIAL PAGES ── -->
+    <div class="section">
+      <div class="section-label">Special Pages</div>
+      <h2>Pagina's om te delen</h2>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem;">Drie pagina's die we het meest delen met luchthavens en partners. Kopieer de link met één klik.</p>
+
+      <div class="preview-list">
+
+        <!-- LELYSTAD AIRPORT -->
+        <div class="preview-card">
+          <div class="preview-thumb">
+            <a href="https://nrg2fly.com/lelystadairport" target="_blank"><img src="../images/cases/Lelystad/HeroHeader.jpeg" alt="Lelystad Airport preview" /></a>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;">
+                <div class="preview-name" style="margin-bottom:0;">Lelystad Airport</div>
+                <span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:#f59e0b;color:#1a1a1a;padding:.15rem .55rem;border-radius:4px;flex-shrink:0;">Brand New</span>
+              </div>
+              <div class="preview-desc">Ons flagship laadplein — airside, publiek toegankelijk en volledig operationeel. Van strategie tot overdracht aan de luchthaven.</div>
+              <div class="preview-url">nrg2fly.com/lelystadairport</div>
+              <div class="preview-updated" id="updated-lelystad"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
+            </div>
+            <div class="preview-actions">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/lelystadairport')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Kopieer link
+              </button>
+              <a href="https://nrg2fly.com/lelystadairport" target="_blank" class="icon-btn" title="Open pagina">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- PARTNER -->
+        <div class="preview-card">
+          <div class="preview-thumb">
+            <a href="https://nrg2fly.com/partner" target="_blank"><img src="../images/Our ambition.jpg" alt="Partner pagina preview" /></a>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div class="preview-name">Partner pagina</div>
+              <div class="preview-desc">Legt uit hoe we samenwerken met luchthavens — van eerste charger tot volledig laadplein. Ideaal om te sturen naar een luchthavencontact.</div>
+              <div class="preview-url">nrg2fly.com/partner</div>
+              <div class="preview-updated" id="updated-partner"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
+            </div>
+            <div class="preview-actions">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/partner')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Kopieer link
+              </button>
+              <a href="https://nrg2fly.com/partner" target="_blank" class="icon-btn" title="Open pagina">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- DEN HELDER -->
+        <div class="preview-card">
+          <div class="preview-thumb">
+            <a href="https://nrg2fly.com/denhelderairport" target="_blank"><img src="../images/cases/Den Helder Airport Airshot.jpg" alt="Den Helder Airport preview" /></a>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div class="preview-name">Den Helder Airport</div>
+              <div class="preview-desc">Concrete case over de installatie van laadinfrastructuur op Den Helder Airport. Laat zien wat elektrificatie in de praktijk betekent.</div>
+              <div class="preview-url">nrg2fly.com/denhelderairport</div>
+              <div class="preview-updated" id="updated-denhelder"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
+            </div>
+            <div class="preview-actions">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/denhelderairport')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Kopieer link
+              </button>
+              <a href="https://nrg2fly.com/denhelderairport" target="_blank" class="icon-btn" title="Open pagina">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WHITEPAPERS -->
+        <div class="preview-card">
+          <div class="preview-thumb">
+            <a href="https://nrg2fly.com/whitepapers" target="_blank"><img src="../images/og-image.jpg" alt="Whitepapers preview" /></a>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div class="preview-name">Whitepapers</div>
+              <div class="preview-desc">Onze rapporten en marktinzichten over elektrisch vliegen en luchthaven elektrificatie. Goed voor geïnteresseerde partners die meer willen lezen.</div>
+              <div class="preview-url">nrg2fly.com/whitepapers</div>
+              <div class="preview-updated" id="updated-whitepapers"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
+            </div>
+            <div class="preview-actions">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/whitepapers')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Kopieer link
+              </button>
+              <a href="https://nrg2fly.com/whitepapers" target="_blank" class="icon-btn" title="Open pagina">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- WEBSITE -->
+        <div class="preview-card">
+          <div class="preview-thumb">
+            <a href="https://nrg2fly.com" target="_blank"><img src="../images/og-image.jpg" alt="NRG2fly website preview" /></a>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div class="preview-name">Website</div>
+              <div class="preview-desc">De hoofdpagina van NRG2fly — overzicht van ons netwerk, onze diensten en de visie op elektrische luchtvaart.</div>
+              <div class="preview-url">nrg2fly.com</div>
+              <div class="preview-updated" id="updated-website"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
+            </div>
+            <div class="preview-actions">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Kopieer link
+              </button>
+              <a href="https://nrg2fly.com" target="_blank" class="icon-btn" title="Open pagina">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div><!-- /special pages -->
+
+    <!-- ── CALL EMAILS ── -->
+    <div class="section">
+      <div class="section-label">Communicatie</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:1.25rem;">
+        <h2 style="margin:0;">Call Templates</h2>
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="lang-nl" onclick="setMailLang('nl')">NL</button>
+          <button class="lang-btn" id="lang-en" onclick="setMailLang('en')">EN</button>
+        </div>
+      </div>
+
+      <div class="toggle-tabs">
+        <button class="tab-btn active" onclick="switchTab('before')">📞 Voor de call</button>
+        <button class="tab-btn" onclick="switchTab('after')">✅ Na de call</button>
+      </div>
+
+      <!-- BEFORE CALL -->
+      <div class="tab-panel active" id="panel-before">
+        <div class="email-card">
+          <div class="email-header">
+            <div class="email-header-info">
+              <div class="email-label" id="label-before-nl">Links delen voor de call</div>
+              <div class="email-label" id="label-before-en" style="display:none;">Share links before the call</div>
+              <div class="email-desc" id="desc-before-nl">Stuur dit voorafgaand aan een eerste kennismaking</div>
+              <div class="email-desc" id="desc-before-en" style="display:none;">Send this ahead of a first introduction</div>
+            </div>
+            <button class="copy-btn" onclick="copyActiveEmail(this, 'before')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copybtn-before-nl">Kopieer mail</span>
+              <span id="copybtn-before-en" style="display:none;">Copy email</span>
+            </button>
+          </div>
+          <div class="email-subject" id="subject-before-nl"><strong>Onderwerp:</strong> Alvast wat achtergrond voor ons gesprek — NRG2fly</div>
+          <div class="email-subject" id="subject-before-en" style="display:none;"><strong>Subject:</strong> A few links ahead of our call — NRG2fly</div>
+          <div class="email-body" id="mail-before-nl">Hi [Naam],
+
+Binnenkort hebben we een call met elkaar. Ik kijk ernaar uit!
+
+Ik deel alvast een paar links zodat je een beeld kunt krijgen van wat we doen voor ons gesprek:
+
+Onze website geeft een overzicht van NRG2fly, het Europese laadnetwerk dat wij uitrollen voor elektrische vliegtuigen, en de adviesdiensten die we aanbieden aan luchthavens: https://www.nrg2fly.com
+
+Deze pagina is specifiek gericht op luchthavens en geeft een duidelijk beeld van hoe we samenwerken met luchthavenpartners: https://www.nrg2fly.com/partner
+
+En een concreet voorbeeld van hoe luchthaven elektrificatie er in de praktijk uitziet, gebaseerd op ons werk met Den Helder Airport: https://www.nrg2fly.com/denhelderairport
+
+Kijk gerust alvast even naar de links. Ik beantwoord graag je vragen als we elkaar spreken!
+
+Groeten,
+Merlijn</div>
+          <div class="email-body" id="mail-before-en" style="display:none;">Hi [Name],
+
+Looking forward to connecting with you!
+
+Sharing a few links so you can get a feel for what we do before we speak:
+
+Our website gives an overview of NRG2fly, the European charging network we are rolling out for electric aircraft, and the consultancy services we offer to airports: https://www.nrg2fly.com
+
+This page is specifically aimed at airports and gives a clear picture of how we typically work with airport partners: https://www.nrg2fly.com/partner
+
+And here is a concrete example of what airport electrification looks like in practice, based on our work with Den Helder Airport: https://www.nrg2fly.com/denhelderairport
+
+Feel free to have a look ahead of our call. Happy to answer any questions when we speak.
+
+Best,
+Merlijn</div>
+        </div>
+      </div><!-- /before -->
+
+      <!-- AFTER CALL -->
+      <div class="tab-panel" id="panel-after">
+        <div class="email-card">
+          <div class="email-header">
+            <div class="email-header-info">
+              <div class="email-label" id="label-after-nl">Follow-up na de call</div>
+              <div class="email-label" id="label-after-en" style="display:none;">Follow-up after the call</div>
+              <div class="email-desc" id="desc-after-nl">Stuur dit na het gesprek, zoals beloofd</div>
+              <div class="email-desc" id="desc-after-en" style="display:none;">Send this after the call, as promised</div>
+            </div>
+            <button class="copy-btn" onclick="copyActiveEmail(this, 'after')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span id="copybtn-after-nl">Kopieer mail</span>
+              <span id="copybtn-after-en" style="display:none;">Copy email</span>
+            </button>
+          </div>
+          <div class="email-subject" id="subject-after-nl"><strong>Onderwerp:</strong> Fijn gesprek — de links die ik noemde</div>
+          <div class="email-subject" id="subject-after-en" style="display:none;"><strong>Subject:</strong> Great speaking — the links I mentioned</div>
+          <div class="email-body" id="mail-after-nl">Hi [Naam],
+
+Dank voor het leuke gesprek vandaag.
+
+Zoals beloofd deel ik een paar links ter referentie:
+
+Onze website geeft een overzicht van NRG2fly, het Europese laadnetwerk dat wij uitrollen voor elektrische vliegtuigen, en de adviesdiensten die we aanbieden aan luchthavens: https://www.nrg2fly.com
+
+Deze pagina geeft een duidelijk beeld van hoe we samenwerken met luchthavenpartners: https://www.nrg2fly.com/partner
+
+En een concreet voorbeeld van hoe luchthaven elektrificatie er in de praktijk uitziet, gebaseerd op ons werk met Den Helder Airport: https://www.nrg2fly.com/denhelderairport
+
+Ik kijk uit naar de vervolgstappen. Laat me weten als je vragen hebt!
+
+Groeten,
+Merlijn</div>
+          <div class="email-body" id="mail-after-en" style="display:none;">Hi [Name],
+
+Great speaking with you today!
+
+As promised, sharing a few links for reference:
+
+Our website gives an overview of NRG2fly, the European charging network we are rolling out for electric aircraft, and the consultancy services we offer to airports: https://www.nrg2fly.com
+
+This page gives a clear picture of how we typically work with airport partners: https://www.nrg2fly.com/partner
+
+And a concrete example of what airport electrification looks like in practice, based on our work with Den Helder Airport: https://www.nrg2fly.com/denhelderairport
+
+Looking forward to next steps. Let me know if you have any questions!
+
+Best,
+Merlijn</div>
+        </div>
+      </div><!-- /after -->
+
+    </div><!-- /emails section -->
+
+
+    <!-- ── LOGOS ── -->
+    <div class="section">
+      <div class="section-label">Branding</div>
+      <h2>Logo's</h2>
+      <div class="logos-grid">
+
+        <div class="logo-item">
+          <div class="logo-box" onclick="downloadAsset('../NRG2FLY_transparant_logo_RGB.png', 'NRG2fly_logo_RGB.png')" title="Download logo">
+            <img src="../NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly logo kleur" />
+          </div>
+          <span class="logo-label">Logo kleur</span>
+          <span class="logo-download" onclick="downloadAsset('../NRG2FLY_transparant_logo_RGB.png', 'NRG2fly_logo_kleur.png')">↓ Download PNG</span>
+        </div>
+
+        <div class="logo-item">
+          <div class="logo-box" onclick="downloadAsset('../NRG2FLY_transparant_logo_RGB_compact.png', 'NRG2fly_logo_compact.png')" title="Download compact logo">
+            <img src="../NRG2FLY_transparant_logo_RGB_compact.png" alt="NRG2fly compact logo" />
+          </div>
+          <span class="logo-label">Logo compact</span>
+          <span class="logo-download" onclick="downloadAsset('../NRG2FLY_transparant_logo_RGB_compact.png', 'NRG2fly_logo_compact.png')">↓ Download PNG</span>
+        </div>
+
+        <div class="logo-item">
+          <div class="logo-box" onclick="downloadAsset('../NRG2FLY_icon_RGB.png', 'NRG2fly_icon.png')" title="Download icon">
+            <img src="../NRG2FLY_icon_RGB.png" alt="NRG2fly icoon" />
+          </div>
+          <span class="logo-label">Icoon</span>
+          <span class="logo-download" onclick="downloadAsset('../NRG2FLY_icon_RGB.png', 'NRG2fly_icon.png')">↓ Download PNG</span>
+        </div>
+
+        <div class="logo-item">
+          <div class="logo-box" onclick="downloadAsset('../images/partners/01_EFC-logo-RGB.png', 'EFC_logo.png')" title="Download EFC logo">
+            <img src="../images/partners/01_EFC-logo-RGB.png" alt="EFC logo" />
+          </div>
+          <span class="logo-label">EFC</span>
+          <span class="logo-download" onclick="downloadAsset('../images/partners/01_EFC-logo-RGB.png', 'EFC_logo.png')">↓ Download PNG</span>
+        </div>
+
+      </div>
+    </div><!-- /logos -->
+
+    <!-- ── OUR CHANNELS ── -->
+    <div class="section">
+      <div class="section-label">Our Channels</div>
+      <h2>Our Channels</h2>
+
+      <!-- LinkedIn -->
+      <div class="channel-block">
+        <div class="channel-header">
+          <div class="channel-icon channel-icon--li">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div class="channel-meta">
+            <div class="channel-name">LinkedIn</div>
+            <div class="channel-url">linkedin.com/company/nrg2fly</div>
+          </div>
+          <div style="display:flex;gap:.4rem;align-items:center;margin-left:auto;">
+            <button class="copy-btn" onclick="copyText(this, 'https://www.linkedin.com/company/nrg2fly')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Link
+            </button>
+            <a href="https://www.linkedin.com/company/nrg2fly" target="_blank" class="icon-btn" title="Open LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- YouTube -->
+      <div class="channel-block" style="margin-top:1rem;">
+        <div class="channel-header">
+          <div class="channel-icon channel-icon--yt">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.54C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.96A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="white"/></svg>
+          </div>
+          <div class="channel-meta">
+            <div class="channel-name">YouTube</div>
+            <div class="channel-url">youtube.com/@NRG2fly</div>
+          </div>
+          <div style="display:flex;gap:.4rem;align-items:center;margin-left:auto;">
+            <button class="copy-btn" onclick="copyText(this, 'https://www.youtube.com/@NRG2fly')">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Link
+            </button>
+            <a href="https://www.youtube.com/@NRG2fly" target="_blank" class="icon-btn" title="Open YouTube">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          </div>
+        </div>
+        <div class="yt-grid">
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/shorts/fxS_euPvMv0" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/fxS_euPvMv0/mqdefault.jpg" alt="Short" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">Lelystad Airport Aircraft Charger stoppen met de TAP electric app</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--short">Short</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/shorts/fxS_euPvMv0')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/shorts/3NauCb_b1g4" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/3NauCb_b1g4/mqdefault.jpg" alt="Short" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">Lelystad Airport Aircraft Charger starten met de Tap Electric App</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--short">Short</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/shorts/3NauCb_b1g4')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=9OkiiDdD_-w" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/9OkiiDdD_-w/mqdefault.jpg" alt="Video" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">Hello! We are NRG2fly</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--video">Video</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/watch?v=9OkiiDdD_-w')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=2sSDqpEZz2w" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/2sSDqpEZz2w/mqdefault.jpg" alt="Video" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">NRG2Fly — Toekomstmaker in Flevoland</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--video">Video</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/watch?v=2sSDqpEZz2w')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=xmGHU2sZLzU" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/xmGHU2sZLzU/mqdefault.jpg" alt="Video" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">VIDEO Horizon Flevoland — NRG2fly — Lelystad Airport</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--video">Video</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/watch?v=xmGHU2sZLzU')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=UFrUUhr_vpE" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/UFrUUhr_vpE/mqdefault.jpg" alt="Video" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">S1A4 — Lelystad Airport: Positieve energie</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--video">Video</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/watch?v=UFrUUhr_vpE')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="yt-card">
+            <a href="https://www.youtube.com/watch?v=JgqHIny8u-U" target="_blank"><img class="yt-thumb" src="https://i.ytimg.com/vi/JgqHIny8u-U/mqdefault.jpg" alt="Video" loading="lazy" /></a>
+            <div class="yt-info">
+              <div class="yt-title">'Het belang van een landelijk laadnetwerk voor vliegtuigen' — Merlijn van Vliet, Business Mobility Week</div>
+              <div class="yt-footer">
+                <span class="yt-badge yt-badge--video">Video</span>
+                <button class="yt-copy" onclick="copyYT(this,'https://www.youtube.com/watch?v=JgqHIny8u-U')" title="Kopieer link"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /our channels -->
+
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">Gekopieerd!</div>
+
+  <script>
+    /* ── TABS ── */
+    function switchTab(which) {
+      document.querySelectorAll('.tab-btn').forEach((b, i) => {
+        b.classList.toggle('active', (i === 0 && which === 'before') || (i === 1 && which === 'after'));
+      });
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('panel-' + which).classList.add('active');
+    }
+
+    /* ── MAIL LANGUAGE ── */
+    let mailLang = 'nl';
+
+    function setMailLang(lang) {
+      mailLang = lang;
+      document.getElementById('lang-nl').classList.toggle('active', lang === 'nl');
+      document.getElementById('lang-en').classList.toggle('active', lang === 'en');
+      const other = lang === 'nl' ? 'en' : 'nl';
+      ['before', 'after'].forEach(tab => {
+        ['label', 'desc', 'subject', 'mail', 'copybtn'].forEach(part => {
+          const show = document.getElementById(part + '-' + tab + '-' + lang);
+          const hide = document.getElementById(part + '-' + tab + '-' + other);
+          if (show) show.style.display = '';
+          if (hide) hide.style.display = 'none';
+        });
+      });
+    }
+
+    /* ── COPY ACTIVE EMAIL ── */
+    function copyActiveEmail(btn, tab) {
+      const body = document.getElementById('mail-' + tab + '-' + mailLang).textContent;
+      navigator.clipboard.writeText(body).then(() => {
+        btn.classList.add('copied');
+        const label = mailLang === 'nl' ? '✓ Gekopieerd' : '✓ Copied';
+        const spanId = 'copybtn-' + tab + '-' + mailLang;
+        const span = document.getElementById(spanId);
+        const orig = span.textContent;
+        span.textContent = label;
+        showToast(mailLang === 'nl' ? 'Mail gekopieerd!' : 'Email copied!');
+        setTimeout(() => { btn.classList.remove('copied'); span.textContent = orig; }, 2500);
+      });
+    }
+
+    /* ── COPY LINK ── */
+    function copyLink(btn, url) {
+      navigator.clipboard.writeText(url).then(() => {
+        btn.classList.add('copied');
+        const orig = btn.innerHTML;
+        btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg> Gekopieerd';
+        showToast('Link gekopieerd!');
+        setTimeout(() => { btn.classList.remove('copied'); btn.innerHTML = orig; }, 2000);
+      });
+    }
+
+    /* ── PAGE LAST UPDATED ── */
+    async function loadLastUpdated(id, url) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      try {
+        const res = await fetch(url, { method: 'HEAD', cache: 'no-cache' });
+        const raw = res.headers.get('Last-Modified');
+        if (raw) {
+          const d = new Date(raw);
+          const str = d.toLocaleDateString('nl-NL', { day: 'numeric', month: 'short', year: 'numeric' }) +
+                      ' ' + d.toLocaleTimeString('nl-NL', { hour: '2-digit', minute: '2-digit' });
+          el.querySelector('span').textContent = 'Bijgewerkt: ' + str;
+        } else {
+          el.querySelector('span').textContent = 'Datum onbekend';
+        }
+      } catch {
+        el.querySelector('span').textContent = 'Niet te laden';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      loadLastUpdated('updated-partner',    'https://nrg2fly.com/partner.html');
+      loadLastUpdated('updated-denhelder',  'https://nrg2fly.com/denhelderairport/');
+      loadLastUpdated('updated-lelystad',   'https://nrg2fly.com/lelystadairport/');
+      loadLastUpdated('updated-whitepapers','https://nrg2fly.com/whitepapers.html');
+      loadLastUpdated('updated-website',    'https://nrg2fly.com/');
+    });
+
+    /* ── COPY YOUTUBE LINK ── */
+    function copyYT(btn, url) {
+      navigator.clipboard.writeText(url).then(() => {
+        btn.classList.add('copied');
+        btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>';
+        showToast('Link gekopieerd!');
+        setTimeout(() => {
+          btn.classList.remove('copied');
+          btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+        }, 2000);
+      });
+    }
+
+
+    /* ── COPY TEXT ── */
+    function copyText(btn, text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.textContent;
+        btn.classList.add('copied');
+        btn.textContent = '✓';
+        showToast('Gekopieerd!');
+        setTimeout(() => { btn.classList.remove('copied'); btn.textContent = orig; }, 2000);
+      });
+    }
+
+    /* ── DOWNLOAD ASSET ── */
+    function downloadAsset(path, filename) {
+      const a = document.createElement('a');
+      a.href = path;
+      a.download = filename;
+      a.click();
+    }
+
+    /* ── TOAST ── */
+    let toastTimer;
+    function showToast(msg) {
+      const t = document.getElementById('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+    }
+  </script>
+
+</body>
+</html>

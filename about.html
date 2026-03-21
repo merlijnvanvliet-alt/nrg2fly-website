@@ -4,12 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About &amp; Team — NRG2fly</title>
-  <meta name="description" content="Meet the NRG2fly team — the people powering Europe's airports for the electric aviation era." />
+  <meta name="description" content="NRG2fly was founded to bridge the gap between electric aviation ambitions and practical airport infrastructure. Meet the team behind Europe's charging network.">
+  <meta property="og:title" content="About &amp; Team — NRG2fly">
+  <meta property="og:description" content="NRG2fly was founded to bridge the gap between electric aviation ambitions and practical airport infrastructure. Meet the team.">
+  <meta property="og:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <meta property="og:url" content="https://nrg2fly.com/about.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nrg2fly.com/images/og-image.jpg">
   <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260319" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KNYPSR7BS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6KNYPSR7BS');
+  </script>
 </head>
 <body>
 
@@ -24,11 +39,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" role="list">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link active">About</a></li>
-        <li><a href="network.html" class="nav-link">Join the Network</a></li>
-        <li><a href="jobs.html" class="nav-link">Job Openings</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="index.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Home</a></li>
+        <li><a href="network.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Join the Network</a></li>
+        <li><a href="about.html" class="nav-link active" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">About</a></li>
+        <li><a href="news.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">News</a></li>
+        <li><a href="whitepapers.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Contact</a></li>
         <li>
           <button class="search-btn" id="search-toggle" aria-label="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -55,7 +72,7 @@
         <div class="people-grid people-grid--centered js-stagger">
 
           <!-- Jacco Bink -->
-          <div class="person-card js-reveal">
+          <div class="person-card js-reveal" id="jacco">
             <a href="https://www.linkedin.com/in/jacco-bink-ba6254/" target="_blank" rel="noopener noreferrer" class="person-avatar-link" aria-label="Jacco Bink on LinkedIn">
               <img class="person-avatar" src="Team/JaccoBink.png" alt="Jacco Bink" />
               <div class="person-avatar-overlay" aria-hidden="true">
@@ -74,7 +91,7 @@
           </div>
 
           <!-- Merlijn van Vliet -->
-          <div class="person-card js-reveal">
+          <div class="person-card js-reveal" id="merlijn">
             <a href="https://www.linkedin.com/in/merlijnvanvliet" target="_blank" rel="noopener noreferrer" class="person-avatar-link" aria-label="Merlijn van Vliet on LinkedIn">
               <img class="person-avatar" src="Team/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" />
               <div class="person-avatar-overlay" aria-hidden="true">
@@ -105,7 +122,7 @@
         <div class="people-grid js-stagger">
 
           <!-- Tristan Oppeneer -->
-          <div class="person-card js-reveal">
+          <div class="person-card js-reveal" id="tristan">
             <a href="https://nl.linkedin.com/in/tristan-oppeneer" target="_blank" rel="noopener noreferrer" class="person-avatar-link" aria-label="Tristan Oppeneer on LinkedIn">
               <img class="person-avatar" src="Team/TristanOpenneer.jpg" alt="Tristan Oppeneer" />
               <div class="person-avatar-overlay" aria-hidden="true">
@@ -121,7 +138,7 @@
           </div>
 
           <!-- Giel Jan Koek -->
-          <div class="person-card js-reveal">
+          <div class="person-card js-reveal" id="giel-jan">
             <a href="https://www.linkedin.com/in/gieljankoek/" target="_blank" rel="noopener noreferrer" class="person-avatar-link" aria-label="Giel Jan Koek on LinkedIn">
               <img class="person-avatar" src="Team/GielJanKoek.jpg" alt="Giel Jan Koek" />
               <div class="person-avatar-overlay" aria-hidden="true">
@@ -179,7 +196,7 @@
         <div class="people-grid js-stagger">
 
           <!-- Jurjen de Jong -->
-          <div class="person-card js-reveal">
+          <div class="person-card js-reveal" id="jurjen">
             <a href="https://www.linkedin.com/in/jurjendejong" target="_blank" rel="noopener noreferrer" class="person-avatar-link" aria-label="Jurjen de Jong on LinkedIn">
               <img class="person-avatar" src="Team/JurendeJong.jpg" alt="Jurjen de Jong" />
               <div class="person-avatar-overlay" aria-hidden="true">
@@ -199,7 +216,7 @@
           </div>
 
           <!-- Maarten Steinbuch -->
-          <div class="person-card js-reveal">
+          <div class="person-card js-reveal" id="maarten">
             <a href="https://nl.linkedin.com/in/steinbuch" target="_blank" rel="noopener noreferrer" class="person-avatar-link" aria-label="Maarten Steinbuch on LinkedIn">
               <img class="person-avatar" src="Team/MaartenSteinbuch.jpg" alt="Maarten Steinbuch" />
               <div class="person-avatar-overlay" aria-hidden="true">
@@ -248,8 +265,8 @@
         <h2 id="about-cta-heading">Want to join the team?</h2>
         <p>We're always looking for passionate people who believe in the future of electric aviation.</p>
         <div class="btn-group">
-          <a href="jobs.html" class="btn btn--dark">View Job Openings</a>
-          <a href="contact.html" class="btn btn--dark-outline">Get in Touch</a>
+          <a href="jobs.html" class="btn btn--dark" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">View Job Openings</a>
+          <a href="contact.html" class="btn btn--dark-outline" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Get in Touch</a>
         </div>
       </div>
     </section>
@@ -262,13 +279,19 @@
       <div class="footer-brand">
         <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
         <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
         <h4>Pages</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
           <li><a href="network.html">Join the Network</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
           <li><a href="jobs.html">Job Openings</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>

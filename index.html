@@ -4,12 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NRG2fly — Electric Aviation Infrastructure</title>
-  <meta name="description" content="NRG2fly helps airports across Europe prepare for electric aviation and become energy hubs for the future of flight." />
+  <meta name="description" content="NRG2fly builds electric aviation charging infrastructure for Europe's 4,200 airports. We help airports prepare for electric aircraft traffic and become energy hubs.">
+  <meta property="og:title" content="NRG2fly — Electric Aviation Infrastructure">
+  <meta property="og:description" content="NRG2fly helps Europe's 4,200 airports prepare for electric aircraft traffic and become energy hubs for the future of flight.">
+  <meta property="og:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <meta property="og:url" content="https://nrg2fly.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nrg2fly.com/images/og-image.jpg">
   <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260320" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KNYPSR7BS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6KNYPSR7BS');
+  </script>
 </head>
 <body>
 
@@ -24,11 +39,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" role="list">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="network.html" class="nav-link">Join the Network</a></li>
-        <li><a href="jobs.html" class="nav-link">Job Openings</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="index.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Home</a></li>
+        <li><a href="network.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Join the Network</a></li>
+        <li><a href="about.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">About</a></li>
+        <li><a href="news.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">News</a></li>
+        <li><a href="whitepapers.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Contact</a></li>
         <li>
           <button class="search-btn" id="search-toggle" aria-label="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -53,17 +70,30 @@
           With 30% of EU flights under 500&nbsp;km, commercial electric flying will take off by 2032.
         </p>
         <div class="hero-cta">
-          <a href="network.html" class="btn btn--primary">Join the Network</a>
+          <a href="network.html" class="btn btn--primary" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Join the Network</a>
           <a href="#mission" class="btn btn--outline">Learn More</a>
         </div>
       </div>
-      <div class="scroll-indicator" aria-hidden="true">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-        Scroll
-      </div>
+      <a href="#events" class="hero-event-tab" aria-label="See upcoming events">
+        <span class="live-dot" aria-hidden="true"></span>
+        <span>Want to meet us?</span>
+      </a>
     </section>
+
+    <!-- ===== NEWS TICKER ===== -->
+    <div class="news-ticker" aria-label="Latest news">
+      <div class="news-ticker-label">⚡ NEWS</div>
+      <div class="news-ticker-viewport">
+        <div class="news-ticker-track">
+          <span class="ticker-item">Beta Technologies is coming to the Netherlands for demonstration flights with E-Smart Avia on May 29th &amp; 30th — Stay tuned</span>
+          <span class="ticker-sep" aria-hidden="true">·</span>
+          <span class="ticker-item">Beta Technologies is coming to the Netherlands for demonstration flights with E-Smart Avia on May 29th &amp; 30th — Stay tuned</span>
+          <span class="ticker-sep" aria-hidden="true">·</span>
+          <span class="ticker-item">Beta Technologies is coming to the Netherlands for demonstration flights with E-Smart Avia on May 29th &amp; 30th — Stay tuned</span>
+          <span class="ticker-sep" aria-hidden="true">·</span>
+        </div>
+      </div>
+    </div>
 
     <!-- ===== MISSION ===== -->
     <section class="mission" id="mission" aria-labelledby="mission-heading">
@@ -79,100 +109,6 @@
           We work with airports, energy providers, regulators, and airlines to design and implement the charging
           infrastructure, grid connections, and operational frameworks that will power tomorrow's flights.
         </p>
-      </div>
-    </section>
-
-    <!-- ===== EUROPE SECTION ===== -->
-    <section class="europe-section" aria-labelledby="europe-heading">
-      <div class="container">
-        <div class="europe-split">
-          <div class="europe-split-text">
-            <p class="section-label">Our Market</p>
-            <h2 id="europe-heading">Europe's airports are our canvas</h2>
-            <p>From Scandinavia to the Mediterranean, 4,200 regional airports are waiting for electric aviation infrastructure. NRG2fly is expanding the charging network in phases — starting in the Netherlands and growing to cover all major regional hubs by 2032.</p>
-          </div>
-          <div class="europe-split-img">
-            <img src="images/Europe Airport Charging Evolution.png" alt="Map showing NRG2fly's phased European expansion from 2025 to 2032" />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== STATS ===== -->
-    <section class="stats" aria-label="Key statistics">
-      <div class="stats-grid">
-        <div class="stat-item">
-          <span class="stat-number" data-target="4200">4,200</span>
-          <p class="stat-label">Airports across Europe</p>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number" data-target="30">30</span>
-          <p class="stat-label">% of EU flights under 500&nbsp;km</p>
-        </div>
-        <div class="stat-item">
-          <span class="stat-number" data-target="2032" data-format="plain">2032</span>
-          <p class="stat-label">Commercial electric aviation takeoff</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PROJECT EUROCHARGE ===== -->
-    <section class="eurocharge-section" aria-labelledby="eurocharge-heading">
-      <div class="container">
-        <span class="eurocharge-badge">&#9889; New Initiative</span>
-        <h2 id="eurocharge-heading">Project Eurocharge</h2>
-        <p>NRG2fly is spearheading a pan-European effort to bring interoperability and common standards to electric aviation charging — so pilots and airports can rely on a seamless network from day one.</p>
-        <div class="eurocharge-grid">
-          <div class="eurocharge-item">
-            <div class="eurocharge-item-icon">&#9889;</div>
-            <h3>Industry-Wide Charging Standards</h3>
-            <p>We're launching Project Eurocharge to establish the definitive charging standards for electric aviation across Europe.</p>
-          </div>
-          <div class="eurocharge-item">
-            <div class="eurocharge-item-icon">&#128101;</div>
-            <h3>OEMs &amp; Manufacturers</h3>
-            <p>Bringing together aircraft OEMs and charger manufacturers to define the interoperability requirements that will power commercial electric flight.</p>
-          </div>
-          <div class="eurocharge-item">
-            <div class="eurocharge-item-icon">&#128207;</div>
-            <h3>Elaad as Technical Partner</h3>
-            <p>Collaborating with Elaad, Europe's leading charging test centre, to validate standards and ensure real-world reliability across the network.</p>
-          </div>
-        </div>
-
-        <div class="eurocharge-video-wrap">
-          <p class="eurocharge-video-label">See It In Action</p>
-          <h3 class="eurocharge-video-heading">Watch NRG2fly's EuroCharge project in action</h3>
-          <div class="video-wrap">
-            <video id="eurocharge-video" controls muted playsinline preload="metadata">
-              <source src="video/Testing.mp4" type="video/mp4" />
-            </video>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== PARTNERS ===== -->
-    <section class="partners-section" aria-label="Partners and investors">
-      <div class="container">
-        <p class="partners-label">Partners &amp; Investors</p>
-        <div class="partners-row">
-          <div class="partner-item">
-            <img src="images/partners/Fastned.webp" alt="Fastned" />
-          </div>
-          <div class="partner-item">
-            <img src="images/partners/Horizon.jpg" alt="Horizon" />
-          </div>
-          <div class="partner-item">
-            <img src="images/partners/Maxem.png" alt="Maxem" />
-          </div>
-          <div class="partner-item">
-            <img src="images/partners/Future Friendly Fund.png" alt="Future Friendly Fund" />
-          </div>
-          <div class="partner-item">
-            <img src="images/partners/01_EFC-logo-RGB.png" alt="Electric Flying Connection" />
-          </div>
-        </div>
       </div>
     </section>
 
@@ -211,17 +147,104 @@
       </div>
     </section>
 
-    <!-- ===== SOCIAL PROOF ===== -->
-    <section class="social-proof" aria-labelledby="awards-heading">
+    <!-- ===== EUROPE SECTION ===== -->
+    <section class="europe-section" aria-labelledby="europe-heading">
       <div class="container">
-        <p class="section-label">Recognition</p>
-        <h2 id="awards-heading">Recognised as a leader in electric aviation</h2>
-        <div class="award-strip">
-          <div class="award-item">
-            <img src="images/We have won the Transaition Awards.jpg" alt="NRG2fly team celebrating winning the ChangeInc Transition Awards" />
+        <div class="europe-split">
+          <div class="europe-split-text">
+            <p class="section-label">Our Market</p>
+            <h2 id="europe-heading">Europe's airports are our canvas</h2>
+            <p>From Scandinavia to the Mediterranean, 4,200 regional airports are waiting for electric aviation infrastructure. NRG2fly is expanding the charging network in phases — starting in the Netherlands and growing to cover all major regional hubs by 2032.</p>
           </div>
-          <div class="award-item">
-            <img src="images/Speaking and consulting.png" alt="NRG2fly winning Electrify Planes &amp; Airports award on stage" />
+          <div class="europe-split-img">
+            <img src="images/Europe Airport Charging Evolution.png" alt="Map showing NRG2fly's phased European expansion from 2025 to 2032" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats" aria-label="Key statistics">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-number" data-target="4200">4,200</span>
+          <p class="stat-label">Airports across Europe</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="30">30</span>
+          <p class="stat-label">% of EU flights under 500&nbsp;km</p>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-target="2032" data-format="plain">2032</span>
+          <p class="stat-label">Commercial electric aviation takeoff</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== FUN FACT BAR ===== -->
+    <div class="funfact-bar" id="funfact-section">
+      <div class="container">
+        <div class="funfact-top">
+          <div>
+            <div class="funfact-label">Fun fact</div>
+            <div class="funfact-text">The Netherlands is the world's most active country for electric flight — powered by E-Flight Academy.</div>
+          </div>
+          <div class="funfact-logo-wrap">
+            <a href="https://www.eflight.nl" target="_blank" rel="noopener">
+              <img src="images/E-Flightlogo_white.png" alt="E-Flight Academy" />
+            </a>
+          </div>
+        </div>
+        <div class="funfact-tiles">
+          <div class="funfact-tile">
+            <div class="funfact-tile-num" id="home-eflight-flights">—</div>
+            <div class="funfact-tile-label">Electric flights</div>
+            <div class="funfact-tile-period">May 2021 – <span id="home-eflight-today"></span></div>
+          </div>
+          <div class="funfact-tile">
+            <div class="funfact-tile-num" id="home-eflight-distance">—</div>
+            <div class="funfact-tile-label">Nautical miles flown</div>
+            <div class="funfact-tile-period">May 2021 – <span class="home-eflight-today-copy"></span></div>
+          </div>
+        </div>
+        <div class="funfact-bottom">
+          <div class="funfact-live-dot"></div>
+          Live data · Source: <a href="https://www.eflight.nl" target="_blank" rel="noopener">E-Flight Academy</a> Open Data
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== PROJECT EUROCHARGE ===== -->
+    <section class="eurocharge-section" aria-labelledby="eurocharge-heading">
+      <div class="container">
+        <span class="eurocharge-badge">&#9889; New Initiative</span>
+        <h2 id="eurocharge-heading">Project Eurocharge</h2>
+        <p>NRG2fly is spearheading a pan-European effort to bring interoperability and common standards to electric aviation charging — so pilots and airports can rely on a seamless network from day one.</p>
+        <div class="eurocharge-grid">
+          <div class="eurocharge-item">
+            <div class="eurocharge-item-icon">&#9889;</div>
+            <h3>Industry-Wide Charging Standards</h3>
+            <p>We're launching Project Eurocharge to establish the definitive charging standards for electric aviation across Europe.</p>
+          </div>
+          <div class="eurocharge-item">
+            <div class="eurocharge-item-icon">&#128101;</div>
+            <h3>OEMs &amp; Manufacturers</h3>
+            <p>Bringing together aircraft OEMs and charger manufacturers to define the interoperability requirements that will power commercial electric flight.</p>
+          </div>
+          <div class="eurocharge-item">
+            <div class="eurocharge-item-icon">&#128207;</div>
+            <h3>Elaad as Technical Partner</h3>
+            <p>Collaborating with Elaad, Europe's leading charging test centre, to validate standards and ensure real-world reliability across the network.</p>
+          </div>
+        </div>
+
+        <div class="eurocharge-video-wrap">
+          <p class="eurocharge-video-label">See It In Action</p>
+          <h3 class="eurocharge-video-heading">Watch NRG2fly's EuroCharge project in action</h3>
+          <div class="video-wrap">
+            <video id="eurocharge-video" controls muted playsinline preload="metadata">
+              <source src="video/Testing.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </div>
@@ -258,6 +281,51 @@
       </div>
     </section>
 
+    <!-- ===== PARTNERS ===== -->
+    <section class="partners-section" aria-label="Partners and investors">
+      <div class="container">
+        <p class="partners-label">Partners &amp; Investors</p>
+        <div class="partners-row">
+          <div class="partner-item">
+            <img src="images/partners/Fastned.webp" alt="Fastned" />
+          </div>
+          <div class="partner-item">
+            <img src="images/partners/Horizon.jpg" alt="Horizon" />
+          </div>
+          <div class="partner-item">
+            <img src="images/partners/Maxem.png" alt="Maxem" />
+          </div>
+          <div class="partner-item">
+            <img src="images/partners/Future Friendly Fund.png" alt="Future Friendly Fund" />
+          </div>
+          <div class="partner-item">
+            <img src="images/partners/01_EFC-logo-RGB.png" alt="Electric Flying Connection" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LATEST NEWS ===== -->
+    <section class="section" aria-labelledby="latest-news-heading">
+      <div class="container">
+        <p class="section-label">Latest News</p>
+        <div style="display:flex;align-items:baseline;justify-content:space-between;margin-bottom:2rem;flex-wrap:wrap;gap:1rem;">
+          <h2 id="latest-news-heading" style="margin:0">From NRG2fly</h2>
+          <a href="news.html" style="font-size:.9rem;font-weight:600;color:var(--green);">All news →</a>
+        </div>
+        <div id="homepage-news" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem;"></div>
+      </div>
+    </section>
+
+    <!-- ===== UPCOMING EVENTS ===== -->
+    <section class="section section--sage" id="events" aria-labelledby="events-heading">
+      <div class="container">
+        <p class="section-label">Meet Us</p>
+        <h2 id="events-heading" style="margin-bottom:2rem">Where to Find Us</h2>
+        <div id="events-list" class="events-list"></div>
+      </div>
+    </section>
+
     <!-- ===== CTA BAND ===== -->
     <section class="cta-band" aria-labelledby="cta-heading">
       <div class="container">
@@ -265,8 +333,8 @@
         <h2 id="cta-heading">Ready to be part of the electric aviation revolution?</h2>
         <p>Whether you represent an airport, energy company, or bring expertise in aviation — there's a place for you in the NRG2fly network.</p>
         <div class="btn-group">
-          <a href="network.html" class="btn btn--dark">Join the Network</a>
-          <a href="jobs.html" class="btn btn--dark-outline">View Job Openings</a>
+          <a href="network.html" class="btn btn--dark" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Join the Network</a>
+          <a href="jobs.html" class="btn btn--dark-outline" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">View Job Openings</a>
         </div>
       </div>
     </section>
@@ -279,13 +347,19 @@
       <div class="footer-brand">
         <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
         <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
         <h4>Pages</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
           <li><a href="network.html">Join the Network</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
           <li><a href="jobs.html">Job Openings</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -317,5 +391,144 @@
   </div>
 
   <script src="script.js"></script>
+  <script>
+    // Fun fact bar — E-Flight Academy live data
+    (function() {
+      var now = new Date();
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var dateStr = now.getDate() + ' ' + months[now.getMonth()] + ' ' + now.getFullYear();
+      document.getElementById('home-eflight-today').textContent = dateStr;
+      document.querySelectorAll('.home-eflight-today-copy').forEach(function(el) { el.textContent = dateStr; });
+
+      function animateCount(el, target, duration) {
+        var startTime = null;
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var progress = Math.min((ts - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - progress, 3);
+          el.textContent = Math.round(eased * target).toLocaleString('nl-NL');
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      var eflightData = null;
+      var animated = false;
+
+      function loadData() {
+        fetch('/eflight-proxy.php')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            eflightData = {};
+            data.forEach(function(item) {
+              if (item.label === 'Electric flights') eflightData.flights = item.count;
+              if (item.label === 'Distance flown') eflightData.distance = item.count;
+            });
+            if (animated) {
+              if (eflightData.flights) document.getElementById('home-eflight-flights').textContent = eflightData.flights.toLocaleString('nl-NL');
+              if (eflightData.distance) document.getElementById('home-eflight-distance').textContent = eflightData.distance.toLocaleString('nl-NL');
+            }
+          }).catch(function() {});
+      }
+      loadData();
+      setInterval(loadData, 5 * 60 * 1000);
+
+      var section = document.getElementById('funfact-section');
+      if (section) {
+        new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting && !animated) {
+              animated = true;
+              if (eflightData) {
+                if (eflightData.flights) animateCount(document.getElementById('home-eflight-flights'), eflightData.flights, 1800);
+                if (eflightData.distance) animateCount(document.getElementById('home-eflight-distance'), eflightData.distance, 2200);
+              }
+            }
+          });
+        }, { threshold: 0.3 }).observe(section);
+      }
+    })();
+  </script>
+  <script>
+    /* ===== UPCOMING EVENTS LOADER ===== */
+    (function () {
+      const list = document.getElementById('events-list');
+      if (!list) return;
+
+      function formatEventDate(start, end) {
+        const s = new Date(start), e = new Date(end);
+        const opts = { day: 'numeric', month: 'long' };
+        const optsYear = { day: 'numeric', month: 'long', year: 'numeric' };
+        if (!end || start === end) return s.toLocaleDateString('en-GB', optsYear);
+        if (s.getMonth() === e.getMonth() && s.getFullYear() === e.getFullYear()) {
+          return `${s.getDate()}–${e.toLocaleDateString('en-GB', optsYear)}`;
+        }
+        return `${s.toLocaleDateString('en-GB', opts)} – ${e.toLocaleDateString('en-GB', optsYear)}`;
+      }
+
+      function daysUntil(dateStr) {
+        const today = new Date(); today.setHours(0,0,0,0);
+        const d = new Date(dateStr);
+        return Math.ceil((d - today) / 86400000);
+      }
+
+      const TEAM_LINKS = {
+        'Jacco':    'about.html#jacco',
+        'Merlijn':  'about.html#merlijn',
+        'Tristan':  'about.html#tristan',
+        'Giel Jan': 'about.html#giel-jan',
+        'Jurjen':   'about.html#jurjen',
+        'Maarten':  'about.html#maarten',
+      };
+
+      function renderEvents(events) {
+        const today = new Date(); today.setHours(0,0,0,0);
+        const upcoming = events.filter(e => new Date(e.date_end || e.date_start) >= today);
+        if (!upcoming.length) {
+          list.innerHTML = '<p style="color:var(--text-light)">No upcoming events at the moment.</p>';
+          return;
+        }
+
+        const nearest = upcoming[0];
+
+        list.innerHTML = upcoming.map((ev, i) => {
+          const days = daysUntil(ev.date_start);
+          const isNext = i === 0;
+          const countdownHtml = isNext
+            ? `<span class="event-countdown">${days <= 0 ? 'Happening now' : days === 1 ? 'Tomorrow' : `In ${days} days`}</span>`
+            : '';
+
+          const attendeeHtml = ev.attendees.map(name => {
+            const href = TEAM_LINKS[name];
+            return href
+              ? `<a class="event-attendee event-attendee--link" href="${href}">${name}</a>`
+              : `<span class="event-attendee">${name}</span>`;
+          }).join('');
+
+          return `
+            <div class="event-card${isNext ? ' event-card--next' : ''}">
+              <div class="event-flag">${ev.flag}</div>
+              <div class="event-info">
+                <div class="event-meta">
+                  <span class="event-date">${formatEventDate(ev.date_start, ev.date_end)}</span>
+                  ${countdownHtml}
+                </div>
+                <h3 class="event-name">${ev.name}</h3>
+                <p class="event-location">${ev.location}</p>
+              </div>
+              <div class="event-team">
+                <span class="event-team-label">Attending</span>
+                <div class="event-attendees">${attendeeHtml}</div>
+              </div>
+            </div>`;
+        }).join('');
+      }
+
+      fetch('events-data.json')
+        .then(r => r.json())
+        .then(renderEvents)
+        .catch(() => { list.innerHTML = ''; });
+    })();
+  </script>
 </body>
 </html>

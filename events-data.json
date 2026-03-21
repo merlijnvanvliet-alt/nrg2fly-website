@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Aero Friedrichshafen",
+    "date_start": "2026-04-22",
+    "date_end": "2026-04-25",
+    "location": "Friedrichshafen, Germany",
+    "flag": "🇩🇪",
+    "attendees": ["Jacco", "Giel Jan", "Tristan"]
+  },
+  {
+    "name": "IDRF Members' Assembly",
+    "date_start": "2026-05-20",
+    "date_end": "2026-05-21",
+    "location": "Mannheim, Germany",
+    "flag": "🇩🇪",
+    "attendees": ["Merlijn", "Jacco"]
+  },
+  {
+    "name": "EFC Member Day",
+    "date_start": "2026-05-29",
+    "date_end": "2026-05-29",
+    "location": "Lelystad & Den Helder Airport",
+    "flag": "🇳🇱",
+    "attendees": ["Jurjen", "Jacco", "Maarten", "Tristan", "Giel Jan"]
+  },
+  {
+    "name": "Farnborough Airshow",
+    "date_start": "2026-07-20",
+    "date_end": "2026-07-24",
+    "location": "Farnborough, UK",
+    "flag": "🇬🇧",
+    "attendees": ["Jurjen", "Merlijn", "Jacco"]
+  }
+]

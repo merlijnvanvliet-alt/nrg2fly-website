@@ -288,6 +288,8 @@ const SEARCH_INDEX = [
   { title: 'Jurjen de Jong — Founder', page: 'About', url: 'about.html', body: 'GreenFlux eMobility 150 million charging sessions co-founded NRG2fly 2022 Electric Flying Connection Accenture' },
   { title: 'Maarten Steinbuch — Founder', page: 'About', url: 'about.html', body: 'TU/e professor scientist e-mobility sustainability keynote speaker Eindhoven Engine serial entrepreneur' },
   { title: 'Jeroen Kroonen — Founder', page: 'About', url: 'about.html', body: 'sustainable mobility airport energy systems grid solar Noord-Brabant co-founder Provincie' },
+  // News
+  { title: 'News', page: 'News', url: 'news.html', body: 'nieuws updates milestones partnerships awards press events NRG2fly electric aviation' },
   // Network
   { title: 'Join the Network', page: 'Network', url: 'network.html', body: 'NRG2fly network airports energy providers aviation experts electric aviation infrastructure join' },
   { title: 'Network Benefits', page: 'Network', url: 'network.html', body: 'expertise partnerships funding opportunities electric aviation sector member access benefits' },
@@ -367,4 +369,55 @@ const SEARCH_INDEX = [
       </a>`
     ).join('');
   });
+})();
+
+/* ===== HOMEPAGE LATEST NEWS ===== */
+(function () {
+  const grid = document.getElementById('homepage-news');
+  if (!grid) return;
+
+  const CATEGORY_ICONS = { Award:'🏆', Partnership:'🤝', Product:'⚡', Event:'📅', Press:'📰', Update:'🔔' };
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    return new Date(iso).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  fetch('news-data.json')
+    .then(r => r.json())
+    .then(articles => {
+      if (!articles.length) { grid.parentElement.parentElement.style.display = 'none'; return; }
+      grid.innerHTML = articles.slice(0, 3).map(a => `
+        <a class="news-card" href="news/${a.slug}.html">
+          ${a.image ? `<img class="news-card-img" src="${a.image}" alt="${a.title}" loading="lazy" />` : `<div class="news-card-img-placeholder">${CATEGORY_ICONS[a.category] || '📰'}</div>`}
+          <div class="news-card-body">
+            <div class="news-card-meta">
+              ${a.category ? `<span class="news-badge news-badge--${a.category}">${a.category}</span>` : ''}
+              <span class="news-card-date">${formatDate(a.date)}</span>
+            </div>
+            <h3 class="news-card-title">${a.title}</h3>
+            ${a.intro ? `<p class="news-card-intro">${a.intro}</p>` : ''}
+          </div>
+        </a>`).join('');
+    })
+    .catch(() => { grid.parentElement.parentElement.style.display = 'none'; });
+})();
+
+/* ===== NEWS SEARCH INTEGRATION ===== */
+(function () {
+  // Fetch news-data.json and add articles to the search index
+  const newsDataUrl = location.pathname.includes('/news/') ? '../news-data.json' : 'news-data.json';
+  fetch(newsDataUrl)
+    .then(r => r.json())
+    .then(articles => {
+      articles.forEach(a => {
+        SEARCH_INDEX.push({
+          title: a.title,
+          page: 'News',
+          url: `news/${a.slug}.html`,
+          body: [a.category, a.intro, a.body].filter(Boolean).join(' '),
+        });
+      });
+    })
+    .catch(() => {});
 })();

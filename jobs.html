@@ -4,12 +4,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Job Openings — NRG2fly</title>
-  <meta name="description" content="Join the NRG2fly team. Open positions in electric aviation infrastructure across Europe." />
+  <meta name="description" content="Join NRG2fly and help build Europe's electric aviation infrastructure. View our open positions and become part of the team shaping the future of flight.">
+  <meta property="og:title" content="Job Openings — NRG2fly">
+  <meta property="og:description" content="Join NRG2fly and help build Europe's electric aviation infrastructure. View open positions and become part of the team.">
+  <meta property="og:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <meta property="og:url" content="https://nrg2fly.com/jobs.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nrg2fly.com/images/og-image.jpg">
   <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css?v=20260319" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KNYPSR7BS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6KNYPSR7BS');
+  </script>
 </head>
 <body>
 
@@ -24,11 +39,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" role="list">
-        <li><a href="index.html" class="nav-link">Home</a></li>
-        <li><a href="about.html" class="nav-link">About</a></li>
-        <li><a href="network.html" class="nav-link">Join the Network</a></li>
-        <li><a href="jobs.html" class="nav-link">Job Openings</a></li>
-        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li><a href="index.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Home</a></li>
+        <li><a href="network.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Join the Network</a></li>
+        <li><a href="about.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">About</a></li>
+        <li><a href="news.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">News</a></li>
+        <li><a href="whitepapers.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Contact</a></li>
         <li>
           <button class="search-btn" id="search-toggle" aria-label="Search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
@@ -63,7 +80,7 @@
             <p>Everyone at NRG2fly works directly on projects that shape the future of regional aviation. Short lines, real ownership, and a shared belief that electric flying takes off by 2032.</p>
             <h3>Based at real airports</h3>
             <p>Our offices are at Lelystad Airport and Teuge Airport — where electric aircraft are already charging today.</p>
-            <a href="mailto:jacco@nrg2fly.com?subject=Open%20Application%20%E2%80%94%20NRG2fly" class="btn btn--green" style="margin-top:0.5rem;">Send an Open Application</a>
+            <a href="mailto:jacco@nrg2fly.com?subject=Open%20Application%20%E2%80%94%20NRG2fly" class="btn btn--green" style="margin-top:0.5rem;" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Send an Open Application</a>
           </div>
           <div class="team-photo-wrap">
             <img src="images/Team NRG2fly.png" alt="The NRG2fly team in front of the NRG2FLY logo and aircraft charger" />
@@ -124,7 +141,7 @@
 
             <div class="job-apply">
               <p>Send your CV and a short motivation letter to <strong>jacco@nrg2fly.com</strong> with the subject line <em>"Regional Director — Belgium &amp; France"</em>.</p>
-              <a href="mailto:jacco@nrg2fly.com?subject=Regional%20Director%20%E2%80%94%20Belgium%20%26%20France" class="btn btn--green">Apply Now</a>
+              <a href="mailto:jacco@nrg2fly.com?subject=Regional%20Director%20%E2%80%94%20Belgium%20%26%20France" class="btn btn--green" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Apply Now</a>
             </div>
           </div>
         </article>
@@ -177,7 +194,7 @@
 
             <div class="job-apply">
               <p>Send your CV and a short motivation letter to <strong>jacco@nrg2fly.com</strong> with the subject line <em>"Regional Director — Scandinavia"</em>.</p>
-              <a href="mailto:jacco@nrg2fly.com?subject=Regional%20Director%20%E2%80%94%20Scandinavia" class="btn btn--green">Apply Now</a>
+              <a href="mailto:jacco@nrg2fly.com?subject=Regional%20Director%20%E2%80%94%20Scandinavia" class="btn btn--green" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Apply Now</a>
             </div>
           </div>
         </article>
@@ -230,7 +247,7 @@
 
             <div class="job-apply">
               <p>Send your CV and a short motivation letter to <strong>jacco@nrg2fly.com</strong> with the subject line <em>"Regional Director — DACH"</em>.</p>
-              <a href="mailto:jacco@nrg2fly.com?subject=Regional%20Director%20%E2%80%94%20DACH" class="btn btn--green">Apply Now</a>
+              <a href="mailto:jacco@nrg2fly.com?subject=Regional%20Director%20%E2%80%94%20DACH" class="btn btn--green" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Apply Now</a>
             </div>
           </div>
         </article>
@@ -284,7 +301,7 @@
 
             <div class="job-apply">
               <p>Send your CV and a short motivation letter to <strong>jacco@nrg2fly.com</strong> with the subject line <em>"Aviation Energy Consultant"</em>.</p>
-              <a href="mailto:jacco@nrg2fly.com?subject=Aviation%20Energy%20Consultant" class="btn btn--green">Apply Now</a>
+              <a href="mailto:jacco@nrg2fly.com?subject=Aviation%20Energy%20Consultant" class="btn btn--green" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Apply Now</a>
             </div>
           </div>
         </article>
@@ -292,7 +309,7 @@
         <!-- General CTA -->
         <div style="text-align:center;padding:2rem 0 1rem;">
           <p style="color:var(--text-light);margin-bottom:1rem;">Don't see the right role? We're always open to hearing from talented people.</p>
-          <a href="mailto:jacco@nrg2fly.com?subject=Open%20Application%20%E2%80%94%20NRG2fly" class="btn btn--green">Send an Open Application</a>
+          <a href="mailto:jacco@nrg2fly.com?subject=Open%20Application%20%E2%80%94%20NRG2fly" class="btn btn--green" onclick="gtag('event', 'cta_click', {event_category: 'cta', event_label: this.textContent.trim()})">Send an Open Application</a>
         </div>
 
       </div>
@@ -306,13 +323,19 @@
       <div class="footer-brand">
         <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
         <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
       </div>
       <nav class="footer-nav" aria-label="Footer navigation">
         <h4>Pages</h4>
         <ul>
           <li><a href="index.html">Home</a></li>
-          <li><a href="about.html">About</a></li>
           <li><a href="network.html">Join the Network</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
           <li><a href="jobs.html">Job Openings</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>

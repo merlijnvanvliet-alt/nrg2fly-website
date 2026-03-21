@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News — NRG2fly</title>
+  <meta name="description" content="" />
+  <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260319" />
+  <style>
+    .article-hero {
+      padding-top: calc(var(--nav-height) + 3rem);
+      padding-bottom: 3rem;
+      background: var(--sage);
+    }
+    .article-hero .container { max-width: 760px; }
+    .article-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 1.5rem;
+      transition: gap var(--transition);
+    }
+    .article-back:hover { gap: 0.65rem; }
+    .article-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .article-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      background: var(--white);
+      color: var(--green);
+    }
+    .article-badge--Award       { background: #fffbe6; color: #a07c00; }
+    .article-badge--Partnership { background: #e8f0fe; color: #1a56ba; }
+    .article-badge--Product     { background: #e6f4ea; color: #1e6e3e; }
+    .article-badge--Event       { background: #fce8d5; color: #b54a00; }
+    .article-badge--Press       { background: #f0e6fa; color: #6b28a8; }
+    .article-badge--Update      { background: #f0f0f0; color: #555; }
+    .article-date { font-size: 0.88rem; color: var(--text-light); }
+    .article-title {
+      font-family: var(--font-heading);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--dark);
+      line-height: 1.2;
+    }
+    .article-body-section { padding: 3rem 1.5rem 5rem; }
+    .article-body-section .container { max-width: 760px; }
+    .article-img {
+      width: 100%;
+      max-height: 440px;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 2rem;
+      display: block;
+    }
+    .article-intro {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--text);
+      margin-bottom: 2rem;
+    }
+    .article-link-btn { margin-top: 0.5rem; }
+    .article-not-found {
+      text-align: center;
+      padding: 6rem 1rem;
+      color: var(--text-light);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header light" aria-label="Main navigation">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="NRG2fly — Home">
+        <img class="logo-mark" src="NRG2FLY_icon_RGB.png" alt="NRG2fly" />
+        <img class="logo-full" src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="news.html" class="nav-link active">News</a></li>
+        <li><a href="network.html" class="nav-link">Join the Network</a></li>
+        <li><a href="whitepapers.html" class="nav-link">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link">Contact</a></li>
+        <li>
+          <button class="search-btn" id="search-toggle" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="article-main">
+    <!-- Content is injected by JS -->
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
+        <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="network.html">Join the Network</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
+          <li><a href="jobs.html">Job Openings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:jacco@nrg2fly.com">jacco@nrg2fly.com</a></li>
+          <li><a href="contact.html">Send a Message</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 NRG2fly. All rights reserved.</span>
+      <span>Lelystad Airport · Teuge Airport</span>
+    </div>
+  </footer>
+
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search site">
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="search-input" placeholder="Search NRG2fly…" autocomplete="off" aria-label="Search query" />
+        <button class="search-close" id="search-close" aria-label="Close search">&times;</button>
+      </div>
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (function () {
+      const main = document.getElementById('article-main');
+      const params = new URLSearchParams(location.search);
+      const articleId = params.get('id');
+
+      const CATEGORY_ICONS = {
+        Award: '🏆', Partnership: '🤝', Product: '⚡', Event: '📅', Press: '📰', Update: '🔔'
+      };
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        const d = new Date(iso);
+        return d.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+
+      function render(article) {
+        // Update page title and meta
+        document.title = `${article.title} — NRG2fly`;
+        document.querySelector('meta[name="description"]').content = article.intro || '';
+
+        const imgHtml = article.image
+          ? `<img class="article-img" src="${article.image}" alt="${article.title}" />`
+          : '';
+
+        const linkBtn = article.link
+          ? `<a href="${article.link}" target="_blank" rel="noopener noreferrer" class="btn btn--primary article-link-btn">Read full article</a>`
+          : '';
+
+        main.innerHTML = `
+          <section class="article-hero">
+            <div class="container">
+              <a href="news.html" class="article-back">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                Back to News
+              </a>
+              <div class="article-meta">
+                ${article.category ? `<span class="article-badge article-badge--${article.category}">${article.category}</span>` : ''}
+                <span class="article-date">${formatDate(article.date)}</span>
+              </div>
+              <h1 class="article-title">${article.title}</h1>
+            </div>
+          </section>
+          <section class="article-body-section">
+            <div class="container">
+              ${imgHtml}
+              ${article.intro ? `<p class="article-intro">${article.intro}</p>` : ''}
+              ${article.body ? article.body.split('\n\n').map(p => `<p>${p}</p>`).join('') : ''}
+              ${linkBtn}
+            </div>
+          </section>`;
+      }
+
+      function notFound() {
+        main.innerHTML = `
+          <div class="article-not-found">
+            <h1>Article not found</h1>
+            <p><a href="news.html" class="btn btn--primary" style="margin-top:1rem;">Back to News</a></p>
+          </div>`;
+      }
+
+      if (!articleId) { notFound(); return; }
+
+      fetch('news-data.json')
+        .then(r => r.json())
+        .then(articles => {
+          const article = articles.find(a => a.id === articleId);
+          article ? render(article) : notFound();
+        })
+        .catch(notFound);
+    })();
+  </script>
+</body>
+</html>
