@@ -94,19 +94,37 @@ async function main() {
 
   // Login
   console.log('Logging in to LinkedIn...');
-  await page.goto('https://www.linkedin.com/login', { waitUntil: 'domcontentloaded' });
-  await sleep(1500);
+  await page.goto('https://www.linkedin.com/login', { waitUntil: 'domcontentloaded', timeout: 30000 });
+  await sleep(2000);
   await page.fill('#username', process.env.LINKEDIN_EMAIL);
-  await sleep(500);
+  await sleep(800);
   await page.fill('#password', process.env.LINKEDIN_PASSWORD);
-  await sleep(500);
+  await sleep(800);
   await page.click('[type="submit"]');
-  await page.waitForNavigation({ waitUntil: 'domcontentloaded', timeout: 15000 });
-  await sleep(3000);
+
+  // Wait for URL to change (don't rely on navigation event)
+  try {
+    await page.waitForFunction(
+      () => !window.location.href.includes('/login'),
+      { timeout: 20000 }
+    );
+  } catch {
+    // Still on login page — might be slow or captcha
+  }
+  await sleep(4000);
 
   const url = page.url();
-  if (url.includes('checkpoint') || url.includes('challenge')) {
-    throw new Error('LinkedIn triggered a security checkpoint — manual login needed');
+  console.log('After login URL:', url);
+
+  // Save screenshot for debugging
+  await page.screenshot({ path: 'login-debug.png', fullPage: false });
+  console.log('Screenshot saved');
+
+  if (url.includes('/login')) {
+    throw new Error('Still on login page after submit — wrong credentials or captcha shown');
+  }
+  if (url.includes('checkpoint') || url.includes('challenge') || url.includes('verify')) {
+    throw new Error('LinkedIn security checkpoint triggered — manual verification needed');
   }
   console.log('Logged in successfully');
 
