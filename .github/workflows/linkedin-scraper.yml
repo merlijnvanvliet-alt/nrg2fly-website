@@ -29,8 +29,7 @@ jobs:
       - name: Run scraper
         working-directory: scraper
         env:
-          LINKEDIN_EMAIL: ${{ secrets.LINKEDIN_EMAIL }}
-          LINKEDIN_PASSWORD: ${{ secrets.LINKEDIN_PASSWORD }}
+          LINKEDIN_COOKIES: ${{ secrets.LINKEDIN_COOKIES }}
           FTP_HOST: ${{ secrets.FTP_HOST }}
           FTP_USER: ${{ secrets.FTP_USER }}
           FTP_PASS: ${{ secrets.FTP_PASS }}
