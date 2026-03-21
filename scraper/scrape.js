@@ -75,11 +75,21 @@ async function scrapeCompany(page, slug) {
       } catch {}
     }
 
-    // Fallback: search all text for follower pattern
+    // Fallback: search all text, pick MOST FREQUENT match (avoids picking noise)
     if (!followers) {
       const bodyText = await page.evaluate(() => document.body.innerText);
-      const match = bodyText.match(/([\d,\.]+)\s*(K\s*)?followers/i);
-      if (match) followers = parseFollowers(match[0]);
+      const allMatches = [...bodyText.matchAll(/([\d][,\d\.]*\s*(?:K|M)?)\s*followers/gi)];
+      if (allMatches.length > 0) {
+        // Count frequency of each raw value
+        const freq = {};
+        for (const m of allMatches) {
+          const raw = m[1].trim();
+          freq[raw] = (freq[raw] || 0) + 1;
+        }
+        // Pick most frequent
+        const best = Object.entries(freq).sort((a,b) => b[1]-a[1])[0][0];
+        followers = parseFollowers(best + ' followers');
+      }
     }
 
     const title = await page.title().catch(() => '');
@@ -139,17 +149,17 @@ async function main() {
   for (let i = 0; i < COMPANIES.length; i++) {
     const company = COMPANIES[i];
 
-    // Return to feed every 2 companies to reset LinkedIn's bot detection
-    if (i > 0 && i % 2 === 0) {
-      console.log('Returning to feed to reset session...');
+    // Always return to feed between companies to reset bot detection
+    if (i > 0) {
+      console.log('Resetting via feed...');
       await page.goto('https://www.linkedin.com/feed', { waitUntil: 'domcontentloaded', timeout: 20000 });
-      await sleep(4000 + Math.random() * 3000);
+      await sleep(8000 + Math.random() * 5000);
     }
 
     console.log(`Scraping ${company.name}...`);
     const followers = await scrapeCompany(page, company.slug);
     snapshot.companies[company.name] = { followers };
-    await sleep(6000 + Math.random() * 5000);
+    await sleep(15000 + Math.random() * 8000);
   }
 
   await browser.close();
