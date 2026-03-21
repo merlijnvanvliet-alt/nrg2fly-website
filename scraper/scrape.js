@@ -24,12 +24,14 @@ function sleep(ms) {
 
 function parseFollowers(text) {
   if (!text) return null;
-  text = text.toLowerCase().replace(/,/g, '').replace(/\./g, '');
-  const match = text.match(/([\d]+)\s*(?:k|thousand)?/);
+  // Match patterns like: 2,203 / 14K / 14.2K / 125,430 / 1.2M
+  const match = text.match(/([\d,]+(?:\.\d+)?)\s*(K|M|thousand)?/i);
   if (!match) return null;
-  let n = parseInt(match[1]);
-  if (text.includes('k') || text.includes('thousand')) n *= 1000;
-  return n;
+  let n = parseFloat(match[1].replace(/,/g, ''));
+  const suffix = (match[2] || '').toUpperCase();
+  if (suffix === 'K' || suffix === 'THOUSAND') n = Math.round(n * 1000);
+  if (suffix === 'M') n = Math.round(n * 1000000);
+  return Math.round(n);
 }
 
 async function scrapeCompany(page, slug) {
@@ -38,7 +40,19 @@ async function scrapeCompany(page, slug) {
       waitUntil: 'domcontentloaded',
       timeout: 30000
     });
-    await sleep(2000 + Math.random() * 2000);
+    await sleep(3000 + Math.random() * 2000);
+
+    // If authwall, wait longer and retry once
+    if (page.url().includes('authwall') || page.url().includes('login')) {
+      console.log(`  ${slug}: hit authwall, retrying after pause...`);
+      await page.goto('https://www.linkedin.com/feed', { waitUntil: 'domcontentloaded', timeout: 20000 });
+      await sleep(6000);
+      await page.goto(`https://www.linkedin.com/company/${slug}/about/`, {
+        waitUntil: 'domcontentloaded',
+        timeout: 30000
+      });
+      await sleep(3000);
+    }
 
     // Try multiple selectors for follower count
     const selectors = [
@@ -122,11 +136,20 @@ async function main() {
     companies: {}
   };
 
-  for (const company of COMPANIES) {
+  for (let i = 0; i < COMPANIES.length; i++) {
+    const company = COMPANIES[i];
+
+    // Return to feed every 2 companies to reset LinkedIn's bot detection
+    if (i > 0 && i % 2 === 0) {
+      console.log('Returning to feed to reset session...');
+      await page.goto('https://www.linkedin.com/feed', { waitUntil: 'domcontentloaded', timeout: 20000 });
+      await sleep(4000 + Math.random() * 3000);
+    }
+
     console.log(`Scraping ${company.name}...`);
     const followers = await scrapeCompany(page, company.slug);
     snapshot.companies[company.name] = { followers };
-    await sleep(3000 + Math.random() * 3000);
+    await sleep(6000 + Math.random() * 5000);
   }
 
   await browser.close();
