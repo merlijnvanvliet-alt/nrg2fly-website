@@ -9,10 +9,9 @@ chromium.use(StealthPlugin());
 const COMPANIES = [
   { name: 'NRG2fly',           slug: 'nrg2fly' },
   { name: 'Aerovolt',          slug: 'aerovolt' },
-  { name: 'Beta Technologies', slug: 'beta-technologies' },
-  { name: 'Joby Aviation',     slug: 'joby-aviation' },
-  { name: 'Green Aero Hub',    slug: 'green-aero-hub' },
-  { name: 'Albatros',          slug: 'albatros-aviation' },
+  { name: 'Beta Technologies', slug: 'beta-air-llc' },
+  { name: 'Joby Aviation',     slug: 'jobyaviation' },
+  { name: 'Albatros EU',       slug: 'albatros-horizon-europe' },
 ];
 
 const DATA_FILE = path.join(__dirname, 'linkedin-data.json');
@@ -68,7 +67,9 @@ async function scrapeCompany(page, slug) {
       if (match) followers = parseFollowers(match[0]);
     }
 
-    console.log(`  ${slug}: ${followers ?? 'not found'} followers`);
+    const title = await page.title().catch(() => '');
+    const currentUrl = page.url();
+    console.log(`  ${slug}: ${followers ?? 'not found'} followers | title="${title.slice(0,60)}" | url=${currentUrl.slice(0,80)}`);
     return followers;
   } catch (err) {
     console.error(`  ${slug}: ERROR - ${err.message}`);
