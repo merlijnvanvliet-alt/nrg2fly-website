@@ -11,6 +11,7 @@ const COMPANIES = [
   { name: 'Aerovolt',          slug: 'aerovolt' },
   { name: 'Beta Technologies', slug: 'beta-air-llc' },
   { name: 'Joby Aviation',     slug: 'jobyaviation' },
+  { name: 'Green Aero Hub',    slug: 'greenaviationhub' },
   { name: 'Albatros EU',       slug: 'albatros-horizon-europe' },
 ];
 
