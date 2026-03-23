@@ -713,9 +713,36 @@
     <div class="section">
       <div class="section-label">Special Pages</div>
       <h2>Pagina's om te delen</h2>
-      <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem;">Drie pagina's die we het meest delen met luchthavens en partners. Kopieer de link met één klik.</p>
+      <p style="font-size:.85rem;color:var(--muted);margin-bottom:1.25rem;">Pagina's die we het meest delen met luchthavens en partners. Kopieer de link met één klik.</p>
 
       <div class="preview-list">
+
+        <!-- PYRAMID OF AIRPORT ELECTRIFICATION -->
+        <div class="preview-card">
+          <div class="preview-thumb">
+            <a href="https://nrg2fly.com/pyramid.html" target="_blank"><img src="../images/Piramid of Airport Electrification .png" alt="Pyramid of Airport Electrification" /></a>
+          </div>
+          <div class="preview-body">
+            <div class="preview-top">
+              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.35rem;">
+                <div class="preview-name" style="margin-bottom:0;">Pyramid of Airport Electrification</div>
+                <span style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;background:#f59e0b;color:#1a1a1a;padding:.15rem .55rem;border-radius:4px;flex-shrink:0;">Brand New</span>
+              </div>
+              <div class="preview-desc">Legt stap voor stap uit hoe luchthavens elektrificatie opbouwen — van energiefundament tot commerciële e-vliegtuigen. Met animatie, echte NRG2fly voorbeelden en foto's.</div>
+              <div class="preview-url">nrg2fly.com/pyramid.html</div>
+              <div class="preview-updated" id="updated-pyramid"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
+            </div>
+            <div class="preview-actions">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/pyramid.html')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                Kopieer link
+              </button>
+              <a href="https://nrg2fly.com/pyramid.html" target="_blank" class="icon-btn" title="Open pagina">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
 
         <!-- LELYSTAD AIRPORT -->
         <div class="preview-card">
@@ -1255,6 +1282,7 @@ Merlijn</div>
         }
       ), 500);
 
+      loadLastUpdated('updated-pyramid',    'https://nrg2fly.com/pyramid.html');
       loadLastUpdated('updated-partner',    'https://nrg2fly.com/partner.html');
       loadLastUpdated('updated-denhelder',  'https://nrg2fly.com/denhelderairport/');
       loadLastUpdated('updated-lelystad',   'https://nrg2fly.com/lelystadairport/');
