@@ -1928,3 +1928,28 @@ a.person-name:hover {
   background: var(--yellow); color: var(--dark); padding: 0.18rem 0.55rem; border-radius: 4px;
 }
 @media (max-width: 768px) { .p-proof-grid { grid-template-columns: 1fr; } }
+
+/* ===== NETWORK AMBITION (From NL to Europe) ===== */
+.p-ambition { background: #fff; padding: 5rem 0; }
+.p-ambition-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+@media (max-width: 700px) { .p-ambition-grid { grid-template-columns: 1fr; } }
+.p-ambition-block { border-radius: 16px; overflow: hidden; border: 1px solid #eee; display: flex; flex-direction: column; }
+.p-ambition-block-header { padding: 1.5rem 1.75rem 1rem; }
+.p-ambition-block--today .p-ambition-block-header { background: var(--sage); }
+.p-ambition-block--future .p-ambition-block-header { background: var(--dark); }
+.p-ambition-tag {
+  display: inline-block; font-size: 0.68rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  padding: 0.2rem 0.6rem; border-radius: 4px; margin-bottom: 0.6rem;
+}
+.p-ambition-block--today .p-ambition-tag { background: var(--green); color: #fff; }
+.p-ambition-block--future .p-ambition-tag { background: var(--yellow); color: var(--dark); }
+.p-ambition-block-header h3 { font-family: var(--font-heading); font-size: 1.5rem; line-height: 1.25; }
+.p-ambition-block--today .p-ambition-block-header h3 { color: var(--dark); }
+.p-ambition-block--future .p-ambition-block-header h3 { color: #fff; }
+.p-ambition-block-header p { font-size: 0.9rem; margin-top: 0.4rem; line-height: 1.6; }
+.p-ambition-block--today .p-ambition-block-header p { color: var(--text-light); }
+.p-ambition-block--future .p-ambition-block-header p { color: rgba(255,255,255,0.6); }
+.p-ambition-block-img { flex: 1; display: flex; align-items: center; justify-content: center; padding: 1.5rem; background: #f9f9f6; }
+.p-ambition-block--future .p-ambition-block-img { background: #111; }
+.p-ambition-block-img img { width: 100%; max-width: 380px; height: auto; border-radius: 8px; }
