@@ -1096,6 +1096,27 @@
       }
 
       /* ===== PYRAMID LAYER HOVER: HIGHLIGHT CARD ===== */
+      /* Mobile bar click → scroll to card */
+      var mobIds = ['pm-l1','pm-l2','pm-l3','pm-l4','pm-l5'];
+      mobIds.forEach(function (id, i) {
+        var bar = document.getElementById(id);
+        if (!bar) return;
+        bar.style.cursor = 'pointer';
+        bar.addEventListener('click', function () {
+          var allCards = document.querySelectorAll('.layer-card');
+          var target = allCards[i];
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            target.style.outline = '2px solid #536942';
+            target.style.outlineOffset = '4px';
+            setTimeout(function () {
+              target.style.outline = '';
+              target.style.outlineOffset = '';
+            }, 2000);
+          }
+        });
+      });
+
       var polyIds = ['py-l1','py-l2','py-l3','py-l4','py-l5'];
       polyIds.forEach(function (id, i) {
         var poly = document.getElementById(id);
