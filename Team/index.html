@@ -1273,12 +1273,18 @@ Merlijn</div>
       const hour = new Date().getHours();
       const greeting = hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
       setTimeout(() => typeWriter(
-        `${greeting}! 👋 Welkom op de NRG2fly Team Hub.`,
-        30,
+        `🆕 Nieuwe pagina live: Pyramid of Airport Electrification — nrg2fly.com/pyramid.html`,
+        28,
         () => {
-          _greetingDone = true;
-          if (_analysisQueued) typeWriter(_analysisQueued, 22);
-          else { _cursorEl().style.animation = 'none'; _cursorEl().style.opacity = '0'; }
+          setTimeout(() => typeWriter(
+            `\n${greeting}! 👋 Welkom op de NRG2fly Team Hub.`,
+            30,
+            () => {
+              _greetingDone = true;
+              if (_analysisQueued) typeWriter(_analysisQueued, 22);
+              else { _cursorEl().style.animation = 'none'; _cursorEl().style.opacity = '0'; }
+            }
+          ), 400);
         }
       ), 500);
 
@@ -1526,19 +1532,13 @@ Merlijn</div>
         // New followers
         const newFStr = newF != null ? ` ${newF} nieuwe volgers deze maand.` : '';
 
-        // Top grower in CN — flag Albatross if no prev data
-        const topCnPrevData = prev?.companies[topGrowerCn];
-        const albatrossDisclaimer = (topGrowerCn === 'Albatross' && (topCnPrevData?.growthPct == null || topCnPrevData?.growthPct === 0))
-          ? ' (let op: Albatross lijkt de grootste stijger maar dat komt doordat vorige periode data ontbrak — dit corrigeert zich volgende week)'
-          : '';
-
         const cnTopNote = topGrowerCn === 'NRG2fly'
           ? ' NRG2fly groeit het snelst in Aviation Charging Networks.'
-          : ` ${DISPLAY_NAMES[topGrowerCn]||topGrowerCn} heeft de hoogste groei (${latest.companies[topGrowerCn]?.growthPct}%)${albatrossDisclaimer}.`;
+          : '';
 
         const acTopNote = topGrowerAc === 'NRG2fly'
           ? ' NRG2fly groeit het snelst in Aviation Consultancy.'
-          : ` In Consultancy heeft ${DISPLAY_NAMES[topGrowerAc]||topGrowerAc} de hoogste groei (${latest.companies[topGrowerAc]?.growthPct}%).`;
+          : '';
 
         queueAnalysis(
           ` NRG2fly staat op #${cnPos} van ${cnSorted.length} in Aviation Charging Networks` +
