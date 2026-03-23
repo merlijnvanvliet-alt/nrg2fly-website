@@ -4,6 +4,15 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NRG2fly — Team Hub</title>
+  <meta property="og:title" content="NRG2fly Team Hub" />
+  <meta property="og:description" content="Interne hub voor competitive intelligence, communicatie en klantmaterialen." />
+  <meta property="og:image" content="https://nrg2fly.com/images/team-hub-og.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="1194" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://nrg2fly.com/team/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content="https://nrg2fly.com/images/team-hub-og.jpg" />
   <link rel="icon" type="image/png" href="../NRG2FLY_icon_RGB.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -596,6 +605,7 @@
       .links-grid { grid-template-columns: 1fr; }
       .info-grid { grid-template-columns: 1fr 1fr; }
     }
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
   </style>
 </head>
 <body>
@@ -610,7 +620,94 @@
   <main class="page">
 
     <h1>Team Hub</h1>
-    <p class="subtitle">Alles wat je nodig hebt voor calls, meetings en klantcontact — op één plek.</p>
+
+    <!-- ── WELCOME CHAT ── -->
+    <div style="display:flex;align-items:flex-end;gap:.75rem;margin:1.25rem 0 .75rem;">
+      <img src="../Team/MerlijnvanVliet.jpg" alt="Merlijn"
+           style="width:40px;height:40px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid var(--sand-3);">
+      <div style="background:var(--sand-2);border:1px solid var(--sand-3);border-radius:16px 16px 16px 4px;padding:.65rem 1rem;max-width:520px;font-size:.88rem;line-height:1.5;">
+        <span id="welcome-text"></span><span id="welcome-cursor" style="display:inline-block;width:2px;height:.9em;background:var(--gold);margin-left:2px;vertical-align:text-bottom;animation:blink .7s step-end infinite;"></span>
+      </div>
+    </div>
+
+
+    <!-- ── LINKEDIN GROWTH ── -->
+    <div class="section" id="growth-section">
+
+      <p style="font-size:.75rem;color:var(--muted);margin-bottom:1.5rem;"><span style="color:#2e7d52;">▲ groen</span> = metric stijgt t.o.v. vorige periode &nbsp;·&nbsp; <span style="color:#c0392b;">▼ rood</span> = metric daalt t.o.v. vorige periode — niet per se een absolute daling in volgers.</p>
+
+      <div id="growth-loading" style="font-size:.85rem;color:var(--muted);padding:2rem 0;">Gegevens laden…</div>
+      <div id="growth-error" style="display:none;font-size:.85rem;color:#c0392b;padding:1rem 0;"></div>
+
+      <!-- Charging Networks -->
+      <div id="growth-cn" style="display:none;">
+        <h3 style="font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 1rem;">Aviation Charging Networks</h3>
+        <div style="overflow-x:auto;margin-bottom:1.5rem;">
+          <table style="width:100%;border-collapse:collapse;font-size:.82rem;table-layout:fixed;">
+            <colgroup>
+              <col style="width:38%">
+              <col style="width:20%">
+              <col style="width:20%">
+              <col style="width:22%">
+            </colgroup>
+            <thead>
+              <tr style="border-bottom:2px solid var(--sand-3);">
+                <th style="text-align:left;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Bedrijf</th>
+                <th style="text-align:right;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Volgers</th>
+                <th style="text-align:right;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Nieuw</th>
+                <th style="text-align:right;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Groei %</th>
+              </tr>
+            </thead>
+            <tbody id="growth-table-cn"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Aviation Consultancy -->
+      <div id="growth-ac" style="display:none;">
+        <h3 style="font-size:.9rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin:0 0 1rem;">Aviation Consultancy</h3>
+        <div style="overflow-x:auto;margin-bottom:1.5rem;">
+          <table style="width:100%;border-collapse:collapse;font-size:.82rem;table-layout:fixed;">
+            <colgroup>
+              <col style="width:38%">
+              <col style="width:20%">
+              <col style="width:20%">
+              <col style="width:22%">
+            </colgroup>
+            <thead>
+              <tr style="border-bottom:2px solid var(--sand-3);">
+                <th style="text-align:left;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Bedrijf</th>
+                <th style="text-align:right;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Volgers</th>
+                <th style="text-align:right;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Nieuw</th>
+                <th style="text-align:right;padding:.5rem .4rem;color:var(--muted);font-weight:600;">Groei %</th>
+              </tr>
+            </thead>
+            <tbody id="growth-table-ac"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <p id="growth-updated" style="font-size:.72rem;color:var(--muted);margin-top:1rem;display:none;"></p>
+    </div><!-- /linkedin growth -->
+
+    <!-- ── WHITEPAPER DOWNLOADS ── -->
+    <div class="section" id="wp-downloads-section">
+      <div class="section-label">Content Performance</div>
+      <h2>Whitepaper downloads</h2>
+      <div id="wp-loading" style="font-size:.85rem;color:var(--muted);padding:1rem 0;">Laden…</div>
+      <div id="wp-table-wrap" style="display:none;overflow-x:auto;">
+        <table style="width:100%;border-collapse:collapse;font-size:.85rem;">
+          <thead>
+            <tr style="border-bottom:2px solid var(--sand-3);">
+              <th style="text-align:left;padding:.55rem .4rem;color:var(--muted);font-weight:600;">Whitepaper</th>
+              <th style="text-align:right;padding:.55rem .4rem;color:var(--muted);font-weight:600;">Downloads</th>
+            </tr>
+          </thead>
+          <tbody id="wp-table-body"></tbody>
+        </table>
+      </div>
+      <p id="wp-total" style="font-size:.8rem;color:var(--muted);margin-top:.75rem;display:none;"></p>
+    </div><!-- /whitepaper downloads -->
 
     <!-- ── SPECIAL PAGES ── -->
     <div class="section">
@@ -698,21 +795,21 @@
         <!-- WHITEPAPERS -->
         <div class="preview-card">
           <div class="preview-thumb">
-            <a href="https://nrg2fly.com/whitepapers" target="_blank"><img src="../images/og-image.jpg" alt="Whitepapers preview" /></a>
+            <a href="https://nrg2fly.com/whitepapers.html" target="_blank"><img src="../images/og-image.jpg" alt="Whitepapers preview" /></a>
           </div>
           <div class="preview-body">
             <div class="preview-top">
               <div class="preview-name">Whitepapers</div>
               <div class="preview-desc">Onze rapporten en marktinzichten over elektrisch vliegen en luchthaven elektrificatie. Goed voor geïnteresseerde partners die meer willen lezen.</div>
-              <div class="preview-url">nrg2fly.com/whitepapers</div>
+              <div class="preview-url">nrg2fly.com/whitepapers.html</div>
               <div class="preview-updated" id="updated-whitepapers"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> <span>laden…</span></div>
             </div>
             <div class="preview-actions">
-              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/whitepapers')">
+              <button class="copy-btn" onclick="copyLink(this, 'https://nrg2fly.com/whitepapers.html')">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
                 Kopieer link
               </button>
-              <a href="https://nrg2fly.com/whitepapers" target="_blank" class="icon-btn" title="Open pagina">
+              <a href="https://nrg2fly.com/whitepapers.html" target="_blank" class="icon-btn" title="Open pagina">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
             </div>
@@ -1122,12 +1219,49 @@ Merlijn</div>
       }
     }
 
+    /* ── WELCOME TYPEWRITER ── */
+    let _analysisQueued = null;
+    let _greetingDone   = false;
+    const _welcomeEl    = () => document.getElementById('welcome-text');
+    const _cursorEl     = () => document.getElementById('welcome-cursor');
+
+    function typeWriter(text, speed = 30, onDone) {
+      const el = _welcomeEl();
+      let i = 0;
+      function tick() {
+        el.textContent += text[i++];
+        if (i < text.length) setTimeout(tick, speed + Math.random() * 18);
+        else if (onDone) onDone();
+        else { _cursorEl().style.animation = 'none'; _cursorEl().style.opacity = '0'; }
+      }
+      setTimeout(tick, 0);
+    }
+
+    function queueAnalysis(text) {
+      if (_greetingDone) typeWriter(text, 22);
+      else _analysisQueued = text;
+    }
+
     window.addEventListener('DOMContentLoaded', () => {
+      const hour = new Date().getHours();
+      const greeting = hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
+      setTimeout(() => typeWriter(
+        `${greeting}! 👋 Welkom op de NRG2fly Team Hub.`,
+        30,
+        () => {
+          _greetingDone = true;
+          if (_analysisQueued) typeWriter(_analysisQueued, 22);
+          else { _cursorEl().style.animation = 'none'; _cursorEl().style.opacity = '0'; }
+        }
+      ), 500);
+
       loadLastUpdated('updated-partner',    'https://nrg2fly.com/partner.html');
       loadLastUpdated('updated-denhelder',  'https://nrg2fly.com/denhelderairport/');
       loadLastUpdated('updated-lelystad',   'https://nrg2fly.com/lelystadairport/');
       loadLastUpdated('updated-whitepapers','https://nrg2fly.com/whitepapers.html');
       loadLastUpdated('updated-website',    'https://nrg2fly.com/');
+      loadLinkedInGrowth();
+      loadWpDownloads();
     });
 
     /* ── COPY YOUTUBE LINK ── */
@@ -1171,6 +1305,227 @@ Merlijn</div>
       t.classList.add('show');
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+    }
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    const _wpSb = supabase.createClient(
+      'https://fygduixgwnrvzckyjmdo.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ5Z2R1aXhnd25ydnpja3lqbWRvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5MDYxMzMsImV4cCI6MjA4ODQ4MjEzM30.ZNcuzfHKpvWRJ2q5jJ-N7q8FubU7rm-sJvxixCPCdh8'
+    );
+
+    async function loadWpDownloads() {
+      const loading   = document.getElementById('wp-loading');
+      const tableWrap = document.getElementById('wp-table-wrap');
+      const tbody     = document.getElementById('wp-table-body');
+      const totalEl   = document.getElementById('wp-total');
+      try {
+        const { data, error } = await _wpSb.from('whitepaper_downloads').select('whitepaper');
+        if (error) throw error;
+        const counts = {};
+        for (const row of data) counts[row.whitepaper] = (counts[row.whitepaper] || 0) + 1;
+        const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+        tbody.innerHTML = sorted.map(([name, count]) =>
+          `<tr style="border-bottom:1px solid var(--sand-3);">
+            <td style="padding:.55rem .4rem;">${name}</td>
+            <td style="padding:.55rem .4rem;text-align:right;font-weight:600;">${count.toLocaleString()}</td>
+          </tr>`
+        ).join('');
+        loading.style.display  = 'none';
+        tableWrap.style.display = 'block';
+        totalEl.textContent    = `Totaal: ${data.length.toLocaleString()} downloads`;
+        totalEl.style.display  = 'block';
+      } catch (e) {
+        loading.textContent = 'Kon downloads niet laden.';
+      }
+    }
+  </script>
+
+  <script>
+    const CATEGORIES = {
+      cn: ['NRG2fly','Aerovolt','Beta Technologies','Joby Aviation','Green Aero Hub','Albatross'],
+      ac: ['NRG2fly','NACO','NLMTD Consulting','TO70','NAG News'],
+    };
+
+    // Display names (shown in table, canonical names used as keys in JSON data)
+    const DISPLAY_NAMES = {
+      'Beta Technologies': 'Beta',
+      'Joby Aviation':     'Joby',
+      'NLMTD Consulting':  'NLMTD',
+      'NAG News':          'NAG',
+    };
+
+    const LOGOS = {
+      'NRG2fly':           'https://www.google.com/s2/favicons?domain=nrg2fly.com&sz=64',
+      'Aerovolt':          'https://squadron.aerovolt.co.uk/images/logos/av_green_arrows.png',
+      'Beta Technologies': 'https://beta.team/hubfs/Brand%20Assets%20-%20Logos/BETA_BIRDMARK_ICON_grey.png',
+      'Joby Aviation':     'https://www.google.com/s2/favicons?domain=jobyaviation.com&sz=64',
+      'Green Aero Hub':    'https://www.google.com/s2/favicons?domain=greenaviationhub.com&sz=64',
+      'Albatross':         'https://www.google.com/s2/favicons?domain=albatross-holding.com&sz=64',
+      'NACO':              'https://www.google.com/s2/favicons?domain=nacoaviation.com&sz=64',
+      'NLMTD Consulting':  'https://www.google.com/s2/favicons?domain=nlmtd.com&sz=64',
+      'TO70':              'https://www.google.com/s2/favicons?domain=to70.com&sz=64',
+      'NAG News':          'https://www.google.com/s2/favicons?domain=nagnews.com&sz=64',
+    };
+
+    function countUp(el, target) {
+      if (target == null) return;
+      const duration = 900;
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(ease * target).toLocaleString();
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    function buildSection(snapshots, names, tbodyId) {
+      const latest = snapshots[snapshots.length - 1];
+      const prev   = snapshots.length > 1 ? snapshots[snapshots.length - 2] : null;
+
+      const sorted = [...names].filter(n => latest.companies[n]).sort((a, b) =>
+        (latest.companies[b]?.followers || 0) - (latest.companies[a]?.followers || 0)
+      );
+
+      function trend(curr, prevVal) {
+        // green = up, red = down, gray = no comparison
+        if (curr == null || prevVal == null) return null;
+        return curr >= prevVal ? 'up' : 'down';
+      }
+
+      function badge(value, t, prefix = '') {
+        if (value == null) return '<span style="color:var(--muted)">—</span>';
+        const color = t === 'up' ? '#2e7d52' : t === 'down' ? '#c0392b' : 'var(--muted)';
+        const bg    = t === 'up' ? '#e8f5ee'  : t === 'down' ? '#fdecea'  : 'transparent';
+        const arrow = t === 'up' ? ' ▲' : t === 'down' ? ' ▼' : '';
+        return `<span style="color:${color};background:${bg};padding:.1rem .4rem;border-radius:4px;font-size:.8rem;">${prefix}${value}${arrow}</span>`;
+      }
+
+      const rows = sorted.map(name => {
+        const d     = latest.companies[name];
+        const dp    = prev?.companies[name];
+        const curr  = d?.followers;
+        const newF  = d?.newFollowers;
+        const pct   = d?.growthPct;
+        const displayName = DISPLAY_NAMES[name] || name;
+        const logo = LOGOS[name] ? `<img src="${LOGOS[name]}" width="20" height="20" style="border-radius:4px;vertical-align:middle;margin-right:.5rem;object-fit:contain;" onerror="this.style.display='none'">` : '';
+
+        // Color is based on TREND vs previous period, matching LinkedIn's logic
+        const newTrend = trend(newF, dp?.newFollowers);
+        const pctTrend = trend(pct,  dp?.growthPct);
+
+        const newStr = newF != null ? `<span style="color:var(--dark)">${newF.toLocaleString()}</span>` : '<span style="color:var(--muted)">—</span>';
+        const pctStr = badge(pct  != null ? pct + '%'           : null, pctTrend);
+
+        return `<tr style="border-bottom:1px solid var(--sand-3);">
+          <td style="padding:.5rem .4rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${logo}${displayName}</td>
+          <td style="padding:.5rem .4rem;text-align:right;white-space:nowrap;" class="count-cell" data-target="${curr ?? ''}">${curr != null ? curr.toLocaleString() : '—'}</td>
+          <td style="padding:.5rem .4rem;text-align:right;white-space:nowrap;">${newStr}</td>
+          <td style="padding:.5rem .4rem;text-align:right;white-space:nowrap;">${pctStr}</td>
+        </tr>`;
+      });
+
+      const tbody = document.getElementById(tbodyId);
+      tbody.innerHTML = rows.join('');
+
+      // Animate count-up on cells
+      tbody.querySelectorAll('.count-cell[data-target]').forEach(td => {
+        const target = parseInt(td.dataset.target, 10);
+        if (!isNaN(target)) countUp(td, target);
+      });
+
+    }
+
+    async function loadLinkedInGrowth() {
+      const loading   = document.getElementById('growth-loading');
+      const errorEl   = document.getElementById('growth-error');
+      const updatedEl = document.getElementById('growth-updated');
+
+      try {
+        const res = await fetch('https://nrg2fly.com/linkedin-data.json?t=' + Date.now());
+        if (!res.ok) throw new Error('Nog geen data beschikbaar — de scraper draait elke maandag.');
+        const data = await res.json();
+
+        if (!data.snapshots || data.snapshots.length === 0)
+          throw new Error('Nog geen data — de scraper heeft nog niet gedraaid.');
+
+        loading.style.display = 'none';
+
+        buildSection(data.snapshots, CATEGORIES.cn, 'growth-table-cn');
+        document.getElementById('growth-cn').style.display = 'block';
+
+        buildSection(data.snapshots, CATEGORIES.ac, 'growth-table-ac');
+        document.getElementById('growth-ac').style.display = 'block';
+
+        // Generate analysis
+        const latest = data.snapshots[data.snapshots.length - 1];
+        const prev   = data.snapshots.length > 1 ? data.snapshots[data.snapshots.length - 2] : null;
+        const cnSorted = CATEGORIES.cn
+          .filter(n => latest.companies[n]?.followers)
+          .sort((a,b) => (latest.companies[b].followers||0) - (latest.companies[a].followers||0));
+        const acSorted = CATEGORIES.ac
+          .filter(n => latest.companies[n]?.followers)
+          .sort((a,b) => (latest.companies[b].followers||0) - (latest.companies[a].followers||0));
+
+        const nrg     = latest.companies['NRG2fly'];
+        const nrgPrev = prev?.companies['NRG2fly'];
+        const cnPos = cnSorted.indexOf('NRG2fly') + 1;
+        const acPos = acSorted.indexOf('NRG2fly') + 1;
+
+        const topGrowerCn = [...cnSorted].sort((a,b) =>
+          (latest.companies[b].growthPct||0) - (latest.companies[a].growthPct||0))[0];
+        const topGrowerAc = [...acSorted].sort((a,b) =>
+          (latest.companies[b].growthPct||0) - (latest.companies[a].growthPct||0))[0];
+
+        const pct     = nrg?.growthPct;
+        const pctPrev = nrgPrev?.growthPct;
+        const newF    = nrg?.newFollowers;
+        const newFPrev = nrgPrev?.newFollowers;
+
+        // Growth rate trend vs previous period
+        let trendStr = '';
+        if (pct != null && pctPrev != null) {
+          trendStr = pct >= pctPrev
+            ? ` De groeisnelheid stijgt: van ${pctPrev}% naar ${pct}%.`
+            : ` De groeisnelheid daalt: van ${pctPrev}% naar ${pct}% — we groeien nog steeds, maar iets langzamer dan de periode ervoor.`;
+        } else if (pct != null) {
+          trendStr = ` Groeisnelheid deze periode: ${pct}%.`;
+        }
+
+        // New followers
+        const newFStr = newF != null ? ` ${newF} nieuwe volgers deze maand.` : '';
+
+        // Top grower in CN — flag Albatross if no prev data
+        const topCnPrevData = prev?.companies[topGrowerCn];
+        const albatrossDisclaimer = (topGrowerCn === 'Albatross' && (topCnPrevData?.growthPct == null || topCnPrevData?.growthPct === 0))
+          ? ' (let op: Albatross lijkt de grootste stijger maar dat komt doordat vorige periode data ontbrak — dit corrigeert zich volgende week)'
+          : '';
+
+        const cnTopNote = topGrowerCn === 'NRG2fly'
+          ? ' NRG2fly groeit het snelst in Aviation Charging Networks.'
+          : ` ${DISPLAY_NAMES[topGrowerCn]||topGrowerCn} heeft de hoogste groei (${latest.companies[topGrowerCn]?.growthPct}%)${albatrossDisclaimer}.`;
+
+        const acTopNote = topGrowerAc === 'NRG2fly'
+          ? ' NRG2fly groeit het snelst in Aviation Consultancy.'
+          : ` In Consultancy heeft ${DISPLAY_NAMES[topGrowerAc]||topGrowerAc} de hoogste groei (${latest.companies[topGrowerAc]?.growthPct}%).`;
+
+        queueAnalysis(
+          ` NRG2fly staat op #${cnPos} van ${cnSorted.length} in Aviation Charging Networks` +
+          ` met ${(nrg?.followers||0).toLocaleString()} volgers.${newFStr}${trendStr}` +
+          `${cnTopNote} In Aviation Consultancy staat NRG2fly op #${acPos} van ${acSorted.length}.${acTopNote}`
+        );
+
+        updatedEl.textContent = `Laatste update: ${data.lastUpdated} — elke maandag automatisch bijgewerkt`;
+        updatedEl.style.display = 'block';
+
+      } catch (err) {
+        loading.style.display = 'none';
+        errorEl.textContent = err.message;
+        errorEl.style.display = 'block';
+      }
     }
   </script>
 

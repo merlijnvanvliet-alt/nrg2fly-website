@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pyramid of Airport Electrification — NRG2fly</title>
+  <meta name="description" content="A step-by-step framework for airports to build electric aviation infrastructure — from energy foundation to full airside charging for commercial e-planes.">
+  <meta property="og:title" content="Pyramid of Airport Electrification — NRG2fly">
+  <meta property="og:description" content="NRG2fly's practical framework for airports to build electric aviation infrastructure layer by layer.">
+  <meta property="og:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <meta property="og:url" content="https://nrg2fly.com/pyramid.html">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://nrg2fly.com/images/og-image.jpg">
+  <link rel="icon" type="image/png" href="NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css?v=20260323" />
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-6KNYPSR7BS"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-6KNYPSR7BS');
+  </script>
+
+  <style>
+    /* ===== PYRAMID PAGE STYLES ===== */
+
+    /* Hero */
+    .pyramid-hero {
+      background: var(--dark);
+      color: var(--white);
+      padding: 8rem 1.5rem 6rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .pyramid-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 110%, rgba(83,105,66,0.35) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .pyramid-hero .section-label { color: var(--yellow); }
+    .pyramid-hero h1 {
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .pyramid-hero-intro {
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .scroll-cta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 3rem;
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      animation: bounce 2s ease-in-out infinite;
+    }
+    .scroll-cta svg { color: rgba(255,255,255,0.4); }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    /* ===== PYRAMID SECTION ===== */
+    .pyramid-viz {
+      padding: 5rem 1.5rem 3rem;
+      background: var(--sage);
+    }
+    .pyramid-viz .container {
+      max-width: 860px;
+    }
+    .pyramid-viz-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .pyramid-viz-header .section-label { color: var(--green); }
+
+    /* SVG wrapper */
+    .pyramid-svg-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      position: relative;
+    }
+    .pyramid-svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    /* Layer polygons — initially hidden */
+    .py-layer {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s cubic-bezier(0.22, 0.61, 0.36, 1),
+                  transform 0.65s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+    .py-layer.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Layer text labels */
+    .py-label {
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      pointer-events: none;
+    }
+    .py-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Side zone labels */
+    .py-side-bar {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    .py-side-text {
+      opacity: 0;
+      transition: opacity 0.6s ease;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      fill: #888;
+      font-size: 11px;
+    }
+    .py-side-bar.visible,
+    .py-side-text.visible {
+      opacity: 1;
+    }
+
+    /* Progress indicator */
+    .pyramid-progress {
+      text-align: center;
+      margin-top: 1.5rem;
+      min-height: 2rem;
+    }
+    .pyramid-progress-text {
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--green);
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .pyramid-progress-text.active { opacity: 1; }
+    .pyramid-progress-text.done { color: var(--green); }
+
+    /* Step dots */
+    .pyramid-steps {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    .pyramid-step-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ddd;
+      transition: background 0.4s ease, transform 0.4s ease;
+    }
+    .pyramid-step-dot.active {
+      background: var(--green);
+      transform: scale(1.3);
+    }
+
+    /* ===== LAYER DETAIL CARDS ===== */
+    .pyramid-details {
+      padding: 5rem 1.5rem;
+      background: var(--white);
+    }
+    .pyramid-details .container { max-width: 860px; }
+    .pyramid-details-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .layer-card {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 1.5rem 2rem;
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid #eee;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .layer-card:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+    .layer-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .layer-number {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-heading);
+      font-size: 1.8rem;
+      color: #fff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+    }
+    .layer-number.l1 { background: #6aafd4; }
+    .layer-number.l2 { background: #4b8fc0; }
+    .layer-number.l3 { background: #89bc72; }
+    .layer-number.l4 { background: #60a048; }
+    .layer-number.l5 { background: #536942; }
+
+    .layer-body h3 {
+      margin-bottom: 0.35rem;
+      font-size: 1.3rem;
+    }
+    .layer-zone-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.65rem;
+      border-radius: 20px;
+      margin-bottom: 0.85rem;
+    }
+    .zone-landside { background: #e3f2fd; color: #4b8fc0; }
+    .zone-airside  { background: #e8f5e1; color: #4a7d34; }
+
+    .layer-body p {
+      color: var(--text-light);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+
+    .layer-insight {
+      background: var(--sage);
+      border-left: 3px solid var(--green);
+      padding: 0.75rem 1rem;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.92rem;
+      color: var(--text);
+      margin-bottom: 1rem;
+    }
+    .layer-insight strong { color: var(--green); }
+
+    .layer-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .layer-tag {
+      background: #f2f2f2;
+      color: var(--text);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.25rem 0.7rem;
+      border-radius: 20px;
+    }
+
+    /* ===== NRG2FLY EXAMPLE SECTIONS ===== */
+    .layer-example {
+      margin-top: 1.5rem;
+      border-top: 1px solid #eee;
+      padding-top: 1.25rem;
+    }
+    .layer-example-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 0.85rem;
+    }
+    .layer-example-imgs {
+      display: grid;
+      gap: 0.75rem;
+      margin-bottom: 0.85rem;
+    }
+    .layer-example-imgs--single { grid-template-columns: 1fr; max-width: 500px; }
+    .layer-example-imgs--double { grid-template-columns: 1fr 1fr; }
+    .layer-example-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: #f0f0f0;
+    }
+    .layer-example-img img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .layer-example-img:hover img { transform: scale(1.04); }
+    .layer-example-caption {
+      padding: 0.45rem 0.6rem;
+      font-size: 0.76rem;
+      color: var(--text-light);
+      background: #f6f6f6;
+      line-height: 1.4;
+    }
+    .layer-example-note {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.68;
+      background: #f6faf3;
+      padding: 0.75rem 1rem;
+      border-radius: var(--radius);
+      border-left: 3px solid #a8c48a;
+    }
+    .layer-example-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--green);
+      margin-top: 0.75rem;
+    }
+    .layer-example-link:hover { text-decoration: underline; }
+
+    /* ===== CTA ===== */
+    .pyramid-cta {
+      background: var(--dark);
+      padding: 5rem 1.5rem;
+      text-align: center;
+    }
+    .pyramid-cta h2, .pyramid-cta p { color: var(--white); }
+    .pyramid-cta p { color: rgba(255,255,255,0.72); margin-bottom: 2rem; }
+    .pyramid-cta .section-label { color: var(--yellow); }
+
+    /* ===== MOBILE PYRAMID (bar-stack layout) ===== */
+    .pyramid-mobile {
+      display: none;
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    /* Zone divider line between landside / airside */
+    .pm-zone-divider {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin: 6px 0;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .pm-zone-divider.visible { opacity: 1; }
+    .pm-zone-divider::before,
+    .pm-zone-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: #bbb;
+    }
+    .pm-zone-divider span {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .pm-zone-divider .pz-air  { color: #4a7d34; }
+    .pm-zone-divider .pz-land { color: #4b8fc0; }
+
+    /* Each mobile bar */
+    .pm-layer {
+      margin: 0 auto 5px;
+      padding: 13px 14px;
+      text-align: center;
+      border-radius: 6px;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      line-height: 1.35;
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s cubic-bezier(0.22,0.61,0.36,1),
+                  transform 0.55s cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .pm-layer.visible { opacity: 1; transform: translateY(0); }
+
+    .pm-l5 { width: 52%; background: #536942; color: #fff; }
+    .pm-l4 { width: 67%; background: #90c870; color: #1a3a0a; }
+    .pm-l3 { width: 81%; background: #c8e6af; color: #2a4a1a; }
+    .pm-l2 { width: 91%; background: #b8ddf0; color: #1a3a55; }
+    .pm-l1 { width: 100%; background: #d4ecf7; color: #1a4a6a; }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 640px) {
+      .pyramid-hero {
+        padding: 5.5rem 1.25rem 3.5rem;
+      }
+      .pyramid-hero-intro { font-size: 1rem; }
+
+      .pyramid-viz { padding: 3rem 1rem 2rem; }
+      .pyramid-viz-header { margin-bottom: 2rem; }
+
+      /* Swap: hide SVG, show bar-stack */
+      .pyramid-svg-wrap { display: none; }
+      .pyramid-mobile   { display: block; }
+
+      .pyramid-progress { margin-top: 1.25rem; }
+      .pyramid-progress-text { font-size: 0.75rem; }
+
+      .pyramid-details { padding: 3rem 1.25rem; }
+      .pyramid-details-header { margin-bottom: 2.5rem; }
+
+      .layer-card {
+        grid-template-columns: 52px 1fr;
+        gap: 0.85rem 1.25rem;
+        margin-bottom: 2.5rem;
+        padding-bottom: 2.5rem;
+      }
+      .layer-number { width: 52px; height: 52px; font-size: 1.25rem; }
+      .layer-body h3 { font-size: 1.1rem; }
+      .layer-insight { font-size: 0.88rem; }
+      .pyramid-cta { padding: 3.5rem 1.25rem; }
+      .layer-example-imgs--double { grid-template-columns: 1fr; }
+      .layer-example-img img { height: 170px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" aria-label="Main navigation">
+    <nav class="nav-inner">
+      <a href="index.html" class="nav-logo" aria-label="NRG2fly — Home">
+        <img class="logo-mark" src="NRG2FLY_icon_RGB.png" alt="NRG2fly" />
+        <img class="logo-full" src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Home</a></li>
+        <li><a href="network.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Join the Network</a></li>
+        <li><a href="about.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">About</a></li>
+        <li><a href="news.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">News</a></li>
+        <li><a href="whitepapers.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Whitepapers</a></li>
+        <li><a href="jobs.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Job Openings</a></li>
+        <li><a href="contact.html" class="nav-link" onclick="gtag('event', 'nav_click', {event_category: 'navigation', event_label: this.textContent.trim()})">Contact</a></li>
+        <li>
+          <button class="search-btn" id="search-toggle" aria-label="Search">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- ===== HERO ===== -->
+    <section class="pyramid-hero" aria-labelledby="pyramid-hero-heading">
+      <div class="container">
+        <p class="section-label">Framework</p>
+        <h1 id="pyramid-hero-heading">The Pyramid of<br>Airport Electrification</h1>
+        <p class="pyramid-hero-intro">
+          Electric aviation doesn't happen overnight — it builds. NRG2fly's Pyramid of Airport Electrification gives airports a clear, step-by-step path from energy foundation to full commercial e-plane operations.
+        </p>
+        <a href="#pyramid-viz" class="btn btn--primary" onclick="gtag('event', 'cta_click', {event_category: 'pyramid_page', event_label: 'hero_explore'})">Explore the Pyramid</a>
+        <div class="scroll-cta" aria-hidden="true">
+          <span>Scroll to build</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ANIMATED PYRAMID ===== -->
+    <section class="pyramid-viz" id="pyramid-viz" aria-labelledby="pyramid-viz-heading">
+      <div class="container">
+        <div class="pyramid-viz-header">
+          <p class="section-label">Layer by Layer</p>
+          <h2 id="pyramid-viz-heading">Building Up to Full Electrification</h2>
+          <p class="section-intro" style="margin: 0 auto;">
+            Each layer unlocks the next. Airports that skip the foundation will struggle at the top. Start where you are — and keep building.
+          </p>
+        </div>
+
+        <div class="pyramid-svg-wrap">
+          <!--
+            SVG viewBox: "-90 -20 880 400"
+            Pyramid: base y=360, tip at x=350 y=10. Height=350.
+            At y: half-width = (y-10)/350 * 350 = (y-10)
+            y-levels: 360, 290, 220, 150, 80, 10 → 70px layers
+
+            Layer 1 (bottom): y 290–360, half=280/350, x 70–630 / 0–700
+            Layer 2:           y 220–290, x 140–560 / 70–630
+            Layer 3:           y 150–220, x 210–490 / 140–560
+            Layer 4:           y 80–150,  x 280–420 / 210–490
+            Layer 5 (top):     y 10–80,   x 350–350 / 280–420
+
+            Side bars:
+              Landside (left, layers 1-2): y 220–360, x –75
+              Airside  (right, layers 3-5): y 10–220, x 720
+          -->
+          <svg class="pyramid-svg" viewBox="-90 -20 880 400" xmlns="http://www.w3.org/2000/svg"
+               role="img" aria-label="Pyramid of Airport Electrification with 5 layers">
+
+            <!-- ── Layer 1: Solar & Energy Foundation ── -->
+            <polygon class="py-layer" id="py-l1"
+              points="0,360 700,360 630,290 70,290"
+              fill="#d4ecf7" />
+
+            <!-- ── Layer 2: Truck / Bus / Car ── -->
+            <polygon class="py-layer" id="py-l2"
+              points="70,290 630,290 560,220 140,220"
+              fill="#b8ddf0" />
+
+            <!-- ── Layer 3: Ground Service Equipment ── -->
+            <polygon class="py-layer" id="py-l3"
+              points="140,220 560,220 490,150 210,150"
+              fill="#c8e6af" />
+
+            <!-- ── Layer 4: Small E-plane / eVtol / Drone ── -->
+            <polygon class="py-layer" id="py-l4"
+              points="210,150 490,150 420,80 280,80"
+              fill="#90c870" />
+
+            <!-- ── Layer 5: Big E-plane ── -->
+            <polygon class="py-layer" id="py-l5"
+              points="280,80 420,80 350,10"
+              fill="#536942" />
+
+            <!-- Dividing lines between layers -->
+            <line class="py-layer" id="py-div1" x1="70" y1="290" x2="630" y2="290" stroke="white" stroke-width="2"/>
+            <line class="py-layer" id="py-div2" x1="140" y1="220" x2="560" y2="220" stroke="white" stroke-width="2"/>
+            <line class="py-layer" id="py-div3" x1="210" y1="150" x2="490" y2="150" stroke="white" stroke-width="2"/>
+            <line class="py-layer" id="py-div4" x1="280" y1="80"  x2="420" y2="80"  stroke="white" stroke-width="2"/>
+
+            <!-- ── Text labels ── -->
+            <!-- Layer 1 -->
+            <text class="py-label" id="py-t1" x="350" y="316" text-anchor="middle" font-size="12.5" fill="#1a4a6a">
+              <tspan x="350" dy="0">Solar Power · Batteries · Smart Energy Infrastructure</tspan>
+              <tspan x="350" dy="17">&amp; Smart Building</tspan>
+            </text>
+
+            <!-- Layer 2 -->
+            <text class="py-label" id="py-t2" x="350" y="260" text-anchor="middle" font-size="13" fill="#1a3a55">
+              Truck, Bus &amp; Car Chargers
+            </text>
+
+            <!-- Layer 3 -->
+            <text class="py-label" id="py-t3" x="350" y="189" text-anchor="middle" font-size="13" fill="#2a4a1a">
+              Ground Service Equipment Chargers
+            </text>
+
+            <!-- Layer 4 -->
+            <text class="py-label" id="py-t4" x="350" y="122" text-anchor="middle" font-size="12" fill="#1a3a0a">
+              Small E-plane, eVtol &amp; Drone Chargers
+            </text>
+
+            <!-- Layer 5 (triangle — text centered, small) -->
+            <text class="py-label" id="py-t5" x="350" y="55" text-anchor="middle" font-size="11.5" fill="#ffffff" font-weight="600">
+              <tspan x="350" dy="0">Big E-plane</tspan>
+              <tspan x="350" dy="14">Chargers</tspan>
+            </text>
+
+            <!-- ── Side zone bars & labels ── -->
+            <!-- Landside (left, layers 1–2) -->
+            <rect class="py-side-bar" id="py-land-bar"
+              x="-72" y="220" width="18" height="140" rx="4"
+              fill="#d8d8d8" />
+            <text class="py-side-text" id="py-land-text"
+              transform="rotate(-90 -63 290)"
+              x="-63" y="290"
+              text-anchor="middle" font-size="11">
+              LANDSIDE
+            </text>
+
+            <!-- Airside (right, layers 3–5) -->
+            <rect class="py-side-bar" id="py-air-bar"
+              x="754" y="10" width="18" height="210" rx="4"
+              fill="#c5e0af" />
+            <text class="py-side-text" id="py-air-text"
+              transform="rotate(90 763 115)"
+              x="763" y="115"
+              text-anchor="middle" font-size="11"
+              fill="#3a6020">
+              AIRSIDE
+            </text>
+
+          </svg>
+        </div>
+
+        <!-- ===== MOBILE BAR-STACK PYRAMID ===== -->
+        <div class="pyramid-mobile" id="pyramid-mobile" aria-label="Pyramid of Airport Electrification">
+          <!-- Rendered top → bottom (tip first, foundation last) -->
+          <div class="pm-layer pm-l5" id="pm-l5">Big E-plane Chargers</div>
+          <div class="pm-layer pm-l4" id="pm-l4">Small E-plane, eVtol &amp; Drone Chargers</div>
+          <div class="pm-zone-divider" id="pm-divider">
+            <span class="pz-air">Airside</span>
+            <span class="pz-land">Landside</span>
+          </div>
+          <div class="pm-layer pm-l3" id="pm-l3">Ground Service Equipment Chargers</div>
+          <div class="pm-layer pm-l2" id="pm-l2">Truck, Bus &amp; Car Chargers</div>
+          <div class="pm-layer pm-l1" id="pm-l1">Solar Power · Batteries · Smart Energy Infrastructure · Smart Building</div>
+        </div>
+
+        <!-- Progress indicator -->
+        <div class="pyramid-progress" aria-live="polite">
+          <div class="pyramid-progress-text" id="pyramid-progress-text"></div>
+          <div class="pyramid-steps" aria-hidden="true">
+            <div class="pyramid-step-dot" id="dot-1"></div>
+            <div class="pyramid-step-dot" id="dot-2"></div>
+            <div class="pyramid-step-dot" id="dot-3"></div>
+            <div class="pyramid-step-dot" id="dot-4"></div>
+            <div class="pyramid-step-dot" id="dot-5"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== LAYER DETAIL CARDS ===== -->
+    <section class="pyramid-details" id="pyramid-details" aria-labelledby="details-heading">
+      <div class="container">
+        <div class="pyramid-details-header">
+          <p class="section-label">Deep Dive</p>
+          <h2 id="details-heading">What Each Layer Means for Your Airport</h2>
+          <p class="section-intro" style="margin: 0 auto;">
+            From laying the energy foundation to enabling commercial e-plane operations — here's what airports need at each stage.
+          </p>
+        </div>
+
+        <!-- Layer 1 -->
+        <div class="layer-card js-card" data-delay="0">
+          <div class="layer-number l1" aria-label="Layer 1">1</div>
+          <div class="layer-body">
+            <span class="layer-zone-badge zone-landside">Landside</span>
+            <h3>Energy Foundation</h3>
+            <p>
+              Before any vehicle or aircraft can charge, an airport needs a smart, resilient energy infrastructure. Solar generation, battery storage, and intelligent energy management systems are the bedrock of the entire pyramid — without this layer, all layers above become prohibitively expensive or unreliable.
+            </p>
+            <div class="layer-insight">
+              <strong>Why start here:</strong> An airport's existing grid connection typically cannot handle the sudden surge in electrical load that EV charging brings. A smart energy foundation distributes load intelligently, reduces peak demand charges, and can generate revenue by becoming a grid service provider.
+            </div>
+            <div class="layer-tags">
+              <span class="layer-tag">Solar panels &amp; carports</span>
+              <span class="layer-tag">Battery storage (BESS)</span>
+              <span class="layer-tag">Energy Management System</span>
+              <span class="layer-tag">Smart metering</span>
+              <span class="layer-tag">Green building standards</span>
+            </div>
+            <div class="layer-example">
+              <div class="layer-example-label">NRG2fly in practice</div>
+              <div class="layer-example-imgs layer-example-imgs--single">
+                <div class="layer-example-img">
+                  <img src="images/Flagship_Teuge.png" alt="Aerial view of Teuge Airport showing solar panels on hangar roof" loading="lazy" />
+                  <div class="layer-example-caption">Teuge Airport — Solar panels on the main hangar roof directly supply the apron's charging network</div>
+                </div>
+              </div>
+              <p class="layer-example-note">
+                At Teuge Airport, NRG2fly integrated solar generation into the airport's infrastructure from the start. The roof of the main hangar carries panels that feed directly into the charging network — keeping energy costs manageable from the very first charger and making the location energy-self-sufficient for all EV loads.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 2 -->
+        <div class="layer-card js-card" data-delay="100">
+          <div class="layer-number l2" aria-label="Layer 2">2</div>
+          <div class="layer-body">
+            <span class="layer-zone-badge zone-landside">Landside</span>
+            <h3>Landside Transport Charging</h3>
+            <p>
+              Electric ground transport is the most accessible and commercially compelling entry point into operational electrification. Airport buses, cargo trucks, shuttle vehicles, employee parking, and visitor parking can all switch to electric today using proven commercial technology — and many benefit from public subsidy programmes.
+            </p>
+            <div class="layer-insight">
+              <strong>Why second:</strong> Familiar technology, straightforward procurement, eligible for public EV subsidies, and no aviation regulation complexity. Most importantly, it builds electric vehicle operational knowledge across your entire airport staff before you move airside.
+            </div>
+            <div class="layer-tags">
+              <span class="layer-tag">AC slow &amp; DC fast chargers</span>
+              <span class="layer-tag">Fleet charging depot</span>
+              <span class="layer-tag">CCS / CHAdeMO</span>
+              <span class="layer-tag">Smart load management</span>
+              <span class="layer-tag">Public EV parking</span>
+            </div>
+            <div class="layer-example">
+              <div class="layer-example-label">NRG2fly in practice</div>
+              <div class="layer-example-imgs layer-example-imgs--single">
+                <div class="layer-example-img">
+                  <img src="images/cases/Lelystad/IMG_9901.jpeg" alt="Yellow Lelystad Airport electric vehicle charging at NRG2fly charger" loading="lazy" />
+                  <div class="layer-example-caption">Lelystad Airport — Airport's electric fleet charging via NRG2fly infrastructure</div>
+                </div>
+              </div>
+              <p class="layer-example-note">
+                At Lelystad Airport, the airport's own electric vehicles — including the yellow apron car — charge via the same NRG2fly infrastructure that later served aircraft. Airport staff were the first users, building operational familiarity with EV charging months before the first e-plane arrived. That headstart made the airside transition seamless.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 3 -->
+        <div class="layer-card js-card" data-delay="100">
+          <div class="layer-number l3" aria-label="Layer 3">3</div>
+          <div class="layer-body">
+            <span class="layer-zone-badge zone-airside">Airside</span>
+            <h3>Ground Service Equipment Charging</h3>
+            <p>
+              Aircraft ground operations are rapidly electrifying. Baggage tractors, pushback tugs, belt loaders, catering trucks, and mobile ground power units are all available in electric variants today — and they spend most of their time between aircraft gates where opportunity charging is straightforward to implement.
+            </p>
+            <div class="layer-insight">
+              <strong>Why third:</strong> GSE electrification drastically reduces apron emissions, lowers fuel costs, and introduces your ramp crew to airside electrical safety practices. It's also where you discover the real-world grid demands of the apron — essential knowledge for Layers 4 and 5.
+            </div>
+            <div class="layer-tags">
+              <span class="layer-tag">Gate opportunity charging</span>
+              <span class="layer-tag">GSE depot chargers</span>
+              <span class="layer-tag">High-capacity DC charging</span>
+              <span class="layer-tag">Smart charge scheduling</span>
+              <span class="layer-tag">Airside electrical safety</span>
+            </div>
+            <div class="layer-example">
+              <div class="layer-example-label">NRG2fly in practice</div>
+              <div class="layer-example-imgs layer-example-imgs--single">
+                <div class="layer-example-img">
+                  <img src="images/cases/PHOTO-2026-03-17-18-28-14.jpg" alt="NRG2fly engineers installing airside charging infrastructure at Den Helder Airport" loading="lazy" />
+                  <div class="layer-example-caption">Den Helder Airport — Airside cable infrastructure installed in 3 days, zero disruption to operations</div>
+                </div>
+              </div>
+              <p class="layer-example-note">
+                At Den Helder Airport, NRG2fly executed a complete airside infrastructure upgrade in just three days — trenching, laying cable, installing sub-stations, and commissioning chargers without disrupting a single flight operation. The new infrastructure enables GSE charging at every gate and forms the backbone for future aircraft charging at this busy helicopter hub.
+              </p>
+              <a href="cases/den-helder-airport.html" class="layer-example-link">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Read the Den Helder case
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 4 -->
+        <div class="layer-card js-card" data-delay="100">
+          <div class="layer-number l4" aria-label="Layer 4">4</div>
+          <div class="layer-body">
+            <span class="layer-zone-badge zone-airside">Airside</span>
+            <h3>Small E-plane, eVtol &amp; Drone Charging</h3>
+            <p>
+              Regional electric aircraft (up to ~19 seats), air taxis, and commercial drones are entering regular commercial service now. These aircraft need fast, reliable DC charging at gates and pads during short turnarounds — typically 20–45 minutes — with aviation-grade safety hardware and certified installation.
+            </p>
+            <div class="layer-insight">
+              <strong>Why fourth:</strong> This layer requires aviation-certified charging hardware, airside safety integration, and coordination with air traffic management. Airports that have built Layers 1–3 have the energy capacity, the trained staff, and the operational confidence to take this step smoothly.
+            </div>
+            <div class="layer-tags">
+              <span class="layer-tag">CPC-compliant chargers (22–150 kW)</span>
+              <span class="layer-tag">Vertiport infrastructure</span>
+              <span class="layer-tag">eVtol charging pads</span>
+              <span class="layer-tag">Drone docking &amp; charging</span>
+              <span class="layer-tag">ATC integration</span>
+            </div>
+            <div class="layer-example">
+              <div class="layer-example-label">NRG2fly in practice</div>
+              <div class="layer-example-imgs layer-example-imgs--double">
+                <div class="layer-example-img">
+                  <img src="images/Flasgship_Lelystad.jpg" alt="Pipistrel Velis Electro electric aircraft at Lelystad Airport charging plaza" loading="lazy" />
+                  <div class="layer-example-caption">Lelystad Airport — Europe's first public combined aircraft &amp; GSE charging plaza</div>
+                </div>
+                <div class="layer-example-img">
+                  <img src="images/Charging a Plane.jpg" alt="NRG2fly engineer plugging in a Pipistrel Velis Electro at Lelystad" loading="lazy" />
+                  <div class="layer-example-caption">Pipistrel Velis Electro being charged — 22 kW, CCS2, charge &amp; pay via the E-Flight app</div>
+                </div>
+              </div>
+              <p class="layer-example-note">
+                Lelystad Airport is home to NRG2fly's flagship charging plaza — Europe's first public location combining aircraft and GSE charging. Three airside chargers serve Pipistrel Velis Electros from E-Flight Academy, available 24/7 via the E-Flight app, and integrated with Schiphol Group's sustainability reporting. More than 500 charge sessions completed and counting.
+              </p>
+              <a href="cases/lelystad-airport.html" class="layer-example-link">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                Read the Lelystad Airport case
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Layer 5 -->
+        <div class="layer-card js-card" data-delay="100">
+          <div class="layer-number l5" aria-label="Layer 5">5</div>
+          <div class="layer-body">
+            <span class="layer-zone-badge zone-airside">Airside</span>
+            <h3>Large Commercial E-plane Charging</h3>
+            <p>
+              The apex of the pyramid. As commercial electric aircraft with 50+ seats enter service — expected from the late 2020s — airports with a complete electrification stack will be ready to serve them. High-power gate-integrated charging of 300–600 kW and above is the ultimate destination. Only airports that have built every layer below will be equipped for this moment.
+            </p>
+            <div class="layer-insight">
+              <strong>Why last:</strong> Commercial e-plane charging requires the full energy foundation, certified aviation hardware, regulatory approval, and the operational maturity that only comes from having navigated all previous layers. This is where early movers gain a lasting competitive advantage.
+            </div>
+            <div class="layer-tags">
+              <span class="layer-tag">High-power DC (300–600 kW+)</span>
+              <span class="layer-tag">Gate-integrated charging</span>
+              <span class="layer-tag">Grid-to-gate power management</span>
+              <span class="layer-tag">CPC aviation certification</span>
+              <span class="layer-tag">Smart load balancing</span>
+            </div>
+            <div class="layer-example">
+              <div class="layer-example-label">NRG2fly in practice</div>
+              <div class="layer-example-imgs layer-example-imgs--single">
+                <div class="layer-example-img">
+                  <img src="images/Plane_4_Elysian.jpg" alt="Elysian E9X 90-seat all-electric regional aircraft render" loading="lazy" />
+                  <div class="layer-example-caption">Elysian E9X — 90-seat all-electric regional aircraft, expected service entry late 2020s</div>
+                </div>
+              </div>
+              <p class="layer-example-note">
+                NRG2fly works closely with <strong>Elysian Aircraft</strong> — the Dutch startup developing the E9X, a 90-seat all-electric regional airliner — to define the charging specifications that airports will need when these aircraft enter service. This collaboration ensures the infrastructure we design and install today is forward-compatible with the commercial e-plane fleets of tomorrow.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== CTA BAND ===== -->
+    <section class="pyramid-cta" aria-labelledby="pyramid-cta-heading">
+      <div class="container">
+        <p class="section-label">Get Started</p>
+        <h2 id="pyramid-cta-heading">Where Is Your Airport on the Pyramid?</h2>
+        <p>NRG2fly helps airports at every stage — from first solar panels to full airside charging. Let's map your next step together.</p>
+        <div class="btn-group">
+          <a href="network.html" class="btn btn--primary" onclick="gtag('event', 'cta_click', {event_category: 'pyramid_page', event_label: 'join_network'})">Join the Network</a>
+          <a href="contact.html" class="btn btn--outline" style="border-color: rgba(255,255,255,0.4); color: #fff;" onclick="gtag('event', 'cta_click', {event_category: 'pyramid_page', event_label: 'contact'})">Talk to an Expert</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" class="footer-logo-img" />
+        <p>Powering Europe's airports for the electric aviation era.</p>
+        <div class="footer-member">
+          <p class="footer-member-label">Proud member of</p>
+          <a href="https://www.efc.aero" target="_blank" rel="noopener noreferrer"><img src="images/efc-logo_white.webp" alt="Electric Flying Connection" class="footer-member-logo" /></a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="network.html">Join the Network</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="news.html">News</a></li>
+          <li><a href="whitepapers.html">Whitepapers</a></li>
+          <li><a href="jobs.html">Job Openings</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div class="footer-nav">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="mailto:jacco@nrg2fly.com">jacco@nrg2fly.com</a></li>
+          <li><a href="contact.html">Send a Message</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2025 NRG2fly. All rights reserved.</span>
+      <span>Lelystad Airport · Teuge Airport</span>
+    </div>
+  </footer>
+
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div class="search-overlay" id="search-overlay" role="dialog" aria-modal="true" aria-label="Search site">
+    <div class="search-box">
+      <div class="search-input-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="search" id="search-input" placeholder="Search NRG2fly…" autocomplete="off" aria-label="Search query" />
+        <button class="search-close" id="search-close" aria-label="Close search">&times;</button>
+      </div>
+      <div class="search-results" id="search-results"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+
+  <script>
+    /* ===== PYRAMID ANIMATION ===== */
+    (function () {
+      const LAYERS = [
+        { poly: 'py-l1', mob: 'pm-l1', text: 'py-t1', label: 'Energy Foundation' },
+        { poly: 'py-l2', mob: 'pm-l2', text: 'py-t2', label: 'Landside Transport' },
+        { poly: 'py-l3', mob: 'pm-l3', text: 'py-t3', label: 'Ground Service Equipment' },
+        { poly: 'py-l4', mob: 'pm-l4', text: 'py-t4', label: 'Small E-plane & eVtol' },
+        { poly: 'py-l5', mob: 'pm-l5', text: 'py-t5', label: 'Big E-plane Chargers' },
+      ];
+
+      const DIVIDERS = ['py-div1','py-div2','py-div3','py-div4'];
+      const SIDE_ELS = ['py-land-bar','py-land-text','py-air-bar','py-air-text'];
+
+      const progressText = document.getElementById('pyramid-progress-text');
+      const dots = [1,2,3,4,5].map(i => document.getElementById('dot-' + i));
+
+      let built = false;
+
+      function buildPyramid() {
+        if (built) return;
+        built = true;
+
+        LAYERS.forEach(function (layer, i) {
+          // Animate polygon
+          setTimeout(function () {
+            // SVG polygon
+            var poly = document.getElementById(layer.poly);
+            if (poly) poly.classList.add('visible');
+
+            // Mobile bar (built bottom→top, but bars are ordered top→bottom in DOM,
+            // so layer index 0 = pm-l1 = bottom = last DOM child → still .visible works)
+            var mob = document.getElementById(layer.mob);
+            if (mob) mob.classList.add('visible');
+
+            // Show zone divider after layer 2 (between landside & airside)
+            if (i === 1) {
+              var divider = document.getElementById('pm-divider');
+              if (divider) divider.classList.add('visible');
+            }
+
+            // SVG dividing line
+            if (DIVIDERS[i]) {
+              var div = document.getElementById(DIVIDERS[i]);
+              if (div) div.classList.add('visible');
+            }
+
+            // Update progress indicator
+            if (progressText) {
+              progressText.textContent = 'Building layer ' + (i + 1) + ' of 5 — ' + layer.label;
+              progressText.classList.add('active');
+            }
+            if (dots[i]) dots[i].classList.add('active');
+
+            // SVG text label
+            setTimeout(function () {
+              var txt = document.getElementById(layer.text);
+              if (txt) txt.classList.add('visible');
+            }, 250);
+
+          }, i * 480);
+        });
+
+        // Show side bars after all layers
+        var totalDelay = LAYERS.length * 480 + 350;
+        setTimeout(function () {
+          SIDE_ELS.forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.classList.add('visible');
+          });
+          if (progressText) {
+            progressText.textContent = 'Pyramid complete — ready for electric aviation';
+            progressText.classList.add('done');
+          }
+        }, totalDelay);
+      }
+
+      // Observe when pyramid section enters viewport
+      var vizSection = document.getElementById('pyramid-viz');
+      if (vizSection && 'IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              // Small delay so user sees the page before animation starts
+              setTimeout(buildPyramid, 300);
+              obs.unobserve(vizSection);
+            }
+          });
+        }, { threshold: 0.25 });
+        obs.observe(vizSection);
+      } else {
+        // Fallback: build immediately
+        buildPyramid();
+      }
+
+      /* ===== DETAIL CARD REVEAL ===== */
+      var cards = document.querySelectorAll('.js-card');
+      if ('IntersectionObserver' in window) {
+        var cardObs = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var delay = parseInt(entry.target.dataset.delay) || 0;
+              setTimeout(function () {
+                entry.target.classList.add('visible');
+              }, delay);
+              cardObs.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15 });
+        cards.forEach(function (card) { cardObs.observe(card); });
+      } else {
+        cards.forEach(function (card) { card.classList.add('visible'); });
+      }
+
+      /* ===== PYRAMID LAYER HOVER: HIGHLIGHT CARD ===== */
+      var polyIds = ['py-l1','py-l2','py-l3','py-l4','py-l5'];
+      polyIds.forEach(function (id, i) {
+        var poly = document.getElementById(id);
+        if (!poly) return;
+        poly.style.cursor = 'pointer';
+        poly.style.transition += ', filter 0.2s ease';
+        poly.addEventListener('mouseenter', function () {
+          poly.style.filter = 'brightness(0.9)';
+        });
+        poly.addEventListener('mouseleave', function () {
+          poly.style.filter = '';
+        });
+        poly.addEventListener('click', function () {
+          var allCards = document.querySelectorAll('.layer-card');
+          var target = allCards[i];
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            target.style.outline = '2px solid #536942';
+            target.style.outlineOffset = '4px';
+            setTimeout(function () {
+              target.style.outline = '';
+              target.style.outlineOffset = '';
+            }, 2000);
+          }
+        });
+      });
+
+    })();
+  </script>
+
+</body>
+</html>
