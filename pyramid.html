@@ -690,21 +690,14 @@
 
         <!-- Horizontal legend (below pyramid on mobile, below SVG on desktop) -->
         <div class="pyramid-legend" aria-label="Zone legend">
-          <span class="pleg-badge pleg-land">Landside — Layers 1 &amp; 2</span>
+          <span class="pleg-badge pleg-land">Landside</span>
           <span class="pleg-sep" aria-hidden="true">→</span>
-          <span class="pleg-badge pleg-air">Airside — Layers 3, 4 &amp; 5</span>
+          <span class="pleg-badge pleg-air">Airside</span>
         </div>
 
         <!-- Progress indicator -->
         <div class="pyramid-progress" aria-live="polite">
           <div class="pyramid-progress-text" id="pyramid-progress-text"></div>
-          <div class="pyramid-steps" aria-hidden="true">
-            <div class="pyramid-step-dot" id="dot-1"></div>
-            <div class="pyramid-step-dot" id="dot-2"></div>
-            <div class="pyramid-step-dot" id="dot-3"></div>
-            <div class="pyramid-step-dot" id="dot-4"></div>
-            <div class="pyramid-step-dot" id="dot-5"></div>
-          </div>
           <p class="pyramid-click-hint">Click a layer to jump to the details below ↓</p>
         </div>
 
@@ -1060,8 +1053,7 @@
         var totalDelay = LAYERS.length * 480 + 350;
         setTimeout(function () {
           if (progressText) {
-            progressText.textContent = 'Pyramid complete — click a layer to explore';
-            progressText.classList.add('done');
+            progressText.textContent = '';
           }
         }, totalDelay);
       }
