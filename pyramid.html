@@ -647,7 +647,10 @@
             <text class="py-label" id="py-t2" x="350" y="258" text-anchor="middle" font-size="15" fill="#1a3a55" font-weight="600">Landside Charging</text>
             <text class="py-label" id="py-t3" x="350" y="188" text-anchor="middle" font-size="15" fill="#2a4a1a" font-weight="600">GSE Charging</text>
             <text class="py-label" id="py-t4" x="350" y="118" text-anchor="middle" font-size="14" fill="#1a3a0a" font-weight="600">E-plane &amp; eVtol</text>
-            <text class="py-label" id="py-t5" x="350" y="51"  text-anchor="middle" font-size="13" fill="#ffffff"  font-weight="700">Big E-planes</text>
+            <text class="py-label" id="py-t5" x="350" y="44"  text-anchor="middle" font-size="13" fill="#ffffff"  font-weight="700">
+              <tspan x="350" dy="0">Big</tspan>
+              <tspan x="350" dy="15">E-planes</tspan>
+            </text>
 
             <!-- ── Side zone bars & labels ── -->
             <!-- Landside (left, layers 1–2) -->
@@ -676,24 +679,20 @@
           </svg>
         </div>
 
-        <!-- Horizontal legend -->
-        <div class="pyramid-legend" aria-label="Zone legend">
-          <span class="pleg-badge pleg-land">Landside — Layers 1 &amp; 2</span>
-          <span class="pleg-sep" aria-hidden="true">→</span>
-          <span class="pleg-badge pleg-air">Airside — Layers 3, 4 &amp; 5</span>
-        </div>
-
         <!-- ===== MOBILE BAR-STACK PYRAMID ===== -->
         <div class="pyramid-mobile" id="pyramid-mobile" aria-label="Pyramid of Airport Electrification">
           <div class="pm-layer pm-l5" id="pm-l5">Big E-planes</div>
           <div class="pm-layer pm-l4" id="pm-l4">E-plane &amp; eVtol</div>
-          <div class="pm-zone-divider" id="pm-divider">
-            <span class="pz-air">↑ Airside</span>
-            <span class="pz-land">Landside ↓</span>
-          </div>
           <div class="pm-layer pm-l3" id="pm-l3">GSE Charging</div>
           <div class="pm-layer pm-l2" id="pm-l2">Landside Charging</div>
           <div class="pm-layer pm-l1" id="pm-l1">Energy Foundation</div>
+        </div>
+
+        <!-- Horizontal legend (below pyramid on mobile, below SVG on desktop) -->
+        <div class="pyramid-legend" aria-label="Zone legend">
+          <span class="pleg-badge pleg-land">Landside — Layers 1 &amp; 2</span>
+          <span class="pleg-sep" aria-hidden="true">→</span>
+          <span class="pleg-badge pleg-air">Airside — Layers 3, 4 &amp; 5</span>
         </div>
 
         <!-- Progress indicator -->
@@ -857,7 +856,7 @@
                 </div>
                 <div class="layer-example-img">
                   <img src="images/Charging a Plane.jpg" alt="NRG2fly engineer plugging in a Pipistrel Velis Electro at Lelystad" loading="lazy" />
-                  <div class="layer-example-caption">Pipistrel Velis Electro being charged — 22 kW, CCS2, charge &amp; pay via the E-Flight app</div>
+                  <div class="layer-example-caption">Pipistrel Velis Electro being charged — 22 kW, CCS2 airside charger at Lelystad</div>
                 </div>
               </div>
               <p class="layer-example-note">
@@ -1035,12 +1034,6 @@
             // so layer index 0 = pm-l1 = bottom = last DOM child → still .visible works)
             var mob = document.getElementById(layer.mob);
             if (mob) mob.classList.add('visible');
-
-            // Show zone divider after layer 2 (between landside & airside)
-            if (i === 1) {
-              var divider = document.getElementById('pm-divider');
-              if (divider) divider.classList.add('visible');
-            }
 
             // SVG dividing line
             if (DIVIDERS[i]) {
