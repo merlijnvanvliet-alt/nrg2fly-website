@@ -1273,18 +1273,12 @@ Merlijn</div>
       const hour = new Date().getHours();
       const greeting = hour < 12 ? 'Goedemorgen' : hour < 18 ? 'Goedemiddag' : 'Goedenavond';
       setTimeout(() => typeWriter(
-        `🆕 Nieuwe pagina live: Pyramid of Airport Electrification — nrg2fly.com/pyramid.html`,
-        28,
+        `${greeting}! 👋 Welkom op de NRG2fly Team Hub.\n🆕 Nieuwe pagina live: Pyramid of Airport Electrification — de link staat bij Special Pages hieronder.`,
+        30,
         () => {
-          setTimeout(() => typeWriter(
-            `\n${greeting}! 👋 Welkom op de NRG2fly Team Hub.`,
-            30,
-            () => {
-              _greetingDone = true;
-              if (_analysisQueued) typeWriter(_analysisQueued, 22);
-              else { _cursorEl().style.animation = 'none'; _cursorEl().style.opacity = '0'; }
-            }
-          ), 400);
+          _greetingDone = true;
+          if (_analysisQueued) typeWriter(_analysisQueued, 22);
+          else { _cursorEl().style.animation = 'none'; _cursorEl().style.opacity = '0'; }
         }
       ), 500);
 
