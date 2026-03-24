@@ -1290,12 +1290,12 @@ Merlijn</div>
         }
       ), 500);
 
-      loadLastUpdated('updated-pyramid',    'https://nrg2fly.com/pyramid.html');
-      loadLastUpdated('updated-partner',    'https://nrg2fly.com/partner.html');
-      loadLastUpdated('updated-denhelder',  'https://nrg2fly.com/denhelderairport/');
-      loadLastUpdated('updated-lelystad',   'https://nrg2fly.com/lelystadairport/');
-      loadLastUpdated('updated-whitepapers','https://nrg2fly.com/whitepapers.html');
-      loadLastUpdated('updated-website',    'https://nrg2fly.com/');
+      loadLastUpdated('updated-pyramid',    '/pyramid.html');
+      loadLastUpdated('updated-partner',    '/partner.html');
+      loadLastUpdated('updated-denhelder',  '/denhelderairport/');
+      loadLastUpdated('updated-lelystad',   '/lelystadairport/');
+      loadLastUpdated('updated-whitepapers','/whitepapers.html');
+      loadLastUpdated('updated-website',    '/');
       loadLinkedInGrowth();
       loadWpDownloads();
     });
@@ -1481,7 +1481,7 @@ Merlijn</div>
       const updatedEl = document.getElementById('growth-updated');
 
       try {
-        const res = await fetch('https://nrg2fly.com/linkedin-data.json?t=' + Date.now());
+        const res = await fetch('/linkedin-data.json?t=' + Date.now());
         if (!res.ok) throw new Error('Nog geen data beschikbaar — de scraper draait elke maandag.');
         const data = await res.json();
 
