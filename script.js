@@ -45,6 +45,7 @@ function animateCounter(el) {
   const raw = el.getAttribute('data-target');
   const isPercent = raw.includes('%');
   const isPlain = el.hasAttribute('data-format') && el.getAttribute('data-format') === 'plain';
+  const prefix = el.getAttribute('data-prefix') || '';
   const target = parseFloat(raw);
   const duration = 1800;
   const start = performance.now();
@@ -56,7 +57,7 @@ function animateCounter(el) {
     const eased = 1 - Math.pow(1 - progress, 3);
     const value = Math.round(eased * target);
     const formatted = isPlain ? value.toString() : value.toLocaleString('en');
-    el.textContent = formatted + (isPercent ? '%' : '');
+    el.textContent = prefix + formatted + (isPercent ? '%' : '');
     if (progress < 1) requestAnimationFrame(step);
   }
   requestAnimationFrame(step);
@@ -268,7 +269,7 @@ if ('IntersectionObserver' in window) {
 /* ===== SITE SEARCH ===== */
 const SEARCH_INDEX = [
   // Home
-  { title: 'Home', page: 'Home', url: 'index.html', body: 'electric aviation infrastructure Europe 4200 airports charging mission' },
+  { title: 'Home', page: 'Home', url: 'index.html', body: 'electric aviation infrastructure Europe 2000 airports charging mission' },
   { title: 'Our Mission', page: 'Home', url: 'index.html#mission', body: 'airports prepare electric traffic energy hubs transition climate infrastructure' },
   { title: 'Project Eurocharge', page: 'Home', url: 'index.html', body: 'pan-European charging standards interoperability Elaad OEM manufacturers standardisation' },
   { title: 'Infrastructure Assessment', page: 'Home', url: 'index.html', body: 'audit airport infrastructure electric aircraft charging scale assessment' },
