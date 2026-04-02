@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Energy Scan — NRG2fly</title>
+  <meta name="description" content="Ontdek welke grid-strategie past bij uw luchthaven. Beantwoord 5 vragen en ontvang persoonlijk advies over GTO, Cable Pooling, GDS of G-CBC." />
+  <meta property="og:title" content="Energy Scan — NRG2fly" />
+  <meta property="og:description" content="Beantwoord 5 vragen en ontdek direct welke grid-strategie aansluit bij uw luchthaven." />
+  <meta property="og:image" content="https://www.nrg2fly.com/images/Lelystad Airport Charging Plaza.jpg" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/png" href="../NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+
+  <style>
+
+    /* ══════════════════════════════════════════════
+       SECTION NAV
+    ══════════════════════════════════════════════ */
+    .section-nav {
+      position: sticky;
+      top: var(--nav-height);
+      z-index: 900;
+      background: #fff;
+      border-bottom: 1px solid #e4e8ef;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section-nav-inner {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section-nav-inner::-webkit-scrollbar { display: none; }
+    .section-nav-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--text-light); white-space: nowrap;
+      text-decoration: none; border-bottom: 2px solid transparent;
+      transition: color 0.18s, border-color 0.18s;
+      flex-shrink: 0;
+    }
+    .section-nav-link:hover { color: var(--dark); border-color: rgba(0,0,0,0.15); }
+    .section-nav-link.active { color: var(--dark); border-color: #0d1c2e; }
+
+    /* ══════════════════════════════════════════════
+       HERO
+    ══════════════════════════════════════════════ */
+    .es-hero {
+      position: relative;
+      padding-top: calc(var(--nav-height) + 56px);
+      min-height: 580px;
+      display: flex; align-items: flex-end;
+      overflow: hidden;
+      background: #0d1c2e;
+    }
+    .es-hero-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 55%;
+      opacity: 0.42;
+    }
+    .es-hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(10,28,20,0.25) 0%, rgba(10,28,20,0.88) 80%, #0a1c14 100%);
+    }
+    .es-hero-content {
+      position: relative; z-index: 1;
+      padding: 3rem 1.5rem 3.5rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      width: 100%;
+    }
+    .es-scan-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(83,105,66,0.2);
+      border: 1px solid rgba(83,105,66,0.5);
+      border-radius: 100px;
+      padding: 5px 14px;
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #8fbe6a;
+      margin-bottom: 1.25rem;
+    }
+    .es-scan-badge::before { content: '● '; }
+    .es-hero-content h1 {
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      font-weight: 400;
+    }
+    .es-hero-content h1 em {
+      color: var(--yellow);
+      font-style: normal;
+    }
+    .es-hero-intro {
+      font-size: 1.05rem; color: rgba(255,255,255,0.72);
+      max-width: 580px; line-height: 1.65; margin-bottom: 2rem;
+    }
+    .es-hero-chips {
+      display: flex; flex-wrap: wrap; gap: 0.65rem;
+    }
+    .es-chip {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.82rem; font-weight: 500;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 100px; padding: 5px 14px; color: rgba(255,255,255,0.85);
+    }
+    .es-chip--green {
+      background: rgba(83,105,66,0.18);
+      border-color: rgba(83,105,66,0.45);
+      color: #8fbe6a;
+    }
+    .es-chip--yellow {
+      background: rgba(255,217,54,0.12);
+      border-color: rgba(255,217,54,0.4);
+      color: #ffd936;
+    }
+
+    /* ══════════════════════════════════════════════
+       SCAN SECTION
+    ══════════════════════════════════════════════ */
+    .es-scan-section {
+      padding: 3.5rem 1.5rem 4rem;
+      background: #f5f7fa;
+      scroll-margin-top: calc(var(--nav-height) + 48px);
+    }
+    .es-scan-intro {
+      max-width: 640px; margin: 0 auto 2rem; text-align: center;
+    }
+    .es-scan-intro .section-label { text-align: center; }
+    .es-scan-intro h2 { color: var(--dark); margin-bottom: 0.5rem; font-size: 1.75rem; }
+    .es-scan-intro p { color: var(--text-light); font-size: 0.95rem; }
+
+    /* Card */
+    .es-card {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.09);
+      max-width: 640px;
+      margin: 0 auto;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Progress bar */
+    .es-progress {
+      display: flex;
+      height: 3px;
+      gap: 3px;
+    }
+    .es-progress-seg {
+      flex: 1;
+      background: #e4e8ef;
+      transition: background 0.35s ease;
+    }
+    .es-progress-seg.done   { background: var(--green); }
+    .es-progress-seg.active { background: #a8c490; }
+
+    /* Step header */
+    .es-step-header {
+      padding: 1.75rem 2rem 0;
+    }
+    .es-step-num {
+      font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--green); margin-bottom: 0.5rem;
+    }
+    .es-step-question {
+      font-family: var(--font-heading);
+      font-size: 1.35rem; color: var(--dark);
+      margin-bottom: 0.4rem; line-height: 1.3;
+    }
+    .es-step-sub {
+      font-size: 0.88rem; color: var(--text-light); margin-bottom: 0;
+    }
+
+    /* Step body */
+    .es-step-body { padding: 1.25rem 2rem 1.75rem; }
+
+    /* Option grids */
+    .es-options-2x2,
+    .es-options-2x3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    .es-option {
+      border: 1.5px solid #e4e8ef;
+      border-radius: 12px;
+      padding: 0.9rem 1rem;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, box-shadow 0.18s;
+      user-select: none;
+    }
+    .es-option:hover { border-color: #a8c490; background: #f6faf3; }
+    .es-option.selected {
+      border-color: var(--green);
+      background: #eef3ea;
+      box-shadow: 0 0 0 1px var(--green);
+    }
+    .es-option-title { font-size: 0.9rem; font-weight: 700; color: var(--dark); margin-bottom: 0.2rem; }
+    .es-option-desc  { font-size: 0.78rem; color: var(--text-light); line-height: 1.4; }
+
+    /* Step footer */
+    .es-step-footer {
+      padding: 0 2rem 1.75rem;
+      display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    }
+    .es-btn-back {
+      background: none; border: 1.5px solid #e4e8ef; border-radius: 8px;
+      padding: 0.6rem 1.25rem; font-family: var(--font-body);
+      font-size: 0.9rem; font-weight: 600; color: var(--text-light);
+      cursor: pointer; transition: border-color 0.18s, color 0.18s;
+    }
+    .es-btn-back:hover { border-color: var(--green); color: var(--green); }
+    .es-btn-next {
+      background: var(--green); border: none; border-radius: 8px;
+      padding: 0.65rem 1.75rem; font-family: var(--font-body);
+      font-size: 0.92rem; font-weight: 700; color: #fff;
+      cursor: pointer; transition: opacity 0.18s, transform 0.18s; margin-left: auto;
+    }
+    .es-btn-next:hover { opacity: 0.85; }
+    .es-btn-next:active { transform: scale(0.97); }
+    .es-btn-next:disabled { opacity: 0.35; cursor: not-allowed; }
+
+    /* Contact form (step 5) */
+    .es-form { display: flex; flex-direction: column; gap: 0.75rem; }
+    .es-field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .es-field { display: flex; flex-direction: column; gap: 0.3rem; }
+    .es-field label { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+    .es-field label .req { color: var(--green); }
+    .es-field input {
+      border: 1.5px solid #e4e8ef; border-radius: 8px;
+      padding: 0.6rem 0.85rem; font-family: var(--font-body);
+      font-size: 0.9rem; color: var(--dark); outline: none;
+      transition: border-color 0.18s;
+    }
+    .es-field input:focus { border-color: var(--green); }
+    .es-field input.error { border-color: #c0392b; }
+    .es-field-error { font-size: 0.75rem; color: #c0392b; min-height: 1em; }
+    .es-consent {
+      display: flex; gap: 0.65rem; align-items: flex-start; margin-top: 0.25rem;
+    }
+    .es-consent input[type="checkbox"] {
+      width: 16px; height: 16px; margin-top: 2px;
+      flex-shrink: 0; accent-color: var(--green);
+    }
+    .es-consent-text { font-size: 0.78rem; color: var(--text-light); line-height: 1.5; }
+    .es-consent-error { font-size: 0.75rem; color: #c0392b; min-height: 1em; }
+
+    /* Slide transitions */
+    .es-step { display: none; }
+    .es-step.active {
+      display: block;
+      animation: esSlideIn 0.3s ease forwards;
+    }
+    .es-step.slide-back {
+      animation: esSlideInBack 0.3s ease forwards;
+    }
+    @keyframes esSlideIn {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes esSlideInBack {
+      from { opacity: 0; transform: translateX(-24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Sending overlay */
+    .es-sending-overlay {
+      display: none; position: absolute; inset: 0;
+      background: rgba(255,255,255,0.85);
+      align-items: center; justify-content: center;
+      border-radius: 20px; z-index: 10;
+    }
+    .es-sending-overlay.visible { display: flex; }
+    .es-spinner {
+      width: 36px; height: 36px;
+      border: 3px solid #e4e8ef; border-top-color: var(--green);
+      border-radius: 50%; animation: esSpin 0.7s linear infinite;
+    }
+    @keyframes esSpin { to { transform: rotate(360deg); } }
+
+    /* ══════════════════════════════════════════════
+       RESULT
+    ══════════════════════════════════════════════ */
+    .es-result { display: none; }
+    .es-result.active { display: block; }
+
+    .es-result-hero {
+      background: #0d1c2e; padding: 2.25rem 2rem; color: #fff;
+    }
+    .es-result-label {
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--yellow); margin-bottom: 0.5rem;
+    }
+    .es-result-title {
+      font-family: var(--font-heading); font-size: 1.6rem;
+      color: #fff; margin-bottom: 0.5rem; line-height: 1.25;
+    }
+    .es-result-sub { font-size: 0.9rem; color: rgba(255,255,255,0.72); margin: 0; }
+
+    .es-result-body { padding: 1.75rem 2rem; }
+    .es-result-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0.75rem; margin-bottom: 1.75rem;
+    }
+    .es-result-card {
+      border: 1.5px solid #e4e8ef; border-radius: 12px;
+      padding: 1rem; background: #fff;
+    }
+    .es-result-card.winner {
+      border-color: var(--green); background: #eef3ea;
+      box-shadow: 0 0 0 1px var(--green);
+    }
+    .es-result-card.second { border-color: #c8d9bb; }
+    .es-result-card.muted  { opacity: 0.6; }
+    .es-result-badge {
+      display: inline-block; font-size: 0.68rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 20px; margin-bottom: 0.6rem;
+    }
+    .winner .es-result-badge { background: var(--green); color: #fff; }
+    .second .es-result-badge { background: #e4eede; color: var(--green); }
+    .muted  .es-result-badge { background: #f0f0f0; color: #999; }
+    .es-result-card-name { font-size: 0.88rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; line-height: 1.3; }
+    .es-score-bar-wrap { background: #e4e8ef; border-radius: 4px; height: 5px; margin-bottom: 0.6rem; overflow: hidden; }
+    .es-score-bar { height: 100%; background: var(--green); border-radius: 4px; transition: width 0.6s ease; }
+    .muted .es-score-bar { background: #bbb; }
+    .es-result-card-desc { font-size: 0.78rem; color: var(--text-light); line-height: 1.45; margin-bottom: 0.5rem; }
+    .es-result-card-avail { font-size: 0.72rem; font-weight: 600; color: var(--green); }
+    .muted .es-result-card-avail { color: #999; }
+
+    .es-result-notes {
+      background: #f5f7fa; border-radius: 12px;
+      padding: 1.1rem 1.25rem; margin-bottom: 1.5rem;
+    }
+    .es-result-notes-title {
+      font-size: 0.8rem; font-weight: 700; color: var(--dark);
+      margin-bottom: 0.6rem; text-transform: uppercase; letter-spacing: 0.07em;
+    }
+    .es-result-notes ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.5rem; }
+    .es-result-notes li {
+      font-size: 0.83rem; color: var(--text);
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .es-result-notes li::before { content: '→'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .es-result-cta { display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap; }
+    .es-btn-cta {
+      background: var(--green); border: none; border-radius: 8px;
+      padding: 0.75rem 1.75rem; font-family: var(--font-body);
+      font-size: 0.95rem; font-weight: 700; color: #fff;
+      cursor: pointer; transition: opacity 0.18s;
+      text-decoration: none; display: inline-block;
+    }
+    .es-btn-cta:hover { opacity: 0.85; }
+    .es-btn-restart {
+      background: none; border: 1.5px solid #e4e8ef; border-radius: 8px;
+      padding: 0.7rem 1.25rem; font-family: var(--font-body);
+      font-size: 0.88rem; font-weight: 600; color: var(--text-light);
+      cursor: pointer; transition: border-color 0.18s, color 0.18s;
+    }
+    .es-btn-restart:hover { border-color: var(--green); color: var(--green); }
+
+    /* ══════════════════════════════════════════════
+       PHOTO BANNER
+    ══════════════════════════════════════════════ */
+    .es-photo-banner {
+      width: 100%; height: 340px;
+      overflow: hidden; position: relative;
+    }
+    .es-photo-banner img {
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center 50%;
+    }
+    .es-photo-banner-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(10,28,20,0.55) 0%, rgba(10,28,20,0.1) 60%);
+    }
+    .es-photo-banner-caption {
+      position: absolute; bottom: 2rem; left: 2.5rem;
+      color: rgba(255,255,255,0.75); font-size: 0.82rem;
+    }
+    @media (max-width: 600px) { .es-photo-banner { height: 220px; } }
+
+    /* ══════════════════════════════════════════════
+       STRATEGIES SECTION
+    ══════════════════════════════════════════════ */
+    .es-strategies-section {
+      background: #07090f;
+      padding: 4.5rem 1.5rem;
+      scroll-margin-top: calc(var(--nav-height) + 48px);
+    }
+    .es-strategies-header {
+      max-width: var(--max-width); margin: 0 auto 3rem;
+    }
+    .es-strategies-header .section-label { color: var(--yellow); }
+    .es-strategies-header h2 { color: #fff; margin-bottom: 0.6rem; }
+    .es-strategies-header p { color: rgba(255,255,255,0.55); max-width: 560px; font-size: 0.97rem; line-height: 1.65; }
+
+    .es-strategies-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .es-strat-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .es-strat-card:hover {
+      border-color: rgba(143,190,106,0.4);
+      background: rgba(255,255,255,0.06);
+    }
+    .es-strat-tag {
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: #8fbe6a; margin-bottom: 0.5rem;
+    }
+    .es-strat-name {
+      font-family: var(--font-heading);
+      font-size: 1.25rem; color: #fff;
+      margin-bottom: 0.4rem; line-height: 1.25;
+    }
+    .es-strat-avail {
+      font-size: 0.75rem; font-weight: 600; color: rgba(255,255,255,0.35);
+      margin-bottom: 1rem;
+    }
+    .es-strat-desc {
+      font-size: 0.88rem; color: rgba(255,255,255,0.6);
+      line-height: 1.65; margin-bottom: 1rem;
+    }
+    .es-strat-risk {
+      display: flex; gap: 0.5rem; align-items: flex-start;
+      font-size: 0.8rem; color: rgba(255,217,54,0.65); line-height: 1.45;
+    }
+    .es-strat-risk::before { content: '⚠'; flex-shrink: 0; margin-top: 1px; }
+
+    @media (max-width: 720px) {
+      .es-strategies-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════════════════════
+       PHOTO GALLERY
+    ══════════════════════════════════════════════ */
+    .es-gallery-section {
+      padding: 3.5rem 1.5rem;
+      background: #f7f9fc;
+      border-top: 1px solid #e4e8ef;
+    }
+    .es-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+    .es-gallery-grid img {
+      width: 100%; aspect-ratio: 4/3;
+      object-fit: cover; border-radius: 10px; display: block;
+    }
+    .es-gallery-grid img:first-child {
+      grid-column: span 2; aspect-ratio: 16/7;
+    }
+    @media (max-width: 700px) {
+      .es-gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .es-gallery-grid img:first-child { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .es-gallery-grid { grid-template-columns: 1fr; }
+      .es-gallery-grid img:first-child { grid-column: span 1; aspect-ratio: 4/3; }
+    }
+
+    /* ══════════════════════════════════════════════
+       TEAM SECTION
+    ══════════════════════════════════════════════ */
+    .es-team-section {
+      background: #0d1c2e;
+      padding: 4rem 1.5rem;
+      scroll-margin-top: calc(var(--nav-height) + 48px);
+    }
+    .es-team-header {
+      max-width: var(--max-width); margin: 0 auto 2.5rem;
+    }
+    .es-team-header .section-label { color: var(--yellow); }
+    .es-team-header h2 { color: #fff; margin-bottom: 0.5rem; }
+    .es-team-header p { color: rgba(255,255,255,0.55); font-size: 0.95rem; max-width: 520px; }
+
+    .es-team-bar {
+      display: flex; gap: 0.85rem; flex-wrap: wrap;
+      justify-content: center; max-width: var(--max-width); margin: 0 auto;
+    }
+    .es-team-member {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0.5rem; text-align: center; width: 160px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px; padding: 1.25rem 1rem 1rem;
+    }
+    .es-avatar-wrap {
+      position: relative; width: 80px; height: 80px;
+    }
+    .es-avatar-wrap::before {
+      content: ''; position: absolute; inset: -3px; border-radius: 50%;
+      background: linear-gradient(135deg, #ffd936, #f5a623);
+    }
+    .es-avatar-wrap.lead::before {
+      background: linear-gradient(135deg, #8fbe6a, #536942);
+    }
+    .es-avatar-wrap img {
+      position: absolute; inset: 2px;
+      width: calc(100% - 4px); height: calc(100% - 4px);
+      border-radius: 50%; object-fit: cover; object-position: center top;
+    }
+    .es-member-name {
+      font-family: var(--font-heading); font-size: 0.9rem; color: #fff; line-height: 1.2;
+    }
+    .es-member-role {
+      font-size: 0.72rem; color: rgba(255,255,255,0.45); letter-spacing: 0.04em;
+    }
+    .es-member-badge {
+      display: inline-block; font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 100px;
+      background: rgba(143,190,106,0.15); border: 1px solid rgba(143,190,106,0.4);
+      color: #8fbe6a; margin-top: 2px;
+    }
+    .es-member-links {
+      display: flex; flex-direction: column; gap: 5px; width: 100%; margin-top: 8px;
+    }
+    .es-member-link {
+      display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+      font-size: 0.72rem; font-weight: 600; padding: 6px 8px; border-radius: 6px;
+      text-decoration: none; transition: opacity 0.15s; white-space: nowrap;
+    }
+    .es-member-link:hover { opacity: 0.8; }
+    .es-member-link--mail {
+      background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.75);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    /* ══════════════════════════════════════════════
+       CTA SECTION
+    ══════════════════════════════════════════════ */
+    .es-cta-section {
+      background: var(--green);
+      padding: 4rem 1.5rem;
+      text-align: center;
+    }
+    .es-cta-section .section-label { color: rgba(255,255,255,0.6); }
+    .es-cta-section h2 { color: #fff; margin-bottom: 0.75rem; }
+    .es-cta-section p { color: rgba(255,255,255,0.75); max-width: 480px; margin: 0 auto 2rem; }
+    .es-cta-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--yellow); color: var(--dark);
+      border: none; border-radius: 10px;
+      padding: 0.85rem 2.25rem;
+      font-family: var(--font-body); font-size: 1rem; font-weight: 700;
+      text-decoration: none; cursor: pointer;
+      transition: opacity 0.18s, transform 0.18s;
+    }
+    .es-cta-btn:hover { opacity: 0.88; }
+    .es-cta-btn:active { transform: scale(0.97); }
+
+    /* ══════════════════════════════════════════════
+       RESPONSIVE SCAN CARD
+    ══════════════════════════════════════════════ */
+    @media (max-width: 540px) {
+      .es-step-header { padding: 1.4rem 1.25rem 0; }
+      .es-step-body   { padding: 1rem 1.25rem 1.4rem; }
+      .es-step-footer { padding: 0 1.25rem 1.4rem; }
+      .es-options-2x2, .es-options-2x3 { grid-template-columns: 1fr; }
+      .es-field-row { grid-template-columns: 1fr; }
+      .es-result-grid { grid-template-columns: 1fr; }
+      .es-result-hero { padding: 1.75rem 1.25rem; }
+      .es-result-body { padding: 1.4rem 1.25rem; }
+      .es-hero-content { padding: 2rem 1rem 2.5rem; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header" aria-label="Main navigation">
+    <nav class="nav-inner">
+      <a href="../index.html" class="nav-logo" aria-label="NRG2fly — Home">
+        <img class="logo-full" src="../NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+      </a>
+      <button class="hamburger" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="../index.html" class="nav-link">Home</a></li>
+        <li><a href="../network.html" class="nav-link">Join the Network</a></li>
+        <li><a href="../about.html" class="nav-link">About</a></li>
+        <li><a href="../news.html" class="nav-link">News</a></li>
+        <li><a href="../contact.html" class="nav-link">Contact</a></li>
+        <li>
+          <a href="../contact.html" class="btn btn--primary" style="padding:0.5rem 1.1rem;font-size:0.85rem;">Gesprek inplannen</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== SECTION NAV ===== -->
+  <nav class="section-nav" aria-label="Paginasecties">
+    <div class="section-nav-inner">
+      <a href="#scan" class="section-nav-link active">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+        De Scan
+      </a>
+      <a href="#strategieen" class="section-nav-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="2" y="3" width="6" height="18" rx="1"/><rect x="9" y="8" width="6" height="13" rx="1"/><rect x="16" y="5" width="6" height="16" rx="1"/></svg>
+        Grid-strategieën
+      </a>
+      <a href="#team" class="section-nav-link">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        Ons Team
+      </a>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════════ -->
+    <section class="es-hero" aria-label="Energy Scan hero">
+      <img class="es-hero-img"
+           src="../images/Lelystad Airport Charging Plaza.jpg"
+           alt="Laadplein Lelystad Airport" />
+      <div class="es-hero-overlay"></div>
+      <div class="es-hero-content">
+        <div class="es-scan-badge">ENERGY SCAN</div>
+        <h1>Welke grid-strategie past<br>bij <em>uw luchthaven</em>?</h1>
+        <p class="es-hero-intro">
+          Beantwoord 5 vragen en ontdek direct welke aanpak aansluit bij uw situatie —
+          GTO, Cable Pooling, GDS of G‑CBC.
+        </p>
+        <div class="es-hero-chips">
+          <span class="es-chip--green">5 vragen</span>
+          <span class="es-chip--green">3 minuten</span>
+          <span class="es-chip--yellow">Persoonlijk advies</span>
+          <span class="es-chip">Gratis &amp; vrijblijvend</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         SCAN SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="scan" class="es-scan-section">
+
+      <div class="es-scan-intro">
+        <div class="section-label">Energie-scan</div>
+        <h2>Start de scan</h2>
+        <p>Uw antwoorden worden direct verwerkt tot een persoonlijk grid-advies.</p>
+      </div>
+
+      <div class="es-card" id="scan-card">
+
+        <!-- Sending overlay -->
+        <div class="es-sending-overlay" id="sending-overlay">
+          <div class="es-spinner"></div>
+        </div>
+
+        <!-- Progress bar -->
+        <div class="es-progress" id="progress-bar" aria-hidden="true">
+          <div class="es-progress-seg active" data-seg="1"></div>
+          <div class="es-progress-seg" data-seg="2"></div>
+          <div class="es-progress-seg" data-seg="3"></div>
+          <div class="es-progress-seg" data-seg="4"></div>
+          <div class="es-progress-seg" data-seg="5"></div>
+        </div>
+
+        <!-- ── STEP 1 — Netaansluiting ── -->
+        <div class="es-step active" id="step-1">
+          <div class="es-step-header">
+            <div class="es-step-num">Stap 1 van 5</div>
+            <h2 class="es-step-question">Wat is de huidige situatie van uw netaansluiting?</h2>
+            <p class="es-step-sub">Beschrijf de situatie die het best van toepassing is.</p>
+          </div>
+          <div class="es-step-body">
+            <div class="es-options-2x2" role="radiogroup" aria-label="Netaansluiting">
+              <div class="es-option" data-step="1" data-value="wait" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Wachtlijst / congestie</div>
+                <div class="es-option-desc">Wacht op nieuwe of grotere aansluiting bij de netbeheerder</div>
+              </div>
+              <div class="es-option" data-step="1" data-value="ok" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Aansluiting aanwezig</div>
+                <div class="es-option-desc">Heeft een werkende aansluiting maar wil optimaliseren</div>
+              </div>
+              <div class="es-option" data-step="1" data-value="grow" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Uitbreidingsplannen</div>
+                <div class="es-option-desc">Nieuwe activiteiten of installaties die meer vermogen vragen</div>
+              </div>
+              <div class="es-option" data-step="1" data-value="explore" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Verkenningsfase</div>
+                <div class="es-option-desc">Oriënteert zich op mogelijkheden, nog geen concrete plannen</div>
+              </div>
+            </div>
+          </div>
+          <div class="es-step-footer">
+            <button class="es-btn-next" id="next-1" disabled>Volgende →</button>
+          </div>
+        </div>
+
+        <!-- ── STEP 2 — Installaties ── -->
+        <div class="es-step" id="step-2">
+          <div class="es-step-header">
+            <div class="es-step-num">Stap 2 van 5</div>
+            <h2 class="es-step-question">Welke energie­installaties zijn aanwezig of gepland?</h2>
+            <p class="es-step-sub">Selecteer alles wat van toepassing is.</p>
+          </div>
+          <div class="es-step-body">
+            <div class="es-options-2x3" role="group" aria-label="Energieinstallaties">
+              <div class="es-option" data-step="2" data-value="solar" tabindex="0" role="checkbox" aria-checked="false">
+                <div class="es-option-title">Zonnepanelen</div>
+                <div class="es-option-desc">Op daken, hangars of terrein</div>
+              </div>
+              <div class="es-option" data-step="2" data-value="battery" tabindex="0" role="checkbox" aria-checked="false">
+                <div class="es-option-title">Batterijopslag</div>
+                <div class="es-option-desc">Stationaire opslag aanwezig of in planning</div>
+              </div>
+              <div class="es-option" data-step="2" data-value="ev" tabindex="0" role="checkbox" aria-checked="false">
+                <div class="es-option-title">Laadinfrastructuur</div>
+                <div class="es-option-desc">EV-laders voor grondvloot of bezoekers</div>
+              </div>
+              <div class="es-option" data-step="2" data-value="h2" tabindex="0" role="checkbox" aria-checked="false">
+                <div class="es-option-title">Waterstof / SAF</div>
+                <div class="es-option-desc">Duurzame brandstofinfrastructuur gepland</div>
+              </div>
+              <div class="es-option" data-step="2" data-value="heat" tabindex="0" role="checkbox" aria-checked="false">
+                <div class="es-option-title">Warmtepomp</div>
+                <div class="es-option-desc">Voor gebouwverwarming of -koeling</div>
+              </div>
+              <div class="es-option" data-step="2" data-value="none" tabindex="0" role="checkbox" aria-checked="false">
+                <div class="es-option-title">Geen / weinig</div>
+                <div class="es-option-desc">Voornamelijk traditioneel stroomverbruik</div>
+              </div>
+            </div>
+          </div>
+          <div class="es-step-footer">
+            <button class="es-btn-back" data-go="1">← Terug</button>
+            <button class="es-btn-next" id="next-2" disabled>Volgende →</button>
+          </div>
+        </div>
+
+        <!-- ── STEP 3 — Partijen op terrein ── -->
+        <div class="es-step" id="step-3">
+          <div class="es-step-header">
+            <div class="es-step-num">Stap 3 van 5</div>
+            <h2 class="es-step-question">Zijn er andere partijen op het terrein die energie verbruiken?</h2>
+            <p class="es-step-sub">Denk aan verhuurders, cateraars, grondhandlers of andere bedrijven.</p>
+          </div>
+          <div class="es-step-body">
+            <div class="es-options-2x2" role="radiogroup" aria-label="Partijen op het terrein">
+              <div class="es-option" data-step="3" data-value="none" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Nee, alleen de luchthaven</div>
+                <div class="es-option-desc">Één eigenaar, één verbruiker</div>
+              </div>
+              <div class="es-option" data-step="3" data-value="few" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Enkele partijen (2–5)</div>
+                <div class="es-option-desc">Beperkt aantal bedrijven actief op het terrein</div>
+              </div>
+              <div class="es-option" data-step="3" data-value="many" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Meerdere partijen (5+)</div>
+                <div class="es-option-desc">Diverse bedrijven actief op het terrein</div>
+              </div>
+              <div class="es-option" data-step="3" data-value="open" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Wil terrein openstellen</div>
+                <div class="es-option-desc">Plannen om derden energie te leveren als hub</div>
+              </div>
+            </div>
+          </div>
+          <div class="es-step-footer">
+            <button class="es-btn-back" data-go="2">← Terug</button>
+            <button class="es-btn-next" id="next-3" disabled>Volgende →</button>
+          </div>
+        </div>
+
+        <!-- ── STEP 4 — Flexibiliteit ── -->
+        <div class="es-step" id="step-4">
+          <div class="es-step-header">
+            <div class="es-step-num">Stap 4 van 5</div>
+            <h2 class="es-step-question">Kan de luchthaven flexibel omgaan met het stroomverbruik?</h2>
+            <p class="es-step-sub">Sommige grid-opties vragen dat u soms minder afneemt op verzoek van de netbeheerder.</p>
+          </div>
+          <div class="es-step-body">
+            <div class="es-options-2x2" role="radiogroup" aria-label="Flexibiliteit">
+              <div class="es-option" data-step="4" data-value="yes" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Ja, flexibel mogelijk</div>
+                <div class="es-option-desc">Bepaalde processen kunnen worden verschoven of gereduceerd</div>
+              </div>
+              <div class="es-option" data-step="4" data-value="partial" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Gedeeltelijk</div>
+                <div class="es-option-desc">Sommige verbruikers zijn flexibel, kritische systemen niet</div>
+              </div>
+              <div class="es-option" data-step="4" data-value="no" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Nee, continue levering</div>
+                <div class="es-option-desc">Operationele veiligheid vereist stabiele stroomlevering</div>
+              </div>
+              <div class="es-option" data-step="4" data-value="unknown" tabindex="0" role="radio" aria-checked="false">
+                <div class="es-option-title">Onbekend / te onderzoeken</div>
+                <div class="es-option-desc">Nog niet in kaart gebracht</div>
+              </div>
+            </div>
+          </div>
+          <div class="es-step-footer">
+            <button class="es-btn-back" data-go="3">← Terug</button>
+            <button class="es-btn-next" id="next-4" disabled>Volgende →</button>
+          </div>
+        </div>
+
+        <!-- ── STEP 5 — Contactgegevens ── -->
+        <div class="es-step" id="step-5">
+          <div class="es-step-header">
+            <div class="es-step-num">Stap 5 van 5</div>
+            <h2 class="es-step-question">Laat uw gegevens achter voor het persoonlijke adviesrapport</h2>
+            <p class="es-step-sub">NRG2FLY neemt contact op met een uitgebreide analyse op maat.</p>
+          </div>
+          <div class="es-step-body">
+            <form class="es-form" id="contact-form" novalidate>
+              <div class="es-field-row">
+                <div class="es-field">
+                  <label for="f-airport">Naam luchthaven <span class="req">*</span></label>
+                  <input type="text" id="f-airport" name="airport" autocomplete="organization" placeholder="b.v. Lelystad Airport" />
+                  <span class="es-field-error" id="err-airport"></span>
+                </div>
+                <div class="es-field">
+                  <label for="f-name">Uw naam <span class="req">*</span></label>
+                  <input type="text" id="f-name" name="name" autocomplete="name" placeholder="Voornaam Achternaam" />
+                  <span class="es-field-error" id="err-name"></span>
+                </div>
+              </div>
+              <div class="es-field-row">
+                <div class="es-field">
+                  <label for="f-role">Functie</label>
+                  <input type="text" id="f-role" name="role" autocomplete="organization-title" placeholder="b.v. Directeur Operaties" />
+                </div>
+                <div class="es-field">
+                  <label for="f-phone">Telefoonnummer</label>
+                  <input type="tel" id="f-phone" name="phone" autocomplete="tel" placeholder="+31 6 …" />
+                </div>
+              </div>
+              <div class="es-field">
+                <label for="f-email">E-mailadres <span class="req">*</span></label>
+                <input type="email" id="f-email" name="email" autocomplete="email" placeholder="naam@luchthaven.nl" />
+                <span class="es-field-error" id="err-email"></span>
+              </div>
+              <div class="es-consent">
+                <input type="checkbox" id="f-consent" name="consent" />
+                <label class="es-consent-text" for="f-consent">
+                  Ik ga akkoord dat NRG2FLY mijn gegevens gebruikt voor een adviesgesprek.
+                  Gegevens worden niet gedeeld met derden.
+                </label>
+              </div>
+              <span class="es-consent-error" id="err-consent"></span>
+            </form>
+          </div>
+          <div class="es-step-footer">
+            <button class="es-btn-back" data-go="4">← Terug</button>
+            <button class="es-btn-next" id="next-5" type="button">Bekijk resultaat →</button>
+          </div>
+        </div>
+
+        <!-- ── RESULT ── -->
+        <div class="es-result" id="step-result">
+          <!-- filled dynamically -->
+        </div>
+
+      </div><!-- /es-card -->
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PHOTO BANNER 1
+    ═══════════════════════════════════════════ -->
+    <div class="es-photo-banner">
+      <img src="../images/Lelystad_airside.jpg" alt="Lelystad Airport airside" loading="lazy" />
+      <div class="es-photo-banner-overlay"></div>
+      <span class="es-photo-banner-caption">Lelystad Airport — laadinfrastructuur airside</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         GRID-STRATEGIES SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="strategieen" class="es-strategies-section">
+      <div class="es-strategies-header">
+        <div class="section-label">De vier opties</div>
+        <h2>Grid-strategieën voor luchthavens</h2>
+        <p>
+          Het Nederlandse energienet biedt vier regelgevende instrumenten waarmee luchthavens
+          capaciteitsproblemen kunnen oplossen of hun energiepositie kunnen versterken.
+          NRG2fly helpt u bepalen welke het best past.
+        </p>
+      </div>
+      <div class="es-strategies-grid">
+        <div class="es-strat-card">
+          <div class="es-strat-tag">GTO</div>
+          <div class="es-strat-name">Gezamenlijk Transportrecht</div>
+          <div class="es-strat-avail">Operationeel per 2027</div>
+          <p class="es-strat-desc">
+            Meerdere partijen delen één transportrecht op dezelfde aansluiting.
+            Goed voor luchthavens die samen met huurders één aansluiting willen
+            optimaliseren en de kosten eerlijk verdelen.
+          </p>
+          <div class="es-strat-risk">Nog in wetgevingstraject — verwachte invoering 2027.</div>
+        </div>
+        <div class="es-strat-card">
+          <div class="es-strat-tag">Cable Pooling</div>
+          <div class="es-strat-name">Gedeelde netaansluiting</div>
+          <div class="es-strat-avail">Beschikbaar sinds 2024</div>
+          <p class="es-strat-desc">
+            Meerdere productie- of verbruiksinstallaties delen één fysieke
+            netaansluiting. Ideaal bij uitbreidingsplannen en meerdere grote
+            verbruikers op hetzelfde terrein.
+          </p>
+          <div class="es-strat-risk">Vereist intensieve samenwerking met andere terreinpartijen.</div>
+        </div>
+        <div class="es-strat-card">
+          <div class="es-strat-tag">GDS</div>
+          <div class="es-strat-name">Gesloten Distributiesysteem</div>
+          <div class="es-strat-avail">Beschikbaar sinds 2015</div>
+          <p class="es-strat-desc">
+            Privaat energienetwerk dat door de luchthaven zelf wordt beheerd.
+            Krachtig instrument voor luchthavens die als lokale energiehub willen
+            fungeren en derden van stroom willen voorzien.
+          </p>
+          <div class="es-strat-risk">ACM-vrijstelling vereist — juridisch traject nodig.</div>
+        </div>
+        <div class="es-strat-card">
+          <div class="es-strat-tag">G-CBC</div>
+          <div class="es-strat-name">Collectieve Vraagsturing</div>
+          <div class="es-strat-avail">Beschikbaar sinds 2022</div>
+          <p class="es-strat-desc">
+            Groepen verbruikers bieden gezamenlijk flexibiliteit aan de netbeheerder
+            aan in ruil voor een vergoeding. Zeer geschikt wanneer de luchthaven
+            beschikt over batterijopslag of zonnepanelen.
+          </p>
+          <div class="es-strat-risk">Verplichte afschaling mogelijk op verzoek van de netbeheerder.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PHOTO GALLERY
+    ═══════════════════════════════════════════ -->
+    <section class="es-gallery-section">
+      <div class="es-gallery-grid">
+        <img src="../images/cases/Lelystad/Lelystad-Laadplein.jpg"
+             alt="Laadplein Lelystad Airport" loading="lazy" />
+        <img src="../images/cases/Lelystad/DSC06157.jpg"
+             alt="Lelystad Airport" loading="lazy" />
+        <img src="../images/cases/Den Helder Airport Terminal .jpg"
+             alt="Den Helder Airport terminal" loading="lazy" />
+        <img src="../images/cases/Den Helder Airport Landside Chargers.jpg"
+             alt="EV-laders Den Helder Airport" loading="lazy" />
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         PHOTO BANNER 2
+    ═══════════════════════════════════════════ -->
+    <div class="es-photo-banner" style="height:280px;">
+      <img src="../images/cases/Den Helder Airport Airshot.jpg"
+           alt="Den Helder Airport luchtfoto"
+           loading="lazy"
+           style="object-position: center 30%;" />
+      <div class="es-photo-banner-overlay"></div>
+      <span class="es-photo-banner-caption">Den Helder Airport — luchtfoto</span>
+    </div>
+
+    <!-- ═══════════════════════════════════════════
+         TEAM SECTION
+    ═══════════════════════════════════════════ -->
+    <section id="team" class="es-team-section">
+      <div class="es-team-header">
+        <div class="section-label">Uw aanspreekpunt</div>
+        <h2>Het NRG2fly team</h2>
+        <p>Na het invullen van de scan neemt een van onze adviseurs persoonlijk contact met u op voor een uitgebreide analyse op maat.</p>
+      </div>
+      <div class="es-team-bar">
+
+        <div class="es-team-member">
+          <div class="es-avatar-wrap lead">
+            <img src="../Team/JaccoBink.png" alt="Jacco Bink" />
+          </div>
+          <div class="es-member-name">Jacco Bink</div>
+          <div class="es-member-role">Consulting Director</div>
+          <div class="es-member-badge">Grid-expert</div>
+          <div class="es-member-links">
+            <a href="mailto:jacco@nrg2fly.com" class="es-member-link es-member-link--mail">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              jacco@nrg2fly.com
+            </a>
+          </div>
+        </div>
+
+        <div class="es-team-member">
+          <div class="es-avatar-wrap">
+            <img src="../Team/MerlijnvanVliet.jpg" alt="Merlijn van Vliet" />
+          </div>
+          <div class="es-member-name">Merlijn van Vliet</div>
+          <div class="es-member-role">Co-founder</div>
+          <div class="es-member-links">
+            <a href="mailto:merlijn@nrg2fly.com" class="es-member-link es-member-link--mail">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              merlijn@nrg2fly.com
+            </a>
+          </div>
+        </div>
+
+        <div class="es-team-member">
+          <div class="es-avatar-wrap">
+            <img src="../Team/TristanOpenneer.jpg" alt="Tristan Oppeneer" />
+          </div>
+          <div class="es-member-name">Tristan Oppeneer</div>
+          <div class="es-member-role">Infra Specialist</div>
+          <div class="es-member-links">
+            <a href="mailto:tristan@nrg2fly.com" class="es-member-link es-member-link--mail">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              tristan@nrg2fly.com
+            </a>
+          </div>
+        </div>
+
+        <div class="es-team-member">
+          <div class="es-avatar-wrap">
+            <img src="../images/GielJanProfile.jpeg" alt="Giel Jan Koek" />
+          </div>
+          <div class="es-member-name">Giel Jan Koek</div>
+          <div class="es-member-role">Aviation Consultant</div>
+          <div class="es-member-links">
+            <a href="mailto:gieljan@nrg2fly.com" class="es-member-link es-member-link--mail">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              gieljan@nrg2fly.com
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════
+         CTA SECTION
+    ═══════════════════════════════════════════ -->
+    <section class="es-cta-section">
+      <div class="section-label">Direct contact</div>
+      <h2>Liever meteen een gesprek?</h2>
+      <p>Plan een vrijblijvend kennismakingsgesprek in met een van onze adviseurs.</p>
+      <a href="../contact.html" class="es-cta-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.08 6.08l.91-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Gesprek inplannen
+      </a>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer style="background:#07090f;padding:2rem 1.5rem;text-align:center;border-top:1px solid rgba(255,255,255,0.06);">
+    <p style="color:rgba(255,255,255,0.35);font-size:0.8rem;margin:0;">
+      © 2025 NRG2fly B.V. —
+      <a href="../index.html" style="color:rgba(255,255,255,0.45);text-decoration:underline;">nrg2fly.com</a>
+      &nbsp;·&nbsp;
+      <a href="../contact.html" style="color:rgba(255,255,255,0.45);text-decoration:underline;">Contact</a>
+    </p>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    var answers = { grid: null, assets: [], parties: null, flex: null };
+    var currentStep = 1;
+
+    var OPTIONS = {
+      gto: {
+        name: 'GTO — Gezamenlijk Transportrecht',
+        available: 'Operationeel per 2027',
+        description: 'Meerdere partijen delen één transportrecht. Goed voor luchthavens die samen met huurders één aansluiting willen optimaliseren.',
+        risk: 'Nog in wetgevingstraject — verwachte invoering 2027.',
+      },
+      cable: {
+        name: 'Cable Pooling',
+        available: 'Beschikbaar sinds 2024',
+        description: 'Meerdere installaties delen één fysieke netaansluiting. Ideaal bij uitbreidingsplannen en meerdere grote verbruikers.',
+        risk: 'Vereist intensieve samenwerking — afhankelijk van andere partijen.',
+      },
+      gds: {
+        name: 'GDS — Gesloten Distributiesysteem',
+        available: 'Beschikbaar sinds 2015',
+        description: 'Privaat netwerk beheerd door een eigen operator. Krachtig voor luchthavens die als energiehub willen fungeren.',
+        risk: 'ACM-vrijstelling vereist — juridisch traject nodig.',
+      },
+      gcbc: {
+        name: 'G-CBC — Collectieve Vraagsturing',
+        available: 'Beschikbaar sinds 2022',
+        description: 'Flexibiliteit aanbieden aan de netbeheerder in ruil voor vergoeding. Zeer geschikt met batterijen of zonnepanelen.',
+        risk: 'Verplichte afschaling mogelijk op verzoek netbeheerder.',
+      },
+    };
+
+    function computeScores() {
+      var s = { gto: 0, cable: 0, gds: 0, gcbc: 0 };
+      var grid = answers.grid, assets = answers.assets,
+          parties = answers.parties, flex = answers.flex;
+
+      if (grid === 'wait')    { s.gto += 3; s.cable += 2; }
+      if (grid === 'ok')      { s.gcbc += 2; s.gds += 1; }
+      if (grid === 'grow')    { s.cable += 3; s.gto += 2; }
+      if (grid === 'explore') { s.gto += 1; s.gcbc += 1; }
+
+      if (assets.indexOf('solar')   >= 0) { s.gcbc += 2; s.gto += 1; }
+      if (assets.indexOf('battery') >= 0) { s.gcbc += 3; s.gto += 1; }
+      if (assets.indexOf('ev')      >= 0) { s.cable += 2; s.gds += 1; }
+      if (assets.indexOf('h2')      >= 0) { s.gds += 2; s.cable += 1; }
+      if (assets.indexOf('heat')    >= 0) { s.gcbc += 1; }
+
+      if (parties === 'none') { s.gto += 2; s.gcbc += 2; }
+      if (parties === 'few')  { s.gto += 3; s.cable += 2; }
+      if (parties === 'many') { s.cable += 3; s.gds += 2; }
+      if (parties === 'open') { s.gds += 3; s.cable += 2; }
+
+      if (flex === 'yes')     { s.gcbc += 4; }
+      if (flex === 'partial') { s.gcbc += 2; s.gto += 1; }
+      if (flex === 'no')      { s.gto += 2; s.cable += 1; }
+      if (flex === 'unknown') { s.gto += 1; }
+
+      return Object.keys(s).map(function(k){ return { key: k, score: s[k] }; })
+        .sort(function(a, b){ return b.score - a.score; });
+    }
+
+    function buildNotes(ranked) {
+      var notes = [];
+      var grid = answers.grid, assets = answers.assets,
+          parties = answers.parties, flex = answers.flex;
+
+      if (grid === 'wait')
+        notes.push('Congestie op het net is een veelvoorkomend obstakel. GTO en Cable Pooling kunnen helpen om toch meer vermogen beschikbaar te stellen zonder een nieuwe aansluiting.');
+      if (grid === 'grow')
+        notes.push('Uitbreidingsplannen passen goed bij Cable Pooling: meerdere installaties kunnen dezelfde fysieke aansluiting benutten, waardoor kostbare netuitbreidingen worden uitgesteld.');
+      if (assets.indexOf('battery') >= 0 || assets.indexOf('solar') >= 0)
+        notes.push('Met eigen opwek of opslag bent u uitstekend gepositioneerd voor G-CBC: u biedt flexibiliteit aan de netbeheerder en ontvangt daarvoor een vergoeding.');
+      if (assets.indexOf('h2') >= 0)
+        notes.push('Een waterstof- of SAF-infrastructuur vraagt regie over het energienetwerk. Een GDS geeft u als luchthaven de meeste controle als energiehub.');
+      if (parties === 'many' || parties === 'open')
+        notes.push('Met meerdere partijen op het terrein biedt een GDS of Cable Pooling structuur om energie efficiënt te verdelen en gezamenlijk te optimaliseren.');
+      if (flex === 'no')
+        notes.push('Continue stroomlevering is cruciaal voor luchthavenveiligheid. GTO geeft zekerheid over transportrecht en past daardoor goed bij uw operationele eisen.');
+
+      if (notes.length === 0)
+        notes.push('Op basis van uw profiel sluit ' + OPTIONS[ranked[0].key].name + ' het best aan. NRG2FLY werkt dit graag uit in een persoonlijk adviesgesprek.');
+
+      return notes.slice(0, 3);
+    }
+
+    function escHtml(str) {
+      return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function renderResult(airportName) {
+      var ranked   = computeScores();
+      var maxScore = Math.max.apply(null, ranked.map(function(r){ return r.score; })) || 1;
+      var notes    = buildNotes(ranked);
+      var badges   = ['Beste match', 'Mogelijk interessant', 'Minder passend', 'Minder passend'];
+      var classes  = ['winner', 'second', 'muted', 'muted'];
+
+      var cardsHtml = ranked.map(function(item, i) {
+        var opt = OPTIONS[item.key];
+        var pct = Math.round((item.score / maxScore) * 100);
+        return '<div class="es-result-card ' + classes[i] + '">' +
+          '<span class="es-result-badge">' + badges[i] + '</span>' +
+          '<div class="es-result-card-name">' + opt.name + '</div>' +
+          '<div class="es-score-bar-wrap"><div class="es-score-bar" style="width:' + pct + '%"></div></div>' +
+          '<div class="es-result-card-desc">' + opt.description + '</div>' +
+          '<div class="es-result-card-avail">' + opt.available + '</div>' +
+          '</div>';
+      }).join('');
+
+      var notesHtml = notes.map(function(n){ return '<li>' + n + '</li>'; }).join('');
+      var label     = airportName || 'uw luchthaven';
+
+      document.getElementById('step-result').innerHTML =
+        '<div class="es-result-hero">' +
+          '<div class="es-result-label">UW ENERGIESCAN RESULTAAT</div>' +
+          '<h2 class="es-result-title">' + OPTIONS[ranked[0].key].name + '</h2>' +
+          '<p class="es-result-sub">Op basis van uw antwoorden sluit deze strategie het beste aan bij ' + escHtml(label) + '.</p>' +
+        '</div>' +
+        '<div class="es-result-body">' +
+          '<div class="es-result-grid">' + cardsHtml + '</div>' +
+          '<div class="es-result-notes">' +
+            '<div class="es-result-notes-title">Toelichting op uw situatie</div>' +
+            '<ul>' + notesHtml + '</ul>' +
+          '</div>' +
+          '<div class="es-result-cta">' +
+            '<a href="../contact.html" class="es-btn-cta">Gesprek inplannen</a>' +
+            '<button class="es-btn-restart" id="btn-restart">Scan opnieuw starten</button>' +
+          '</div>' +
+        '</div>';
+
+      document.getElementById('btn-restart').addEventListener('click', restartScan);
+    }
+
+    function updateProgress(step) {
+      document.querySelectorAll('.es-progress-seg').forEach(function(seg, idx) {
+        var n = idx + 1;
+        seg.classList.remove('done', 'active');
+        if (n < step) seg.classList.add('done');
+        else if (n === step) seg.classList.add('active');
+      });
+    }
+
+    function showStep(next, direction) {
+      var current = document.querySelector('.es-step.active');
+      if (current) { current.classList.remove('active', 'slide-back'); current.style.display = 'none'; }
+
+      if (next === 'result') {
+        document.getElementById('progress-bar').style.display = 'none';
+        var r = document.getElementById('step-result');
+        r.classList.add('active'); r.style.display = 'block';
+        return;
+      }
+
+      var nextEl = document.getElementById('step-' + next);
+      nextEl.style.display = 'block';
+      nextEl.classList.remove('slide-back');
+      if (direction === 'back') nextEl.classList.add('slide-back');
+      nextEl.classList.add('active');
+      updateProgress(next);
+      currentStep = next;
+    }
+
+    function setupOptions() {
+      document.querySelectorAll('.es-option').forEach(function(opt) {
+        opt.addEventListener('click', function(){ selectOption(this); });
+        opt.addEventListener('keydown', function(e){
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectOption(this); }
+        });
+      });
+    }
+
+    function selectOption(opt) {
+      var step  = parseInt(opt.dataset.step, 10);
+      var value = opt.dataset.value;
+      var nextBtn = document.getElementById('next-' + step);
+
+      if (step === 2) {
+        if (value === 'none') {
+          document.querySelectorAll('[data-step="2"]:not([data-value="none"])').forEach(function(o){
+            o.classList.remove('selected'); o.setAttribute('aria-checked','false');
+          });
+        } else {
+          var noneOpt = document.querySelector('[data-step="2"][data-value="none"]');
+          if (noneOpt) { noneOpt.classList.remove('selected'); noneOpt.setAttribute('aria-checked','false'); }
+        }
+        if (opt.classList.contains('selected')) {
+          opt.classList.remove('selected'); opt.setAttribute('aria-checked','false');
+        } else {
+          opt.classList.add('selected'); opt.setAttribute('aria-checked','true');
+        }
+        answers.assets = Array.from(document.querySelectorAll('[data-step="2"].selected')).map(function(o){ return o.dataset.value; });
+        nextBtn.disabled = answers.assets.length === 0;
+      } else {
+        document.querySelectorAll('[data-step="' + step + '"]').forEach(function(s){
+          s.classList.remove('selected'); s.setAttribute('aria-checked','false');
+        });
+        opt.classList.add('selected'); opt.setAttribute('aria-checked','true');
+        if (step === 1) answers.grid    = value;
+        if (step === 3) answers.parties = value;
+        if (step === 4) answers.flex    = value;
+        nextBtn.disabled = false;
+      }
+    }
+
+    function setupNavigation() {
+      for (var i = 1; i <= 4; i++) {
+        (function(step) {
+          var btn = document.getElementById('next-' + step);
+          if (btn) btn.addEventListener('click', function(){ showStep(step + 1, 'forward'); });
+        })(i);
+      }
+      document.getElementById('next-5').addEventListener('click', handleSubmit);
+      document.querySelectorAll('.es-btn-back').forEach(function(btn) {
+        btn.addEventListener('click', function(){
+          showStep(parseInt(this.dataset.go, 10), 'back');
+        });
+      });
+    }
+
+    function handleSubmit() {
+      var airport = document.getElementById('f-airport').value.trim();
+      var name    = document.getElementById('f-name').value.trim();
+      var email   = document.getElementById('f-email').value.trim();
+      var consent = document.getElementById('f-consent').checked;
+      var valid   = true;
+
+      ['airport','name','email','consent'].forEach(function(id) {
+        var el = document.getElementById('err-' + id);
+        if (el) el.textContent = '';
+        var inp = document.getElementById('f-' + id);
+        if (inp) inp.classList.remove('error');
+      });
+
+      if (!airport) {
+        document.getElementById('err-airport').textContent = 'Vul de naam van uw luchthaven in.';
+        document.getElementById('f-airport').classList.add('error');
+        valid = false;
+      }
+      if (!name) {
+        document.getElementById('err-name').textContent = 'Vul uw naam in.';
+        document.getElementById('f-name').classList.add('error');
+        valid = false;
+      }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        document.getElementById('err-email').textContent = 'Vul een geldig e-mailadres in.';
+        document.getElementById('f-email').classList.add('error');
+        valid = false;
+      }
+      if (!consent) {
+        document.getElementById('err-consent').textContent = 'Geef akkoord om verder te gaan.';
+        valid = false;
+      }
+      if (!valid) return;
+
+      document.getElementById('sending-overlay').classList.add('visible');
+
+      var payload = {
+        airport: airport, name: name,
+        role:    document.getElementById('f-role').value.trim(),
+        email:   email,
+        phone:   document.getElementById('f-phone').value.trim(),
+        answers: { grid: answers.grid, assets: answers.assets, parties: answers.parties, flex: answers.flex },
+        scores:  computeScores(),
+      };
+
+      fetch('../api/leads.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      })
+      .then(function(r){ return r.json(); })
+      .catch(function(){ return { ok: false }; })
+      .finally(function() {
+        document.getElementById('sending-overlay').classList.remove('visible');
+        renderResult(airport);
+        showStep('result', 'forward');
+        document.getElementById('scan').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    function restartScan() {
+      answers = { grid: null, assets: [], parties: null, flex: null };
+      document.querySelectorAll('.es-option').forEach(function(o){
+        o.classList.remove('selected'); o.setAttribute('aria-checked','false');
+      });
+      ['f-airport','f-name','f-role','f-email','f-phone'].forEach(function(id){
+        var el = document.getElementById(id); if (el) el.value = '';
+      });
+      document.getElementById('f-consent').checked = false;
+      for (var i = 1; i <= 4; i++) {
+        var btn = document.getElementById('next-' + i);
+        if (btn) btn.disabled = true;
+      }
+      var r = document.getElementById('step-result');
+      r.classList.remove('active'); r.style.display = 'none';
+      document.getElementById('progress-bar').style.display = '';
+      document.querySelectorAll('.es-step').forEach(function(s){
+        s.classList.remove('active','slide-back'); s.style.display = 'none';
+      });
+      var s1 = document.getElementById('step-1');
+      s1.style.display = 'block'; s1.classList.add('active');
+      updateProgress(1); currentStep = 1;
+      document.getElementById('scan').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    /* Sticky nav scroll */
+    var header = document.querySelector('.site-header');
+    window.addEventListener('scroll', function() {
+      header.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+    if (window.scrollY > 10) header.classList.add('scrolled');
+
+    /* Section nav active state */
+    var navLinks = Array.from(document.querySelectorAll('.section-nav-link'));
+    var sections = navLinks.map(function(l){ return document.querySelector(l.getAttribute('href')); });
+    window.addEventListener('scroll', function() {
+      var scrollY = window.scrollY + 120;
+      sections.forEach(function(sec, i) {
+        if (!sec) return;
+        if (sec.offsetTop <= scrollY && sec.offsetTop + sec.offsetHeight > scrollY) {
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          navLinks[i].classList.add('active');
+        }
+      });
+    }, { passive: true });
+
+    /* Hamburger */
+    var hamburger = document.querySelector('.hamburger');
+    var navLinksEl = document.querySelector('.nav-links');
+    if (hamburger) {
+      hamburger.addEventListener('click', function() {
+        var open = hamburger.classList.toggle('open');
+        hamburger.setAttribute('aria-expanded', open ? 'true' : 'false');
+        navLinksEl.classList.toggle('open', open);
+      });
+    }
+
+    setupOptions();
+    setupNavigation();
+
+  })();
+  </script>
+
+</body>
+</html>
