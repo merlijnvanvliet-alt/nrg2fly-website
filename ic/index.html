@@ -736,7 +736,6 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
         Revenue
       </a>
-      <a class="section-nav-link" href="#scenarios">Scenarios</a>
       <a class="section-nav-link" href="#investment">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
         Investment
@@ -881,8 +880,24 @@
         </div>
       </div>
 
-      <div class="ic-callout" style="margin-top:1.5rem;">
-        The graph in the scenarios section shows two outcomes — current plan and market delayed. In both, consulting runs flat at €1.2M+. The difference is only <em>when</em> CPO and MSP take off, not <em>whether</em> they do. NRG2fly is not a bet on timing. It is a bet on direction.
+      <p style="font-size:0.93rem; color:var(--text-light); line-height:1.7; margin-top:2rem; margin-bottom:0.5rem;">The graph below shows two scenarios — current plan and market delayed. In both, consulting runs flat at €1.2M+. The difference is only <em>when</em> CPO and MSP take off, not <em>whether</em> they do. NRG2fly is not a bet on timing. It is a bet on direction.</p>
+
+      <div class="chart-legend" style="margin-top:1rem;">
+        <div class="chart-legend-item"><span class="leg-line" style="background:#185FA5;"></span>Consulting (identical in both scenarios)</div>
+        <div class="chart-legend-item"><span class="leg-line" style="background:#1D9E75;"></span>CPO + MSP — current plan</div>
+        <div class="chart-legend-item"><span class="leg-dash" style="color:#BA7517;"></span>CPO + MSP — market delayed</div>
+      </div>
+      <div class="chart-wrap" style="height:300px; margin:1rem 0;"><canvas id="scChartOpp"></canvas></div>
+
+      <div class="scenario-grid">
+        <div class="scenario-card scenario-card--green">
+          <div class="scenario-card-title">Current plan — market on schedule</div>
+          <div class="scenario-card-body">Certification, regulation and airport adoption proceed as expected. OEMs enter around 2029–2030 and scale. CPO/MSP grows substantially from 2030. NRG2fly is already positioned at 35–75 locations.</div>
+        </div>
+        <div class="scenario-card scenario-card--amber">
+          <div class="scenario-card-title">Market delayed — everything shifts right</div>
+          <div class="scenario-card-body">Regulation, certification or airport adoption take longer. Everything moves slower. Consulting runs profitably throughout. More positions claimed at lower cost. Market position is stronger when the market does break open.</div>
+        </div>
       </div>
     </div>
   </section>
@@ -1170,41 +1185,6 @@
           <div style="font-size:0.82rem; font-weight:700; color:#0a3d2a; margin-bottom:0.3rem;">CPO &amp; MSP margins improve at scale</div>
           <div style="font-size:0.82rem; color:#1a5c3e; line-height:1.65;">Early network: ~30% margin per kWh delivered — fixed costs (hardware depreciation, grid connections, platform) spread across low volume. As the network scales and kWh volumes grow, those fixed costs are amortised across more sessions. By full scale, margins rise to ~50%+. The revenue ranges above are top-line; the margin uplift compounds the return.</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <hr class="ic-divider" />
-
-  <!-- ══════════════════════════════════════════════
-       SCENARIOS
-  ══════════════════════════════════════════════ -->
-  <section class="ic-section ic-section--grey" id="scenarios">
-    <div class="container">
-      <div class="section-label">Timing resilience</div>
-      <h2>The question is not <em>whether</em> — it's <em>when</em></h2>
-      <p class="ic-intro">Electric aviation will happen. Every major OEM, every airport authority, and every national aviation regulator is working toward it. The pace is uncertain — but the direction is not. NRG2fly has built a business model that makes the answer irrelevant.</p>
-
-      <div class="chart-legend" style="margin-top:0;">
-        <div class="chart-legend-item"><span class="leg-line" style="background:#185FA5;"></span>Consulting (identical in both scenarios)</div>
-        <div class="chart-legend-item"><span class="leg-line" style="background:#1D9E75;"></span>CPO + MSP — current plan</div>
-        <div class="chart-legend-item"><span class="leg-dash" style="color:#BA7517;"></span>CPO + MSP — market delayed</div>
-      </div>
-      <div class="chart-wrap" style="height:320px; margin:1rem 0;"><canvas id="scChart"></canvas></div>
-
-      <div class="scenario-grid">
-        <div class="scenario-card scenario-card--green">
-          <div class="scenario-card-title">Current plan — market on schedule</div>
-          <div class="scenario-card-body">Certification, regulation and airport adoption proceed as expected. Electric aircraft manufacturers make their market entry around 2029–2030 and scale production. CPO/MSP grows substantially from 2030. NRG2fly is already positioned at 35+ locations with a locked-in network advantage.</div>
-        </div>
-        <div class="scenario-card scenario-card--amber">
-          <div class="scenario-card-title">Market delayed — everything shifts right</div>
-          <div class="scenario-card-body">Regulation, political will, certification or airport adoption take longer. OEM market entry and production scale-up shift to the right. Everything moves slower and stays lower. Network development continues to run profitably throughout. More positions are claimed at a lower cost. The market position is stronger when the market does break open.</div>
-        </div>
-      </div>
-
-      <div class="ic-callout" style="margin-top:1.5rem;">
-        The network development baseline is identical in both scenarios. The only variable is when and how fast CPO and MSP grow — not whether. NRG2fly is not a bet on timing. It is a bet on direction.
       </div>
     </div>
   </section>
@@ -1775,36 +1755,34 @@
       });
 
       /* Scenario chart */
-      new Chart(document.getElementById('scChart'), {
-        type: 'line',
-        data: {
-          labels: ['2025','2026','2027','2028','2029','2030','2031','2033','2035','2037','2040'],
-          datasets: [
-            { label:'Consulting', data:[247000,428000,820000,1155000,1200000,1200000,1200000,1200000,1200000,1200000,1200000], borderColor:'#185FA5', borderWidth:3, pointRadius:3, pointBackgroundColor:'#185FA5', fill:false, tension:0.3 },
-            { label:'CPO + MSP (current plan)', data:[3000,5000,25000,35000,125000,600000,2000000,7000000,30000000,60000000,80000000], borderColor:'#1D9E75', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#1D9E75', fill:false, tension:0.4 },
-            { label:'CPO + MSP (market delayed)', data:[3000,5000,15000,20000,40000,80000,150000,500000,2000000,6000000,15000000], borderColor:'#BA7517', borderWidth:2, borderDash:[6,4], pointRadius:3, pointBackgroundColor:'#BA7517', fill:false, tension:0.4 }
-          ]
+      var scData = {
+        labels: ['2025','2026','2027','2028','2029','2030','2031','2033','2035','2037','2040'],
+        datasets: [
+          { label:'Consulting', data:[247000,428000,820000,1155000,1200000,1200000,1200000,1200000,1200000,1200000,1200000], borderColor:'#185FA5', borderWidth:3, pointRadius:3, pointBackgroundColor:'#185FA5', fill:false, tension:0.3 },
+          { label:'CPO + MSP (current plan)', data:[3000,5000,25000,35000,125000,600000,2000000,7000000,30000000,60000000,80000000], borderColor:'#1D9E75', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#1D9E75', fill:false, tension:0.4 },
+          { label:'CPO + MSP (market delayed)', data:[3000,5000,15000,20000,40000,80000,150000,500000,2000000,6000000,15000000], borderColor:'#BA7517', borderWidth:2, borderDash:[6,4], pointRadius:3, pointBackgroundColor:'#BA7517', fill:false, tension:0.4 }
+        ]
+      };
+      var scOptions = {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display:false },
+          tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label+': '+fmt(ctx.parsed.y); } } }
         },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          plugins: {
-            legend: { display:false },
-            tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label+': '+fmt(ctx.parsed.y); } } }
-          },
-          scales: {
-            x: { ticks:{ color:textCol, font:{size:11}, autoSkip:false, maxRotation:45 }, grid:{ color:gridCol } },
-            y: {
-              type: 'logarithmic', min: 100000,
-              ticks: { color:textCol, font:{size:11}, callback: function(v){
-                var s=[100000,500000,1000000,5000000,10000000,50000000,100000000];
-                if(s.some(function(x){ return Math.abs(v-x)/x<0.01; })) return fmt(v);
-                return '';
-              }},
-              grid: { color:gridCol }
-            }
+        scales: {
+          x: { ticks:{ color:textCol, font:{size:11}, autoSkip:false, maxRotation:45 }, grid:{ color:gridCol } },
+          y: {
+            type: 'logarithmic', min: 100000,
+            ticks: { color:textCol, font:{size:11}, callback: function(v){
+              var s=[100000,500000,1000000,5000000,10000000,50000000,100000000];
+              if(s.some(function(x){ return Math.abs(v-x)/x<0.01; })) return fmt(v);
+              return '';
+            }},
+            grid: { color:gridCol }
           }
         }
-      });
+      };
+      new Chart(document.getElementById('scChartOpp'), { type:'line', data: JSON.parse(JSON.stringify(scData)), options: JSON.parse(JSON.stringify(scOptions)) });
 
       /* Cash chart */
       var cashLabels = ['Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26','Jan 27','Feb 27','Mar 27','Apr 27','May 27','Jun 27','Jul 27','Aug 27','Sep 27','Oct 27','Nov 27','Dec 27'];
