@@ -490,6 +490,22 @@
     .role-adv .role-name { color: #888 !important; font-style: italic; }
     .role-intern .role-name { color: #854f0b !important; font-style: italic; }
 
+    /* ── Phase cards (burn rate layout) ── */
+    .phases { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:1.5rem 0; }
+    @media (max-width:860px) { .phases { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:500px) { .phases { grid-template-columns:1fr; } }
+    .phase-card { background:#fff; border:0.5px solid #e4e8ef; border-radius:14px; padding:1rem; }
+    .phase-period { font-size:11px; color:var(--text-light); margin-bottom:10px; }
+    .phase-burn { font-size:20px; font-weight:500; color:var(--dark); margin-bottom:2px; }
+    .phase-rev { font-size:12px; color:#1D9E75; margin-bottom:6px; }
+    .phase-result { font-size:12px; font-weight:500; margin-bottom:10px; }
+    .phase-people { border-top:1px solid #e4e8ef; padding-top:8px; }
+    .person-row { display:flex; align-items:center; gap:6px; padding:3px 0; }
+    .person-name { font-size:10px; color:var(--text-light); flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .person-cost { font-size:10px; color:var(--text-light); flex-shrink:0; }
+    .phases .phase-label { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-light); margin-bottom:4px; }
+    .pos { color:#1D9E75; } .neg { color:#A32D2D; }
+
     .team-summary {
       background: #f7f9fc;
       border: 1px solid #e4e8ef;
@@ -1259,218 +1275,97 @@
   <section class="ic-section ic-section--light" id="team">
     <div class="container">
       <div class="section-label">Team growth</div>
-      <h2>From 5 to 11 FTE — the foundation to scale across Europe</h2>
-      <p class="ic-intro">With this investment, NRG2fly builds the operational foundation for a European electric aviation charging network. We strengthen our capacity in the Netherlands in 2026, place a country manager in DACH &amp; Nordics in 2027, and expand to South Europe in 2028 — self-funded from that point on.</p>
+      <h2>Team growth &amp; burn rate</h2>
+      <p class="ic-intro">With this investment NRG2fly builds the operational foundation for a European electric aviation charging network. All amounts are monthly employer costs.</p>
 
-      <div class="team-legend">
-        <div class="team-legend-item">
-          <span style="width:18px;height:18px;border-radius:50%;background:#e6f1fb;display:inline-block;flex-shrink:0;"></span>
-          Core team
-        </div>
-        <div class="team-legend-item">
-          <span style="width:18px;height:18px;border-radius:50%;background:#f1efe8;display:inline-block;flex-shrink:0;"></span>
-          Advisory board
-        </div>
-        <div class="team-legend-item">
-          <span style="width:18px;height:18px;border-radius:50%;background:#e1f5ee;border:1.5px solid #1D9E75;display:inline-block;flex-shrink:0;"></span>
-          New hire
-        </div>
-        <div class="team-legend-item">
-          <span style="width:18px;height:18px;border-radius:4px;background:#faeeda;display:inline-block;flex-shrink:0;"></span>
-          Intern
-        </div>
+      <div class="phases">
+  <div class="phase-card">
+    <div class="phase-label">Phase 1</div>
+    <div class="phase-period">Until June 2026</div>
+    <div class="phase-burn">&euro;38k/mo</div>
+    <div class="phase-rev">&#8593; &euro;21k/mo avg</div>
+    <div class="phase-result neg">-&euro;17k/mo</div>
+    <div class="phase-people">
+      <div class="person-row"><div class="dot dot-e">MvV</div><div class="person-name">Merlijn van Vliet</div><div class="person-cost">&euro;8k</div></div>
+      <div class="person-row"><div class="dot dot-e">JBi</div><div class="person-name">Jacco Bink</div><div class="person-cost">&euro;7.3k</div></div>
+      <div class="person-row"><div class="dot dot-e">GJK</div><div class="person-name">Giel Jan Koek</div><div class="person-cost">&euro;5.6k</div></div>
+      <div class="person-row"><div class="dot dot-e">EMj</div><div class="person-name">Ed Meijer</div><div class="person-cost">&euro;4.2k</div></div>
+      <div class="person-row"><div class="dot dot-e">TOp</div><div class="person-name">Tristan Oppeneer</div><div class="person-cost">&euro;0.9k</div></div>
+      <div class="person-row"><div class="dot dot-a">JdJ</div><div class="person-name">Jurjen de Jong</div><div class="person-cost">&euro;3.3k</div></div>
+      <div class="person-row"><div class="dot dot-a">MSt</div><div class="person-name">Maarten Steinbuch</div><div class="person-cost">&euro;1.0k</div></div>
+    </div>
+  </div>
+  <div class="phase-card" style="border-color:#185FA5">
+    <div class="phase-label" style="color:#185FA5">Phase 2 &mdash; T1+T2</div>
+    <div class="phase-period">June 2026 &ndash; Dec 2026</div>
+    <div class="phase-burn">&euro;55k/mo</div>
+    <div class="phase-rev">&#8593; &euro;36k/mo avg</div>
+    <div class="phase-result neg">-&euro;19k/mo</div>
+    <div class="phase-people">
+      <div class="person-row"><div class="dot dot-e">MvV</div><div class="person-name">Merlijn van Vliet</div><div class="person-cost">&euro;8k</div></div>
+      <div class="person-row"><div class="dot dot-e">JBi</div><div class="person-name">Jacco Bink</div><div class="person-cost">&euro;7.3k</div></div>
+      <div class="person-row"><div class="dot dot-e">GJK</div><div class="person-name">Giel Jan Koek</div><div class="person-cost">&euro;5.6k</div></div>
+      <div class="person-row"><div class="dot dot-e">EMj</div><div class="person-name">Ed Meijer</div><div class="person-cost">&euro;4.2k</div></div>
+      <div class="person-row"><div class="dot dot-e">TOp</div><div class="person-name">Tristan Oppeneer</div><div class="person-cost">&euro;0.9k</div></div>
+      <div class="person-row"><div class="dot dot-a">JdJ</div><div class="person-name">Jurjen de Jong</div><div class="person-cost">&euro;3.3k</div></div>
+      <div class="person-row"><div class="dot dot-a">MSt</div><div class="person-name">Maarten Steinbuch</div><div class="person-cost">&euro;1.0k</div></div>
+      <div class="person-row"><div class="dot dot-n">ND1</div><div class="person-name">Sr. Consultant ND NL</div><div class="person-cost">&euro;11.7k</div></div>
+      <div class="person-row"><div class="dot dot-n">JC</div><div class="person-name">Junior consultant</div><div class="person-cost">&euro;5.5k</div></div>
+    </div>
+  </div>
+  <div class="phase-card" style="border-color:#185FA5">
+    <div class="phase-label" style="color:#185FA5">Phase 3 &mdash; T3</div>
+    <div class="phase-period">Jan 2027 &ndash; Dec 2027</div>
+    <div class="phase-burn">&euro;68k/mo</div>
+    <div class="phase-rev">&#8593; &euro;68k/mo avg</div>
+    <div class="phase-result pos">&#8776; break-even</div>
+    <div class="phase-people">
+      <div class="person-row"><div class="dot dot-e">MvV</div><div class="person-name">Merlijn van Vliet</div><div class="person-cost">&euro;8k</div></div>
+      <div class="person-row"><div class="dot dot-e">JBi</div><div class="person-name">Jacco Bink</div><div class="person-cost">&euro;7.3k</div></div>
+      <div class="person-row"><div class="dot dot-e">GJK</div><div class="person-name">Giel Jan Koek</div><div class="person-cost">&euro;5.6k</div></div>
+      <div class="person-row"><div class="dot dot-e">EMj</div><div class="person-name">Ed Meijer (0.7 FTE)</div><div class="person-cost">&euro;7.4k</div></div>
+      <div class="person-row"><div class="dot dot-e">TOp</div><div class="person-name">Tristan Oppeneer (0.5 FTE)</div><div class="person-cost">&euro;2.3k</div></div>
+      <div class="person-row"><div class="dot dot-a">JdJ</div><div class="person-name">Jurjen de Jong</div><div class="person-cost">&euro;3.3k</div></div>
+      <div class="person-row"><div class="dot dot-a">MSt</div><div class="person-name">Maarten Steinbuch</div><div class="person-cost">&euro;1.0k</div></div>
+      <div class="person-row"><div class="dot dot-n">ND1</div><div class="person-name">Sr. Consultant ND NL</div><div class="person-cost">&euro;11.7k</div></div>
+      <div class="person-row"><div class="dot dot-n">JC</div><div class="person-name">Junior consultant</div><div class="person-cost">&euro;5.5k</div></div>
+      <div class="person-row"><div class="dot dot-n">DN</div><div class="person-name">Country Mgr. DACH &amp; Nordics</div><div class="person-cost">&euro;7.5k</div></div>
+    </div>
+  </div>
+  <div class="phase-card">
+    <div class="phase-label">Phase 4 &mdash; Self-funded</div>
+    <div class="phase-period">From 2028</div>
+    <div class="phase-burn">&euro;94k/mo</div>
+    <div class="phase-rev">&#8593; &euro;96k/mo avg</div>
+    <div class="phase-result pos">+&euro;2k/mo &#8594; profitable</div>
+    <div class="phase-people">
+      <div class="person-row"><div class="dot dot-e">MvV</div><div class="person-name">Merlijn van Vliet</div><div class="person-cost">&euro;8k</div></div>
+      <div class="person-row"><div class="dot dot-e">JBi</div><div class="person-name">Jacco Bink</div><div class="person-cost">&euro;7.3k</div></div>
+      <div class="person-row"><div class="dot dot-e">GJK</div><div class="person-name">Giel Jan Koek</div><div class="person-cost">&euro;5.6k</div></div>
+      <div class="person-row"><div class="dot dot-e">EMj</div><div class="person-name">Ed Meijer (0.7 FTE)</div><div class="person-cost">&euro;7.4k</div></div>
+      <div class="person-row"><div class="dot dot-e">TOp</div><div class="person-name">Tristan Oppeneer (0.5 FTE)</div><div class="person-cost">&euro;2.3k</div></div>
+      <div class="person-row"><div class="dot dot-a">JdJ</div><div class="person-name">Jurjen de Jong</div><div class="person-cost">&euro;3.3k</div></div>
+      <div class="person-row"><div class="dot dot-a">MSt</div><div class="person-name">Maarten Steinbuch</div><div class="person-cost">&euro;1.0k</div></div>
+      <div class="person-row"><div class="dot dot-n">ND1</div><div class="person-name">Sr. Consultant ND NL</div><div class="person-cost">&euro;11.7k</div></div>
+      <div class="person-row"><div class="dot dot-n">JC</div><div class="person-name">Junior consultant</div><div class="person-cost">&euro;5.5k</div></div>
+      <div class="person-row"><div class="dot dot-n">DN</div><div class="person-name">Country Mgr. DACH &amp; Nordics</div><div class="person-cost">&euro;7.5k</div></div>
+      <div class="person-row"><div class="dot dot-n">ND2</div><div class="person-name">Sr. Consultant ND EU</div><div class="person-cost">&euro;11.7k</div></div>
+      <div class="person-row"><div class="dot dot-n">MT</div><div class="person-name">Medior tech. specialist</div><div class="person-cost">&euro;7.5k</div></div>
+      <div class="person-row"><div class="dot dot-n">SE</div><div class="person-name">Country Mgr. S. Europe</div><div class="person-cost">&euro;7.5k</div></div>
+    </div>
+  </div>
+</div>
+
+      <div class="team-legend" style="margin-top:0.5rem;">
+        <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#888780;margin-right:4px;vertical-align:middle;"></span>Overhead</span>
+        <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#185FA5;margin-right:4px;vertical-align:middle;"></span>Existing team</span>
+        <span><span style="display:inline-block;width:12px;height:12px;border-radius:50%;background:#1D9E75;margin-right:4px;vertical-align:middle;"></span>New hires</span>
+        <span style="display:inline-flex;align-items:center;gap:4px;"><span style="width:24px;height:3px;background:#BA7517;border-radius:2px;display:inline-block;"></span>Revenue</span>
       </div>
-
-      <div class="team-wrap">
-        <!-- Phase 1 -->
-        <div class="team-phase">
-          <div class="phase-label">Today</div>
-          <div class="phase-year">2025 — 5 FTE</div>
-          <div class="dot-wrap">
-            <div class="dot dot-e" title="Merlijn van Vliet">MvV</div>
-            <div class="dot dot-e" title="Jacco Bink">JBi</div>
-            <div class="dot dot-e" title="Giel Jan Koek">GJK</div>
-            <div class="dot dot-e" title="Ed Meijer">EMj</div>
-            <div class="dot dot-e" title="Tristan Oppeneer">TOp</div>
-            <div class="dot dot-a" title="Jurjen de Jong">JdJ</div>
-            <div class="dot dot-a" title="Maarten Steinbuch">MSt</div>
-          </div>
-          <div class="intern-label">Interns (2)</div>
-          <div class="dot-wrap">
-            <div class="dot dot-intern">S1</div>
-            <div class="dot dot-intern">S2</div>
-          </div>
-          <div class="role-list">
-            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO / network dev.</span></div>
-            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO / operations</span></div>
-            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
-            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
-            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
-            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-intern"><span class="role-name">2 interns</span><span class="role-title">full-time</span></div>
-          </div>
-        </div>
-
-        <!-- Phase 2 -->
-        <div class="team-phase">
-          <div class="phase-label">After Tranche 1 + 2</div>
-          <div class="phase-year">2026 — 7 FTE</div>
-          <div class="dot-wrap">
-            <div class="dot dot-e">MvV</div><div class="dot dot-e">JBi</div>
-            <div class="dot dot-e">GJK</div><div class="dot dot-e">EMj</div>
-            <div class="dot dot-e">TOp</div>
-            <div class="dot dot-a">JdJ</div><div class="dot dot-a">MSt</div>
-            <div class="dot dot-n" title="Sr. Consultant ND NL">ND1</div>
-            <div class="dot dot-n" title="Junior consultant">JC</div>
-          </div>
-          <div class="intern-label">Interns (4)</div>
-          <div class="dot-wrap">
-            <div class="dot dot-intern">S1</div><div class="dot dot-intern">S2</div>
-            <div class="dot dot-intern">S3</div><div class="dot dot-intern">S4</div>
-          </div>
-          <div class="role-list">
-            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO / network dev.</span></div>
-            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO / operations</span></div>
-            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
-            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
-            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
-            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND NL</span><span class="role-title">new hire · June</span></div>
-            <div class="role-row role-new"><span class="role-name">Junior consultant</span><span class="role-title">new hire · July</span></div>
-            <div class="role-row role-intern"><span class="role-name">4 interns</span><span class="role-title">full-time</span></div>
-          </div>
-        </div>
-
-        <!-- Phase 3 -->
-        <div class="team-phase">
-          <div class="phase-label">After Tranche 3</div>
-          <div class="phase-year">2027 — 8 FTE</div>
-          <div class="dot-wrap">
-            <div class="dot dot-e">MvV</div><div class="dot dot-e">JBi</div>
-            <div class="dot dot-e">GJK</div><div class="dot dot-e">EMj</div>
-            <div class="dot dot-e">TOp</div>
-            <div class="dot dot-a">JdJ</div><div class="dot dot-a">MSt</div>
-            <div class="dot dot-n">ND1</div><div class="dot dot-n">JC</div>
-            <div class="dot dot-n" title="Country manager DACH &amp; Nordics">DN</div>
-          </div>
-          <div class="intern-label">Interns (6)</div>
-          <div class="dot-wrap">
-            <div class="dot dot-intern">S1</div><div class="dot dot-intern">S2</div>
-            <div class="dot dot-intern">S3</div><div class="dot dot-intern">S4</div>
-            <div class="dot dot-intern">S5</div><div class="dot dot-intern">S6</div>
-          </div>
-          <div class="role-list">
-            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO / network dev.</span></div>
-            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO / operations</span></div>
-            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
-            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
-            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
-            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND NL</span><span class="role-title">continuing</span></div>
-            <div class="role-row role-new"><span class="role-name">Junior consultant</span><span class="role-title">continuing</span></div>
-            <div class="role-row role-new"><span class="role-name">Country mgr. DACH &amp; N.</span><span class="role-title">new hire</span></div>
-            <div class="role-row role-intern"><span class="role-name">6 interns</span><span class="role-title">full-time</span></div>
-          </div>
-        </div>
-
-        <!-- Phase 4 -->
-        <div class="team-phase" style="border-color:#1d9e75;">
-          <div class="phase-label" style="color:#0f6e56;">Self-funded from 2028</div>
-          <div class="phase-year">2028 — 11 FTE</div>
-          <div class="dot-wrap">
-            <div class="dot dot-e">MvV</div><div class="dot dot-e">JBi</div>
-            <div class="dot dot-e">GJK</div><div class="dot dot-e">EMj</div>
-            <div class="dot dot-e">TOp</div>
-            <div class="dot dot-a">JdJ</div><div class="dot dot-a">MSt</div>
-            <div class="dot dot-n">ND1</div><div class="dot dot-n">JC</div>
-            <div class="dot dot-n">DN</div>
-            <div class="dot dot-n" title="Sr. Consultant ND EU">EU</div>
-            <div class="dot dot-n" title="Medior technical specialist">TS</div>
-            <div class="dot dot-n" title="Country manager South Europe">SE</div>
-          </div>
-          <div class="intern-label">Interns (6+)</div>
-          <div class="dot-wrap">
-            <div class="dot dot-intern">S1</div><div class="dot dot-intern">S2</div>
-            <div class="dot dot-intern">S3</div><div class="dot dot-intern">S4</div>
-            <div class="dot dot-intern">S5</div><div class="dot dot-intern">S6</div>
-          </div>
-          <div class="role-list">
-            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO</span></div>
-            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO</span></div>
-            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
-            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
-            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
-            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
-            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND NL</span><span class="role-title">continuing</span></div>
-            <div class="role-row role-new"><span class="role-name">Junior consultant</span><span class="role-title">continuing</span></div>
-            <div class="role-row role-new"><span class="role-name">Country mgr. DACH &amp; N.</span><span class="role-title">continuing</span></div>
-            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND EU</span><span class="role-title">new · self-funded</span></div>
-            <div class="role-row role-new"><span class="role-name">Medior tech. specialist</span><span class="role-title">new · self-funded</span></div>
-            <div class="role-row role-new"><span class="role-name">Country mgr. South EU</span><span class="role-title">new · self-funded</span></div>
-            <div class="role-row role-intern"><span class="role-name">6+ interns</span><span class="role-title">full-time</span></div>
-          </div>
-        </div>
+      <div class="chart-wrap" style="height:260px;margin:1rem 0">
+        <canvas id="burnChart"></canvas>
       </div>
-
-      <div class="team-summary">
-        <div><div class="sum-val">5</div><div class="sum-lbl">FTE today</div></div>
-        <div class="sum-div"><div class="sum-val" style="color:#185FA5">+3</div><div class="sum-lbl">Funded hires 2026–27</div></div>
-        <div class="sum-div"><div class="sum-val" style="color:#1D9E75">8</div><div class="sum-lbl">FTE end 2027</div></div>
-        <div class="sum-div"><div class="sum-val" style="color:#BA7517">11</div><div class="sum-lbl">FTE in 2028 (self-funded)</div></div>
-      </div>
-
-      <hr class="ic-divider" style="margin:2rem 0;" />
-
-      <h2 style="margin-bottom:0.5rem;">Burn rate per phase</h2>
-      <p class="ic-intro" style="margin-bottom:1.25rem;">Monthly employer costs and result per investment phase. Losses are known and funded — not surprises. All amounts are monthly employer costs.</p>
-
-      <div class="tbl-wrap">
-        <table class="ic-tbl">
-          <thead>
-            <tr>
-              <th style="width:28%">Phase</th>
-              <th>Period</th>
-              <th>Monthly costs</th>
-              <th>Monthly revenue</th>
-              <th>Monthly result</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="td-bold">Phase 1 — current team</td>
-              <td class="td-muted">Until June 2026</td>
-              <td>€38k/mo</td>
-              <td>€21k/mo avg</td>
-              <td class="td-red">−€17k/mo</td>
-            </tr>
-            <tr>
-              <td class="td-bold">Phase 2 — Tranches 1 + 2</td>
-              <td class="td-muted">June – Dec 2026</td>
-              <td>€55k/mo</td>
-              <td>€36k/mo avg</td>
-              <td class="td-red">−€19k/mo</td>
-            </tr>
-            <tr>
-              <td class="td-bold">Phase 3 — Tranche 3</td>
-              <td class="td-muted">Jan – Dec 2027</td>
-              <td>€68k/mo</td>
-              <td>€68k/mo avg</td>
-              <td class="td-green">≈ break-even</td>
-            </tr>
-            <tr>
-              <td class="td-bold">Phase 4 — self-funded</td>
-              <td class="td-muted">From 2028</td>
-              <td>€94k/mo</td>
-              <td>€96k/mo avg</td>
-              <td class="td-green">+€2k/mo → profitable</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <p class="ic-note" style="font-size:0.8rem;color:var(--text-light);margin-top:0.5rem;">Monthly costs jump at each tranche moment. Revenue grows steadily, crossing the cost line in Q4 2027. From 2028, the full team of 11 FTE drives consulting revenue above &euro;1.1M &mdash; covering all costs without relying on CPO/MSP before 2029.</p>
     </div>
   </section>
 
@@ -1829,6 +1724,36 @@
           scales: {
             x: { ticks:{ color:textCol, font:{size:10}, autoSkip:false, maxRotation:45 }, grid:{ color:gridCol } },
             y: { ticks:{ color:textCol, font:{size:11}, callback:function(v){ return fmt(v); } }, grid:{ color:gridCol } }
+          }
+        }
+      });
+
+      /* Burn chart */
+      var burnLabels=['Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26','Jan 27','Feb 27','Mar 27','Apr 27','May 27','Jun 27','Jul 27','Aug 27','Sep 27','Oct 27','Nov 27','Dec 27'];
+      var burnExisting=Array(36).fill(30);
+      var burnOverhead=Array(36).fill(8);
+      var burnNewHires=[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,17.2,22.7,22.7,22.7,22.7,22.7,22.7,40.2,40.2,40.2,40.2,40.2,40.2,40.2,40.2,40.2,40.2,40.2,40.2];
+      var burnRevenue=[16,14,14,16,14,17,22,20,24,24,27,29,25,25,22,22,28,28,36,36,46,46,55,55,55,60,63,65,67,68,68,70,72,74,75,78];
+      new Chart(document.getElementById('burnChart'),{
+        type:'bar',
+        data:{
+          labels:burnLabels,
+          datasets:[
+            {label:'Overhead',data:burnOverhead,backgroundColor:'#888780',stack:'c'},
+            {label:'Existing team',data:burnExisting,backgroundColor:'#185FA5',stack:'c'},
+            {label:'New hires',data:burnNewHires,backgroundColor:'#1D9E75',stack:'c'},
+            {label:'Revenue',data:burnRevenue,type:'line',borderColor:'#BA7517',borderWidth:2.5,pointRadius:0,pointHoverRadius:4,fill:false,tension:0.4,yAxisID:'y'}
+          ]
+        },
+        options:{
+          responsive:true,maintainAspectRatio:false,
+          plugins:{
+            legend:{display:false},
+            tooltip:{callbacks:{label:function(ctx){return ctx.dataset.label+': \u20ac'+ctx.parsed.y.toFixed(0)+'k';}}}
+          },
+          scales:{
+            x:{stacked:true,ticks:{color:textCol,font:{size:9},autoSkip:true,maxTicksLimit:18,maxRotation:45},grid:{color:gridCol}},
+            y:{stacked:true,max:100,ticks:{color:textCol,font:{size:11},callback:function(v){return '\u20ac'+v+'k';}},grid:{color:gridCol}}
           }
         }
       });
