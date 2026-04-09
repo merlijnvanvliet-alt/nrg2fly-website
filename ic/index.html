@@ -369,7 +369,7 @@
     .td-bold { font-weight: 700; }
     .td-green { color: #0f6e56; font-weight: 600; }
     .td-red { color: #a32d2d; }
-    .td-check { color: #0f6e56; font-weight: 700; }
+    .td-check { color: #0f6e56; font-weight: 700; background: #e8f5ef !important; text-align: center; }
     .row-header td {
       background: #f7f9fc;
       font-size: 0.7rem; font-weight: 700;
@@ -420,14 +420,17 @@
     /* ── Team layout ── */
     .team-wrap {
       display: grid;
-      grid-template-columns: 1fr 28px 1fr 28px 1fr;
+      grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
       gap: 10px;
       align-items: start;
       margin: 1.5rem 0;
     }
-    @media (max-width: 860px) {
-      .team-wrap { grid-template-columns: 1fr; }
+    @media (max-width: 1100px) {
+      .team-wrap { grid-template-columns: 1fr 1fr; }
       .team-arrow { display: none; }
+    }
+    @media (max-width: 600px) {
+      .team-wrap { grid-template-columns: 1fr; }
     }
     .team-phase {
       background: #fff;
@@ -1249,7 +1252,47 @@
             <div class="role-row role-new"><span class="role-name">Country mgr. DACH &amp; N.</span><span class="role-title">new hire</span></div>
             <div class="role-row role-intern"><span class="role-name">6 interns</span><span class="role-title">full-time</span></div>
           </div>
-          <p style="font-size:0.72rem;color:var(--text-light);margin-top:0.75rem;line-height:1.5;">+3 more hires in 2028 (self-funded): Sr. Consultant ND EU, Medior technical specialist, Country mgr. South Europe → 11 FTE</p>
+        </div>
+
+        <div class="team-arrow">→</div>
+
+        <!-- Phase 4 -->
+        <div class="team-phase" style="border-color:#1d9e75;">
+          <div class="phase-label" style="color:#0f6e56;">Self-funded from 2028</div>
+          <div class="phase-year">2028 — 11 FTE</div>
+          <div class="dot-wrap">
+            <div class="dot dot-e">MvV</div><div class="dot dot-e">JBi</div>
+            <div class="dot dot-e">GJK</div><div class="dot dot-e">EMj</div>
+            <div class="dot dot-e">TOp</div>
+            <div class="dot dot-a">JdJ</div><div class="dot dot-a">MSt</div>
+            <div class="dot dot-n">ND1</div><div class="dot dot-n">JC</div>
+            <div class="dot dot-n">DN</div>
+            <div class="dot dot-n" title="Sr. Consultant ND EU">EU</div>
+            <div class="dot dot-n" title="Medior technical specialist">TS</div>
+            <div class="dot dot-n" title="Country manager South Europe">SE</div>
+          </div>
+          <div class="intern-label">Interns (6+)</div>
+          <div class="dot-wrap">
+            <div class="dot dot-intern">S1</div><div class="dot dot-intern">S2</div>
+            <div class="dot dot-intern">S3</div><div class="dot dot-intern">S4</div>
+            <div class="dot dot-intern">S5</div><div class="dot dot-intern">S6</div>
+          </div>
+          <div class="role-list">
+            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO</span></div>
+            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO</span></div>
+            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
+            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
+            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
+            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND NL</span><span class="role-title">continuing</span></div>
+            <div class="role-row role-new"><span class="role-name">Junior consultant</span><span class="role-title">continuing</span></div>
+            <div class="role-row role-new"><span class="role-name">Country mgr. DACH &amp; N.</span><span class="role-title">continuing</span></div>
+            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND EU</span><span class="role-title">new · self-funded</span></div>
+            <div class="role-row role-new"><span class="role-name">Medior tech. specialist</span><span class="role-title">new · self-funded</span></div>
+            <div class="role-row role-new"><span class="role-name">Country mgr. South EU</span><span class="role-title">new · self-funded</span></div>
+            <div class="role-row role-intern"><span class="role-name">6+ interns</span><span class="role-title">full-time</span></div>
+          </div>
         </div>
       </div>
 
@@ -1367,21 +1410,21 @@
       <div class="chart-sub">Commercial electric aviation scales, CPO and MSP dominate the revenue mix</div>
       <div class="chart-wrap" style="height:260px; margin-bottom:1.5rem;"><canvas id="chart2"></canvas></div>
 
-      <div class="tbl-wrap">
+      <div class="tbl-wrap tbl-wrap--scrollable">
         <table class="ic-tbl">
           <thead>
             <tr>
-              <th style="width:18%"></th>
-              <th>2030</th><th>2031</th><th>2032</th><th>2033</th>
-              <th>2034</th><th>2035</th><th>2037</th><th>2040</th>
+              <th style="width:14%"></th>
+              <th>2030</th><th>2031</th><th>2032</th><th>2033</th><th>2034</th>
+              <th>2035</th><th>2036</th><th>2037</th><th>2038</th><th>2039</th><th>2040</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td class="td-muted col-nd">Consulting</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td></tr>
-            <tr><td class="td-muted col-cpo">CPO</td><td class="col-cpo">€150–300k</td><td class="col-cpo">€300–600k</td><td class="col-cpo">€600k–1M</td><td class="col-cpo">€1,5–4M</td><td class="col-cpo">€3–8M</td><td class="col-cpo">€5–15M</td><td class="col-cpo">€15–30M</td><td class="col-cpo">€25–50M</td></tr>
-            <tr><td class="td-muted col-msp">MSP</td><td class="col-msp">€150–300k</td><td class="col-msp">€300–600k</td><td class="col-msp">€600k–1M</td><td class="col-msp">€1,5–4M</td><td class="col-msp">€3–8M</td><td class="col-msp">€5–15M</td><td class="col-msp">€15–30M</td><td class="col-msp">€25–50M</td></tr>
-            <tr><td class="td-muted col-hw">Hardware margin</td><td class="col-hw">€100–200k</td><td class="col-hw">€150–300k</td><td class="col-hw">€200–400k</td><td class="col-hw">€500k–1M</td><td class="col-hw">€1–2M</td><td class="col-hw">€2–4M</td><td class="col-hw">€3–6M</td><td class="col-hw">€5–10M</td></tr>
-            <tr><td class="td-bold col-tot">Total</td><td class="col-tot">€1,6–2M</td><td class="col-tot">€2–3,4M</td><td class="col-tot">€2,6–4,6M</td><td class="col-tot">€4,7–10M</td><td class="col-tot">€8,4–19M</td><td class="col-tot">€13,4–31M</td><td class="col-tot">€34,4–67M</td><td class="col-tot">€56–111M</td></tr>
+            <tr><td class="td-muted col-nd">Consulting</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td></tr>
+            <tr><td class="td-muted col-cpo">CPO</td><td class="col-cpo">€150–300k</td><td class="col-cpo">€300–600k</td><td class="col-cpo">€600k–1M</td><td class="col-cpo">€1,5–4M</td><td class="col-cpo">€3–8M</td><td class="col-cpo">€5–15M</td><td class="col-cpo">€8–20M</td><td class="col-cpo">€15–30M</td><td class="col-cpo">€18–35M</td><td class="col-cpo">€20–40M</td><td class="col-cpo">€25–50M</td></tr>
+            <tr><td class="td-muted col-msp">MSP</td><td class="col-msp">€150–300k</td><td class="col-msp">€300–600k</td><td class="col-msp">€600k–1M</td><td class="col-msp">€1,5–4M</td><td class="col-msp">€3–8M</td><td class="col-msp">€5–15M</td><td class="col-msp">€8–20M</td><td class="col-msp">€15–30M</td><td class="col-msp">€18–35M</td><td class="col-msp">€20–40M</td><td class="col-msp">€25–50M</td></tr>
+            <tr><td class="td-muted col-hw">Hardware</td><td class="col-hw">€100–200k</td><td class="col-hw">€150–300k</td><td class="col-hw">€200–400k</td><td class="col-hw">€500k–1M</td><td class="col-hw">€1–2M</td><td class="col-hw">€2–4M</td><td class="col-hw">€2,5–5M</td><td class="col-hw">€3–6M</td><td class="col-hw">€3,5–7M</td><td class="col-hw">€4–8M</td><td class="col-hw">€5–10M</td></tr>
+            <tr><td class="td-bold col-tot">Total</td><td class="col-tot">€1,6–2M</td><td class="col-tot">€2–3,4M</td><td class="col-tot">€2,6–4,6M</td><td class="col-tot">€4,7–10M</td><td class="col-tot">€8,4–19M</td><td class="col-tot">€13,4–31M</td><td class="col-tot">€19,9–46M</td><td class="col-tot">€34,4–67M</td><td class="col-tot">€41,9–78M</td><td class="col-tot">€46,4–89M</td><td class="col-tot">€56–111M</td></tr>
           </tbody>
         </table>
       </div>
@@ -1638,13 +1681,13 @@
 
       new Chart(document.getElementById('chart2'), {
         type: 'bar',
-        data: { labels: ['2030','2033','2035','2040'], datasets: mkDs(
-          [1000000,1000000,1000000,1000000],
-          [225000,2750000,15000000,50000000],
-          [225000,2750000,15000000,50000000],
-          [150000,750000,3000000,10000000]
+        data: { labels: ['2030','2031','2032','2033','2034','2035','2036','2037','2038','2039','2040'], datasets: mkDs(
+          [1200000,1200000,1200000,1200000,1200000,1200000,1200000,1200000,1200000,1200000,1200000],
+          [225000,450000,800000,2750000,5500000,10000000,14000000,22500000,26500000,30000000,37500000],
+          [225000,450000,800000,2750000,5500000,10000000,14000000,22500000,26500000,30000000,37500000],
+          [150000,225000,300000,750000,1500000,3000000,3750000,4500000,5250000,6000000,7500000]
         )},
-        options: mkOpts(115000000,20000000)
+        options: mkOpts(90000000,15000000)
       });
 
       /* Scenario chart */
