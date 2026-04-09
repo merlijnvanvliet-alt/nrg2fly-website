@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Investment Committee — NRG2fly</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <meta property="og:title" content="Investment Committee — NRG2fly" />
+  <meta property="og:description" content="NRG2fly business case — prepared exclusively for the Horizon Investment Committee." />
+  <meta property="og:image" content="https://www.nrg2fly.com/images/ICthumb.jpg" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.nrg2fly.com/ic/" />
+  <link rel="icon" type="image/png" href="../NRG2FLY_icon_RGB.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Forum&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../style.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+  <style>
+    /* ── Login gate ── */
+    #login-gate {
+      position: fixed; inset: 0;
+      background: #0d1c2e;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; padding: 1.5rem;
+    }
+    #login-gate.hidden { display: none; }
+    .login-box {
+      background: #fff; border-radius: 16px;
+      padding: 2.5rem 2.5rem 2rem;
+      max-width: 400px; width: 100%; text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+    }
+    .login-box img { height: 36px; margin-bottom: 1.75rem; }
+    .login-box h2 { font-size: 1.25rem; font-weight: 700; color: #0d1c2e; margin-bottom: 0.4rem; }
+    .login-box input[type="password"] {
+      width: 100%; padding: 0.7rem 1rem;
+      border: 1.5px solid #dde2ea; border-radius: 8px;
+      font-size: 1rem; font-family: inherit; outline: none;
+      margin-bottom: 0.75rem; transition: border-color 0.18s;
+    }
+    .login-box input[type="password"]:focus { border-color: #0d1c2e; }
+    .login-box button {
+      width: 100%; padding: 0.75rem;
+      background: #0d1c2e; color: #ffd936;
+      border: none; border-radius: 8px;
+      font-size: 0.97rem; font-weight: 700; font-family: inherit;
+      cursor: pointer; transition: opacity 0.18s;
+    }
+    .login-box button:hover { opacity: 0.85; }
+    .login-error { font-size: 0.82rem; color: #c0392b; margin-top: 0.6rem; min-height: 1.2em; }
+    .login-confidential { font-size: 0.75rem; color: #aaa; margin-top: 1.25rem; }
+
+    /* ── Confidential bar ── */
+    .confidential-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 28px;
+      background: var(--yellow); color: var(--dark); text-align: center;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; display: flex; align-items: center;
+      justify-content: center; gap: 8px; z-index: 1050;
+      white-space: nowrap; overflow: hidden;
+    }
+    @media (max-width: 600px) {
+      .confidential-bar { font-size: 0.6rem; letter-spacing: 0.04em; gap: 5px; }
+    }
+    @media (max-width: 380px) {
+      .confidential-bar .conf-full { display: none; }
+      .confidential-bar .conf-short { display: inline; }
+    }
+    .conf-short { display: none; }
+    .site-header {
+      top: 28px !important;
+      background: #fff !important;
+      box-shadow: 0 1px 0 #e4e8ef !important;
+    }
+
+    /* ── Section nav ── */
+    .section-nav {
+      position: sticky;
+      top: calc(var(--nav-height) + 28px);
+      z-index: 900;
+      background: #fff;
+      border-bottom: 1px solid #e4e8ef;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .section-nav-inner {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+    .section-nav-inner::-webkit-scrollbar { display: none; }
+    .section-nav-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.82rem; font-weight: 600;
+      color: var(--text-light); white-space: nowrap;
+      text-decoration: none; border-bottom: 2px solid transparent;
+      transition: color 0.18s, border-color 0.18s;
+      flex-shrink: 0;
+    }
+    .section-nav-link:hover { color: var(--dark); border-color: rgba(0,0,0,0.15); }
+    .section-nav-link.active { color: var(--dark); border-color: #0d1c2e; }
+
+    /* ── Hero ── */
+    .ic-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .ic-hero-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; z-index: 0;
+    }
+    .ic-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(6,6,6,0.52);
+      z-index: 1;
+    }
+    .ic-hero-inner {
+      position: relative; z-index: 2;
+      max-width: 860px;
+      padding: calc(var(--nav-height) + 28px + 2rem) 1.5rem 4rem;
+      color: var(--white);
+    }
+    .ic-hero-inner h1 {
+      color: var(--white);
+      margin-bottom: 1.25rem;
+    }
+    .ic-hero-inner h1 em {
+      color: var(--yellow);
+      font-style: normal;
+    }
+    .ic-hero-sub {
+      font-size: clamp(1rem, 2.2vw, 1.2rem);
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 2rem;
+      max-width: 640px;
+      margin-left: auto; margin-right: auto;
+    }
+    .ic-hero-members {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,217,54,0.1);
+      border: 1px solid rgba(255,217,54,0.3);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 0;
+    }
+    .ic-hero-members svg { color: var(--yellow); flex-shrink: 0; }
+    .ic-hero-scroll {
+      position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.35); font-size: 0.72rem; letter-spacing: 0.1em;
+      text-transform: uppercase; text-decoration: none;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+
+    /* ── Intro section (below hero) ── */
+    .ic-intro-section {
+      background: var(--dark);
+      padding: 4rem 1.5rem 4.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .ic-intro-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .ic-intro-eyebrow {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 1.1rem;
+      opacity: 0.85;
+    }
+    .ic-intro-heading {
+      font-family: var(--font-heading);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .ic-intro-body {
+      font-size: 1.02rem;
+      color: rgba(255,255,255,0.62);
+      line-height: 1.75;
+      margin-bottom: 1rem;
+    }
+    .ic-intro-callout {
+      margin-top: 1.5rem;
+      background: rgba(255,255,255,0.04);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      padding: 1.1rem 1.4rem;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.68);
+      line-height: 1.7;
+    }
+
+    /* ── IC sections shared ── */
+    .ic-section {
+      padding: 4.5rem 1.5rem;
+      scroll-margin-top: calc(var(--nav-height) + 28px + 48px);
+    }
+    .ic-section .container { max-width: 860px; margin: 0 auto; }
+    .ic-section--light { background: #fff; }
+    .ic-section--grey { background: #f7f9fc; }
+    .ic-section--dark { background: var(--dark); }
+    .ic-section--sage { background: var(--sage); }
+
+    .ic-section .section-label { margin-bottom: 0.5rem; }
+    .ic-section h2 { margin-bottom: 0.65rem; }
+    .ic-section--dark .section-label { color: var(--yellow); }
+    .ic-section--dark h2 { color: var(--white); }
+
+    .ic-intro {
+      font-size: 0.97rem;
+      color: var(--text-light);
+      line-height: 1.7;
+      max-width: 680px;
+      margin-bottom: 2rem;
+    }
+
+    /* ── 3-col cards ── */
+    .ic-cards3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    .ic-cards4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.1rem;
+      margin-top: 1.5rem;
+    }
+    @media (max-width: 800px) { .ic-cards3 { grid-template-columns: 1fr; } }
+    @media (max-width: 860px) { .ic-cards4 { grid-template-columns: repeat(2,1fr); } }
+    @media (max-width: 500px) { .ic-cards4 { grid-template-columns: 1fr; } }
+
+    .ic-card {
+      background: #fff;
+      border: 1px solid #e4e8ef;
+      border-radius: 14px;
+      padding: 1.4rem 1.4rem 1.3rem;
+    }
+    .ic-section--grey .ic-card { background: #fff; }
+    .ic-card-badge {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 3px 10px; border-radius: 100px;
+      margin-bottom: 0.75rem;
+    }
+    .badge-blue { background: #e6f1fb; color: #0c447c; }
+    .badge-teal { background: #e1f5ee; color: #085041; }
+    .badge-amber { background: #faeeda; color: #633806; }
+    .badge-grey { background: #f1efe8; color: #444441; }
+    .ic-card-num {
+      font-size: 1.75rem; font-weight: 700;
+      color: var(--dark); line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .ic-card-label {
+      font-size: 0.78rem; font-weight: 600;
+      color: var(--text-light); letter-spacing: 0.04em;
+      margin-bottom: 0.65rem;
+    }
+    .ic-card-body {
+      font-size: 0.87rem; color: var(--text-light); line-height: 1.6;
+    }
+    .ic-card-icon {
+      width: 34px; height: 34px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 0.75rem;
+    }
+    .icon-blue { background: #e6f1fb; }
+    .icon-green { background: #e1f5ee; }
+
+    /* ── Callout ── */
+    .ic-callout {
+      background: var(--sage);
+      border-left: 3px solid var(--green);
+      border-radius: 0 10px 10px 0;
+      padding: 1.1rem 1.4rem;
+      font-size: 0.93rem;
+      color: var(--dark);
+      line-height: 1.65;
+      margin: 1.75rem 0;
+    }
+    .ic-callout--blue {
+      background: #eef4fd;
+      border-left-color: #185fa5;
+    }
+
+    /* ── Divider ── */
+    .ic-divider { border: none; border-top: 1px solid #e4e8ef; margin: 0; }
+
+    /* ── P&L table ── */
+    .tbl-wrap { overflow-x: auto; margin: 1.5rem 0; }
+    .tbl-wrap--scrollable {
+      position: relative;
+    }
+    /* right-edge fade gradient */
+    .tbl-wrap--scrollable::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0;
+      width: 64px;
+      background: linear-gradient(to right, transparent, rgba(247,249,252,0.95));
+      pointer-events: none;
+      z-index: 2;
+      border-radius: 0 0 8px 0;
+      transition: opacity 0.3s;
+    }
+    .tbl-wrap--scrollable.at-end::after { opacity: 0; }
+    .tbl-scroll-hint {
+      display: inline-flex; align-items: center; gap: 7px;
+      font-size: 0.75rem; font-weight: 700;
+      color: #185fa5;
+      background: #eef4fd;
+      border: 1px solid #c3d8f7;
+      border-radius: 100px;
+      padding: 5px 14px;
+      margin-bottom: 10px;
+      letter-spacing: 0.02em;
+      animation: hint-pulse 2.2s ease-in-out infinite;
+    }
+    .tbl-scroll-hint svg { flex-shrink: 0; }
+    @keyframes hint-pulse {
+      0%, 100% { opacity: 1; transform: translateX(0); }
+      50%       { opacity: 0.7; transform: translateX(4px); }
+    }
+    table.ic-tbl { width: 100%; border-collapse: collapse; font-size: 0.84rem; }
+    table.ic-tbl th {
+      font-size: 0.72rem; font-weight: 700; color: var(--text-light);
+      text-align: left; padding: 8px 12px;
+      border-bottom: 1.5px solid #e4e8ef;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      background: #f7f9fc; white-space: nowrap;
+    }
+    table.ic-tbl td {
+      padding: 9px 12px;
+      border-bottom: 1px solid #f0f0ec;
+      color: var(--dark);
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+    table.ic-tbl tr:last-child td { border-bottom: none; }
+    .td-muted { color: var(--text-light) !important; }
+    .td-indent { color: var(--text-light) !important; font-size: 0.8rem !important; padding-left: 28px !important; }
+    .td-bold { font-weight: 700; }
+    .td-green { color: #0f6e56; font-weight: 600; }
+    .td-red { color: #a32d2d; }
+    .td-check { color: #0f6e56; font-weight: 700; }
+    .row-header td {
+      background: #f7f9fc;
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text-light);
+      padding: 6px 12px;
+    }
+    /* column colour tints */
+    .col-nd { background: rgba(24,95,165,0.04); }
+    .col-cpo { background: rgba(29,158,117,0.04); }
+    .col-msp { background: rgba(186,117,23,0.04); }
+    .col-hw { background: rgba(136,135,128,0.05); }
+    .col-tot { background: #f7f9fc; font-weight: 700 !important; }
+
+    /* ── Chart ── */
+    .chart-title {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 2px;
+    }
+    .chart-sub {
+      font-size: 0.78rem; color: var(--text-light); margin-bottom: 12px;
+    }
+    .chart-wrap { position: relative; width: 100%; }
+    .chart-legend {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      margin-bottom: 12px; font-size: 0.78rem;
+      color: var(--text-light);
+    }
+    .chart-legend-item { display: flex; align-items: center; gap: 7px; }
+    .leg-dot {
+      width: 10px; height: 10px;
+      border-radius: 2px; display: inline-block; flex-shrink: 0;
+    }
+    .leg-line {
+      width: 22px; height: 3px; border-radius: 2px;
+      display: inline-block; flex-shrink: 0;
+    }
+    .leg-dash {
+      width: 22px; height: 0;
+      border-top: 2px dashed currentColor;
+      display: inline-block; flex-shrink: 0;
+    }
+    .chart-note {
+      font-size: 0.76rem; color: var(--text-light);
+      font-style: italic; margin-top: 10px;
+    }
+
+    /* ── Team layout ── */
+    .team-wrap {
+      display: grid;
+      grid-template-columns: 1fr 28px 1fr 28px 1fr;
+      gap: 10px;
+      align-items: start;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 860px) {
+      .team-wrap { grid-template-columns: 1fr; }
+      .team-arrow { display: none; }
+    }
+    .team-phase {
+      background: #fff;
+      border: 1px solid #e4e8ef;
+      border-radius: 14px;
+      padding: 1.25rem;
+    }
+    .phase-label {
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--text-light); margin-bottom: 5px;
+    }
+    .phase-year {
+      font-size: 0.97rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 10px;
+    }
+    .team-arrow {
+      display: flex; align-items: center; justify-content: center;
+      color: var(--text-light); font-size: 1.25rem;
+      padding-top: 3rem;
+    }
+    .dot-wrap { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 5px; }
+    .intern-label { font-size: 0.65rem; color: var(--text-light); margin-bottom: 4px; letter-spacing: 0.04em; }
+    .dot {
+      width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7px; font-weight: 700; flex-shrink: 0;
+    }
+    .dot-e { background: #e6f1fb; color: #0c447c; }
+    .dot-a { background: #f1efe8; color: #444441; }
+    .dot-n { background: #e1f5ee; color: #085041; border: 1.5px solid #1d9e75; }
+    .dot-intern { background: #faeeda; color: #633806; border-radius: 4px; }
+    .role-list {
+      margin-top: 10px;
+      display: flex; flex-direction: column; gap: 1px;
+    }
+    .role-list .role-row {
+      display: flex; align-items: baseline; gap: 6px;
+      font-size: 0.73rem; line-height: 1.55;
+      color: var(--text-light);
+      padding: 2px 0;
+      border-bottom: 1px solid #f4f4f2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .role-list .role-row:last-child { border-bottom: none; }
+    .role-list .role-row .role-name {
+      font-weight: 600; color: var(--dark);
+      flex-shrink: 0; min-width: 0;
+    }
+    .role-list .role-row .role-title {
+      color: var(--text-light); font-size: 0.7rem;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .role-new .role-name { color: #0f6e56 !important; }
+    .role-adv .role-name { color: #888 !important; font-style: italic; }
+    .role-intern .role-name { color: #854f0b !important; font-style: italic; }
+
+    .team-summary {
+      background: #f7f9fc;
+      border: 1px solid #e4e8ef;
+      border-radius: 12px;
+      padding: 1rem 1.25rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      text-align: center;
+      margin-top: 1rem;
+    }
+    @media (max-width: 500px) { .team-summary { grid-template-columns: repeat(2,1fr); } }
+    .sum-val { font-size: 1.5rem; font-weight: 700; color: var(--dark); }
+    .sum-lbl { font-size: 0.68rem; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 2px; }
+    .sum-div { border-left: 1px solid #e4e8ef; }
+
+    /* ── Tranche cards ── */
+    .tranche-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 680px) { .tranche-grid { grid-template-columns: 1fr; } }
+    .tranche-card {
+      background: #fff;
+      border: 1px solid #e4e8ef;
+      border-radius: 14px;
+      padding: 1.25rem;
+    }
+    .tranche-num {
+      font-size: 1.75rem; font-weight: 700;
+      color: #185fa5; margin-bottom: 2px;
+    }
+    .tranche-name {
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--text-light); margin-bottom: 3px;
+    }
+    .tranche-amount {
+      font-size: 1.2rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 3px;
+    }
+    .tranche-timing {
+      font-size: 0.78rem; color: var(--text-light); margin-bottom: 8px;
+    }
+    .tranche-use {
+      font-size: 0.83rem; color: var(--text-light); line-height: 1.55;
+    }
+
+    /* ── Scenario cards ── */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+      margin-top: 1.25rem;
+    }
+    @media (max-width: 640px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-card {
+      background: #f7f9fc;
+      padding: 1.1rem 1.25rem;
+      border-radius: 10px;
+    }
+    .scenario-card--green { border-left: 3px solid var(--green); }
+    .scenario-card--amber { border-left: 3px solid #ba7517; }
+    .scenario-card-title {
+      font-size: 0.85rem; font-weight: 700;
+      color: var(--dark); margin-bottom: 6px;
+    }
+    .scenario-card-body {
+      font-size: 0.84rem; color: var(--text-light); line-height: 1.65;
+    }
+
+    /* ── Timing pillars ── */
+    .timing-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.1rem;
+      margin: 1.5rem 0;
+    }
+    @media (max-width: 640px) { .timing-pillars { grid-template-columns: 1fr; } }
+    .timing-pillar {
+      background: #f7f9fc;
+      border-radius: 12px;
+      padding: 1.1rem;
+    }
+    .pillar-icon { font-size: 1.25rem; margin-bottom: 8px; }
+    .pillar-title { font-size: 0.84rem; font-weight: 700; color: var(--dark); margin-bottom: 4px; }
+    .pillar-body { font-size: 0.82rem; color: var(--text-light); line-height: 1.6; }
+
+    /* ── Team legend ── */
+    .team-legend {
+      display: flex; flex-wrap: wrap; gap: 14px;
+      font-size: 0.78rem; color: var(--text-light); margin-bottom: 1.25rem;
+    }
+    .team-legend-item { display: flex; align-items: center; gap: 7px; }
+
+    /* ── Contact footer ── */
+    .ic-contact {
+      padding: 4rem 1.5rem;
+      background: var(--dark);
+      text-align: center;
+      scroll-margin-top: calc(var(--nav-height) + 28px + 48px);
+    }
+    .ic-contact .section-label { color: var(--yellow); }
+    .ic-contact h2 { color: var(--white); margin-bottom: 1rem; }
+    .ic-contact p { color: rgba(255,255,255,0.55); font-size: 0.97rem; line-height: 1.7; }
+    .ic-contact a { color: var(--yellow); text-decoration: none; }
+    .ic-contact a:hover { text-decoration: underline; }
+    .contact-chips {
+      display: flex; justify-content: center; flex-wrap: wrap;
+      gap: 0.75rem; margin-top: 1.75rem;
+    }
+    .contact-chip {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 100px; padding: 9px 18px;
+      font-size: 0.88rem; color: rgba(255,255,255,0.75);
+      text-decoration: none; transition: background 0.18s, border-color 0.18s;
+    }
+    .contact-chip:hover {
+      background: rgba(255,217,54,0.1);
+      border-color: rgba(255,217,54,0.35);
+      color: var(--yellow);
+    }
+    .contact-chip svg { flex-shrink: 0; }
+
+    /* ── Fun fact / live flight data ── */
+    .p-funfact { background: linear-gradient(135deg, #0d160d 0%, #121f12 100%); padding: 3.5rem 0 2.5rem; border-top: 3px solid var(--yellow); }
+    .p-funfact-top { display: flex; align-items: flex-start; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .p-funfact-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: var(--yellow); margin-bottom: 0.5rem; }
+    .p-funfact-text { font-family: var(--font-heading); font-size: clamp(1.1rem, 2.2vw, 1.4rem); color: #fff; line-height: 1.4; max-width: 480px; }
+    .p-funfact-logo-wrap { margin-left: auto; flex-shrink: 0; display: flex; align-items: center; }
+    .p-funfact-logo-wrap a { display: block; transition: opacity 0.2s; }
+    .p-funfact-logo-wrap a:hover { opacity: 0.7; }
+    .p-funfact-logo-wrap img { height: 34px; width: auto; object-fit: contain; display: block; }
+    .p-funfact-tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 500px) { .p-funfact-tiles { grid-template-columns: 1fr; } }
+    .p-funfact-tile { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 1.5rem 2rem; position: relative; overflow: hidden; }
+    .p-funfact-tile::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: var(--yellow); border-radius: 3px 0 0 3px; }
+    .p-funfact-tile-num { font-family: var(--font-heading); font-size: clamp(2rem, 4vw, 2.8rem); color: var(--yellow); line-height: 1; letter-spacing: -0.01em; }
+    .p-funfact-tile-label { font-size: 0.88rem; font-weight: 600; color: #fff; margin-top: 0.4rem; }
+    .p-funfact-tile-period { font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 0.2rem; }
+    .p-funfact-bottom { margin-top: 1.25rem; font-size: 0.72rem; color: rgba(255,255,255,0.28); display: flex; align-items: center; gap: 0.4rem; }
+    .p-funfact-bottom a { color: rgba(255,255,255,0.4); text-decoration: underline; }
+    .p-funfact-live-dot { width: 6px; height: 6px; background: #4caf50; border-radius: 50%; animation: blink 2s ease-in-out infinite; flex-shrink: 0; }
+    @media (max-width: 640px) { .p-funfact-logo-wrap { margin-left: 0; } }
+
+    /* ── Pitch deck viewer ── */
+    .deck-section { padding: 4rem 1.5rem; background: #fff; scroll-margin-top: calc(var(--nav-height) + 28px + 48px); }
+    .deck-section .container { max-width: 900px; }
+    .deck-viewer {
+      position: relative; width: 100%; padding-bottom: 62.5%;
+      background: #f0f2f5; border-radius: 14px; overflow: hidden;
+      border: 1px solid #e4e8ef; margin-top: 1.75rem; box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+    .deck-viewer iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%; border: none;
+    }
+    .deck-actions { display: flex; align-items: center; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap; }
+    .deck-download-btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.65rem 1.4rem; background: #0d1c2e; color: #ffd936;
+      border-radius: 9px; font-size: 0.9rem; font-weight: 700;
+      text-decoration: none; transition: opacity 0.18s;
+    }
+    .deck-download-btn:hover { opacity: 0.85; }
+    .deck-note { font-size: 0.8rem; color: var(--text-light); }
+    .deck-mobile-cta {
+      display: none;
+      margin-top: 1.75rem;
+      background: #f7f9fc; border: 1px solid #e4e8ef; border-radius: 14px;
+      padding: 2rem 1.5rem; text-align: center;
+    }
+    .deck-mobile-cta p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 1.25rem; }
+    .deck-mobile-cta-btns { display: flex; flex-direction: column; gap: 0.75rem; }
+    .deck-mobile-btn-open {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.4rem; background: #0d1c2e; color: #ffd936;
+      border-radius: 9px; font-size: 0.95rem; font-weight: 700; text-decoration: none;
+    }
+    .deck-mobile-btn-dl {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.75rem 1.4rem; background: #eef2fb; color: #1a56db;
+      border: 1px solid #c3d2f5; border-radius: 9px; font-size: 0.95rem; font-weight: 600; text-decoration: none;
+    }
+    @media (max-width: 700px) {
+      .deck-viewer { display: none; }
+      .deck-mobile-cta { display: block; }
+      .deck-actions { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Login gate ── -->
+  <div id="login-gate">
+    <div class="login-box">
+      <img src="../NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+      <h2>Welcome, Horizon Investment Committee</h2>
+      <p style="font-size:0.84rem; color:#536942; font-weight:600; margin-bottom:0.5rem;">Roy, Marcia, Patrick, Cilia &amp; Arjan</p>
+      <p style="font-size:0.84rem; color:#666; line-height:1.6; margin-bottom:1.25rem;">This portal was prepared exclusively for your committee — confidential and intended solely for the members above. We look forward to presenting in person on 7 May and to answering all your questions.</p>
+      <input type="password" id="pw-input" placeholder="Password" autocomplete="current-password" />
+      <button id="pw-submit">Continue →</button>
+      <div class="login-error" id="login-error"></div>
+      <p style="font-size:0.78rem; color:#aaa; margin-top:1rem; line-height:1.6;">Questions before 7 May?<br /><a href="mailto:merlijn@nrg2fly.com" style="color:#536942; text-decoration:none;">merlijn@nrg2fly.com</a> &nbsp;·&nbsp; <a href="tel:+31615896506" style="color:#536942; text-decoration:none;">+31 6 15 89 65 06</a></p>
+    </div>
+  </div>
+
+  <!-- ── Confidential bar ── -->
+  <div class="confidential-bar" role="note" aria-label="Confidentiality notice">
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+    <span class="conf-full">Confidential &nbsp;·&nbsp; Horizon Investment Committee only</span>
+    <span class="conf-short">Confidential · IC only</span>
+  </div>
+
+  <!-- ── Logo-only header ── -->
+  <header class="site-header light" aria-label="NRG2fly logo" style="display:flex; align-items:center; padding:0 1.5rem;">
+    <a href="../index.html" class="nav-logo" aria-label="NRG2fly — Home">
+      <img class="logo-mark" src="../NRG2FLY_icon_RGB.png" alt="NRG2fly" />
+      <img class="logo-full" src="../NRG2FLY_transparant_logo_RGB.png" alt="NRG2fly" />
+    </a>
+  </header>
+
+  <!-- ── Section navigation ── -->
+  <nav class="section-nav" aria-label="IC sections">
+    <div class="section-nav-inner">
+      <a class="section-nav-link active" href="#welcome">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        Welcome
+      </a>
+      <a class="section-nav-link" href="#pitchdeck">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        Pitch deck
+      </a>
+      <a class="section-nav-link" href="#business-model">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Business model
+      </a>
+      <a class="section-nav-link" href="#investment">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+        Investment
+      </a>
+      <a class="section-nav-link" href="#team">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Team
+      </a>
+      <a class="section-nav-link" href="#pl">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        P&amp;L
+      </a>
+      <a class="section-nav-link" href="#revenue">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+        Revenue
+      </a>
+      <a class="section-nav-link" href="#scenarios">Scenarios</a>
+      <a class="section-nav-link" href="#cash">Cash timing</a>
+      <a class="section-nav-link" href="#ask">The ask</a>
+      <a class="section-nav-link" href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+       HERO
+  ══════════════════════════════════════════════ -->
+  <section class="ic-hero" id="welcome">
+    <video class="ic-hero-video" autoplay muted loop playsinline poster="../images/Mapof Europe.png">
+      <source src="../video/homevideo.mp4" type="video/mp4" />
+    </video>
+    <div class="ic-hero-inner">
+      <h1>Europe's <em>&gt;2,000 Airports</em> offer massive potential for electric aviation.</h1>
+      <p class="ic-hero-sub">With 30% of EU flights under 500&nbsp;km, commercial electric flying will take off by 2032.</p>
+      <div class="ic-hero-members">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        Investment Committee · Roy, Marcia, Patrick, Cilia &amp; Arjan
+      </div>
+    </div>
+    <a href="#business-model" class="ic-hero-scroll" aria-label="Scroll to content">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+    </a>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       INTRO / CASE INTRO
+  ══════════════════════════════════════════════ -->
+  <section class="ic-intro-section">
+    <div class="ic-intro-inner">
+      <div class="ic-intro-eyebrow">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        Investment Committee · May 2026 · Confidential
+      </div>
+      <h2 class="ic-intro-heading">NRG2fly — Business case explained</h2>
+      <p class="ic-intro-body">NRG2fly is building Europe's leading charging network for electric aviation. Everything we do — from advisory projects to CPO contracts to software — builds the same network. We finance that network through knowledge services today, and operate it as infrastructure tomorrow.</p>
+      <p class="ic-intro-body">By the time commercial electric aviation scales, we are already the infrastructure partner of choice at 35+ airports across Europe.</p>
+      <div class="ic-intro-callout">
+        We significantly reduce market timing risk. Whatever the pace of adoption — driven by certification, regulation, political will, OEM market entry, or airport transformation — NRG2fly builds compounding value at every stage. The network grows regardless of when the market peaks.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       PITCH DECK
+  ══════════════════════════════════════════════ -->
+  <section id="pitchdeck" class="deck-section">
+    <div class="container">
+      <p class="section-label">Investor Materials</p>
+      <h2>Pitch Deck</h2>
+      <p style="color:var(--text-light); font-size:0.97rem; margin-bottom:0;">This page reads best if you start with the general pitch deck. It gives the full company story, market context, and team — everything below dives deeper into the financial business case.</p>
+
+      <div class="deck-actions">
+        <a href="../decks/20260323_NRG2fly_Extra_Seeding_Round.pdf" download class="deck-download-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download PDF
+        </a>
+        <span class="deck-note">March 2026 · Confidential</span>
+      </div>
+
+      <div class="deck-viewer" id="deck-viewer">
+        <iframe
+          src="../decks/20260323_NRG2fly_Extra_Seeding_Round.pdf#toolbar=0&navpanes=0&view=FitH"
+          title="NRG2fly Pitch Deck — March 2026"
+          id="deck-iframe"
+        ></iframe>
+      </div>
+
+      <!-- Mobile fallback -->
+      <div class="deck-mobile-cta">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="1.5" aria-hidden="true" style="margin:0 auto 1rem;"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+        <p>Open de pitch deck in je browser of download hem direct.</p>
+        <div class="deck-mobile-cta-btns">
+          <a href="../decks/20260323_NRG2fly_Extra_Seeding_Round.pdf" target="_blank" rel="noopener" class="deck-mobile-btn-open">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open pitch deck
+          </a>
+          <a href="../decks/20260323_NRG2fly_Extra_Seeding_Round.pdf" download class="deck-mobile-btn-dl">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       BUSINESS MODEL
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--light" id="business-model">
+    <div class="container">
+      <div class="section-label">Business model</div>
+      <h2>Three revenue streams, one compounding network</h2>
+      <p class="ic-intro">Three revenue streams, each reinforcing the next. Every airport we advise becomes a location we operate. Every location we operate feeds our platform.</p>
+
+      <div class="ic-cards3">
+        <div class="ic-card">
+          <div class="ic-card-badge badge-blue">Stream 1</div>
+          <div class="ic-card-label">Consulting</div>
+          <div class="ic-card-body">Strategic and technical advisory to airports, governments, and OEMs. From energy strategy and permitting to charging specification and project management. Every engagement builds a long-term airport relationship and a future network position.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-badge badge-grey">Stream 2</div>
+          <div class="ic-card-label">Hardware margin</div>
+          <div class="ic-card-body">NRG2fly sources, supplies, and installs charging hardware. We earn a margin on procurement and installation. As the network grows across Europe, purchasing volumes increase and margins improve.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-badge badge-teal">Stream 3</div>
+          <div class="ic-card-label">CPO and MSP</div>
+          <div class="ic-card-body">As Charge Point Operator (CPO), NRG2fly owns and manages the chargers and earns per kWh delivered. As Mobile Service Provider (MSP), NRG2fly operates the software platform through which pilots, operators, and ground handlers access and pay for the network.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       AIRCRAFT + GSE TIMELINE
+  ══════════════════════════════════════════════ -->
+  <section id="toekomst" class="home-timeline" style="scroll-margin-top:calc(var(--nav-height) + 28px + 48px);">
+    <div class="container">
+      <p class="section-label">Fleet Roadmap</p>
+      <h2 style="font-size:clamp(1.8rem,3.5vw,2.6rem);color:#fff;margin-bottom:0.75rem;">Electric aviation is arriving in waves</h2>
+      <p class="home-tl-intro">From the Pipistrel Velis already charging today, to the 90-seat Elysian entering service in the 2030s — each aircraft generation places new demands on airport infrastructure: more power, smarter grid management, and larger storage capacity. NRG2fly lays the foundation so airports are ready for every wave.</p>
+      <p class="home-tl-disclaimer">Vehicles and aircraft shown are indicative. Battery capacity and charging power are based on publicly available specifications and industry projections.</p>
+      <div class="home-tl-runway">
+        <div class="home-tl-track">
+
+          <div class="home-tl-item">
+            <div class="home-tl-card">
+              <div class="home-tl-plane-wrap">
+                <img src="../images/Plane_1_pipistrel.jpg" alt="Pipistrel Velis elektrisch trainingsvliegtuig" class="home-tl-plane" loading="lazy" />
+              </div>
+              <div class="home-tl-kwh">22 kWh</div>
+              <div class="home-tl-type">Training aircraft</div>
+              <div class="home-tl-name">Pipistrel Velis</div>
+            </div>
+            <div class="home-tl-dot"></div>
+            <div class="home-tl-year">Now — 2026</div>
+            <span class="home-tl-tag home-tl-tag--now">Already active</span>
+          </div>
+
+          <div class="home-tl-item">
+            <div class="home-tl-card">
+              <div class="home-tl-plane-wrap" style="align-items:center;">
+                <svg width="80" height="60" viewBox="0 0 80 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.7;">
+                  <rect x="5" y="28" width="60" height="20" rx="4" fill="#ffd936"/>
+                  <rect x="12" y="18" width="38" height="14" rx="3" fill="#ffd936" opacity="0.7"/>
+                  <circle cx="18" cy="50" r="7" fill="#0d1c2e" stroke="#ffd936" stroke-width="2"/>
+                  <circle cx="52" cy="50" r="7" fill="#0d1c2e" stroke="#ffd936" stroke-width="2"/>
+                  <rect x="62" y="32" width="12" height="10" rx="2" fill="#ffd936" opacity="0.5"/>
+                  <circle cx="18" cy="50" r="3" fill="#ffd936"/>
+                  <circle cx="52" cy="50" r="3" fill="#ffd936"/>
+                </svg>
+              </div>
+              <div class="home-tl-kwh">75 kWh</div>
+              <div class="home-tl-type">GSE / Ground operations</div>
+              <div class="home-tl-name">VW ID.4</div>
+            </div>
+            <div class="home-tl-dot"></div>
+            <div class="home-tl-year">Operational</div>
+            <span class="home-tl-tag home-tl-tag--now">Already active · CCS</span>
+          </div>
+
+          <div class="home-tl-item">
+            <div class="home-tl-card">
+              <div class="home-tl-plane-wrap">
+                <img src="../images/Plane_2_Beta.jpg" alt="Beta ALIA elektrisch pendelvliegtuig" class="home-tl-plane" loading="lazy" />
+              </div>
+              <div class="home-tl-kwh">225 kWh</div>
+              <div class="home-tl-type">Shuttle / cargo</div>
+              <div class="home-tl-name">Beta ALIA</div>
+            </div>
+            <div class="home-tl-dot"></div>
+            <div class="home-tl-year">2026 — 2028</div>
+            <span class="home-tl-tag">Experimentally active</span>
+          </div>
+
+          <div class="home-tl-item">
+            <div class="home-tl-card">
+              <div class="home-tl-plane-wrap" style="align-items:center;">
+                <svg width="90" height="60" viewBox="0 0 90 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="opacity:0.7;">
+                  <rect x="4" y="30" width="70" height="18" rx="3" fill="#e05a5a"/>
+                  <rect x="8" y="18" width="30" height="15" rx="3" fill="#e05a5a" opacity="0.8"/>
+                  <rect x="70" y="24" width="14" height="10" rx="2" fill="#e05a5a" opacity="0.6"/>
+                  <line x1="40" y1="18" x2="40" y2="8" stroke="#e05a5a" stroke-width="3" stroke-linecap="round"/>
+                  <line x1="40" y1="8" x2="60" y2="8" stroke="#e05a5a" stroke-width="2.5" stroke-linecap="round"/>
+                  <circle cx="18" cy="50" r="7" fill="#1a1a2e" stroke="#e05a5a" stroke-width="2"/>
+                  <circle cx="55" cy="50" r="7" fill="#1a1a2e" stroke="#e05a5a" stroke-width="2"/>
+                  <circle cx="18" cy="50" r="3" fill="#e05a5a"/>
+                  <circle cx="55" cy="50" r="3" fill="#e05a5a"/>
+                </svg>
+              </div>
+              <div class="home-tl-kwh" style="color:#e88a8a;">256 kWh</div>
+              <div class="home-tl-type">Fire &amp; rescue</div>
+              <div class="home-tl-name">Rosenbauer Panther</div>
+            </div>
+            <div class="home-tl-dot"></div>
+            <div class="home-tl-year">2026</div>
+            <span class="home-tl-tag" style="background:rgba(224,90,90,0.15);color:#e88a8a;border-color:rgba(224,90,90,0.3);">Available · CCS/CE</span>
+          </div>
+
+          <div class="home-tl-item">
+            <div class="home-tl-card">
+              <div class="home-tl-plane-wrap">
+                <img src="../images/Plane_3_Vaeridion.jpg" alt="Vaeridion elektrisch regionaal vliegtuig" class="home-tl-plane" loading="lazy" />
+              </div>
+              <div class="home-tl-kwh">600 kWh</div>
+              <div class="home-tl-type">Regional aircraft</div>
+              <div class="home-tl-name">Vaeridion</div>
+            </div>
+            <div class="home-tl-dot"></div>
+            <div class="home-tl-year">2028 — 2032</div>
+            <span class="home-tl-tag">In development</span>
+          </div>
+
+          <div class="home-tl-item">
+            <div class="home-tl-card">
+              <div class="home-tl-plane-wrap">
+                <img src="../images/Plane_4_Elysian.jpg" alt="Elysian E9X 90-zitter elektrisch" class="home-tl-plane" loading="lazy" />
+              </div>
+              <div class="home-tl-kwh">15 MWh</div>
+              <div class="home-tl-type">Short-haul airliner</div>
+              <div class="home-tl-name">Elysian E9X</div>
+            </div>
+            <div class="home-tl-dot"></div>
+            <div class="home-tl-year">2032+</div>
+            <span class="home-tl-tag">Future fleet</span>
+          </div>
+
+        </div>
+        <div class="home-tl-ground"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       WHAT WE CHARGE
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--light">
+    <div class="container">
+      <h2>What we charge</h2>
+      <p class="ic-intro">NRG2fly charges everything electric at and around airports, from the aircraft themselves to the vehicles that service them.</p>
+
+      <div class="ic-cards4">
+        <div class="ic-card">
+          <div class="ic-card-icon icon-blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div class="ic-card-label">Electric aircraft — GA</div>
+          <div class="ic-card-body">General aviation, training flights, air taxis. Pipistrel Velis Electro, Bristell, H55 and other OEM partners. First charging sessions operational today.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-icon icon-blue">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#185FA5" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+          </div>
+          <div class="ic-card-label">Electric aircraft — commuter</div>
+          <div class="ic-card-body">Regional routes with 9–19 passengers. Vaeridion, Elysian, Beta and other scale-up OEMs. Market entry expected 2030–2033.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-icon icon-green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/></svg>
+          </div>
+          <div class="ic-card-label">Ground service equipment</div>
+          <div class="ic-card-body">Electric baggage carts, pushback tractors, airside vehicles. Maastricht Airport (MAA) is an active trajectory. Large market, immediately profitable.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-icon icon-green">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="21" r="1"/><circle cx="20" cy="21" r="1"/></svg>
+          </div>
+          <div class="ic-card-label">Landside charging</div>
+          <div class="ic-card-body">Electric cars for staff and visitors. Den Helder Airport operational today. Direct CPO revenue, strengthens the airport relationship.</div>
+        </div>
+      </div>
+
+      <div class="ic-callout ic-callout--blue">
+        We significantly reduce market timing risk. Whatever the pace of adoption — driven by certification, regulation, political will, OEM market entry, or airport transformation — NRG2fly builds compounding value at every stage. The network grows regardless of when the market peaks.
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FUN FACT / LIVE FLIGHT DATA -->
+  <div class="p-funfact" id="funfact-section">
+    <div class="container">
+      <div class="p-funfact-top">
+        <div>
+          <div class="p-funfact-label">Fun fact</div>
+          <div class="p-funfact-text">The Netherlands is the world's most active country for electric flight — powered by E-Flight Academy.</div>
+        </div>
+        <div class="p-funfact-logo-wrap">
+          <a href="https://www.eflight.nl" target="_blank" rel="noopener">
+            <img src="../images/E-Flightlogo_white.png" alt="E-Flight Academy" />
+          </a>
+        </div>
+      </div>
+      <div class="p-funfact-tiles">
+        <div class="p-funfact-tile">
+          <div class="p-funfact-tile-num" id="eflight-flights">—</div>
+          <div class="p-funfact-tile-label">Electric flights</div>
+          <div class="p-funfact-tile-period" id="eflight-period">May 2021 – <span id="eflight-today"></span></div>
+        </div>
+        <div class="p-funfact-tile">
+          <div class="p-funfact-tile-num" id="eflight-distance">—</div>
+          <div class="p-funfact-tile-label">Nautical miles flown</div>
+          <div class="p-funfact-tile-period">May 2021 – <span class="eflight-today-copy"></span></div>
+        </div>
+      </div>
+      <div class="p-funfact-bottom">
+        <div class="p-funfact-live-dot"></div>
+        Live data · Source: <a href="https://www.eflight.nl" target="_blank" rel="noopener">E-Flight Academy</a> Open Data
+      </div>
+    </div>
+  </div>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       INVESTMENT
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--grey" id="investment">
+    <div class="container">
+      <div class="section-label">Use of funds</div>
+      <h2>Three parallel investments</h2>
+      <p class="ic-intro">The €1.85M is not an operational budget. Each bucket directly builds the network — every euro goes toward a position, a person, or a piece of infrastructure that compounds over time.</p>
+
+      <div class="ic-cards3">
+        <div class="ic-card">
+          <div class="ic-card-badge badge-blue">Bucket 1</div>
+          <div class="ic-card-num">€500k</div>
+          <div class="ic-card-label">Network development</div>
+          <div class="ic-card-body">Two senior consultants added in 2026 and 2027. Self-sustaining within 12 months, cashflow positive within 18. Every project = airport relationship = permanent network position.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-badge badge-teal">Bucket 2</div>
+          <div class="ic-card-num">€500k</div>
+          <div class="ic-card-label">Pilot network (capex)</div>
+          <div class="ic-card-body">Nine additional charging stations across the Netherlands, on top of 7 already operational in NL and 1 in Germany. Live spring 2027. Generates first real CPO and MSP revenue.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-badge badge-amber">Bucket 3</div>
+          <div class="ic-card-num">€850k</div>
+          <div class="ic-card-label">People, platform, runway</div>
+          <div class="ic-card-body">Six new hires across 2026–2028: three funded by this investment (2026–2027), three self-funded from consulting revenue (2028). Country managers for DACH &amp; Nordics and South Europe. MSP platform built and launched. Operating losses during scale-up covered.</div>
+        </div>
+      </div>
+
+      <div style="margin-top:2.5rem;">
+        <h2 style="margin-bottom:0.5rem;">Cash timing — three tranches</h2>
+        <p class="ic-intro">Each tranche is drawn as capital is actively deployed into people, network capex, and platform. Cash position maintained above €100k throughout.</p>
+        <div class="tranche-grid">
+          <div class="tranche-card">
+            <div class="tranche-num">1</div>
+            <div class="tranche-name">Tranche 1</div>
+            <div class="tranche-amount">€375k</div>
+            <div class="tranche-timing">May 2026 — upon IC approval</div>
+            <div class="tranche-use">Bridge operating loss. Onboard Sr. Consultant ND NL (June) and Junior consultant (July). Start network capex.</div>
+          </div>
+          <div class="tranche-card">
+            <div class="tranche-num">2</div>
+            <div class="tranche-name">Tranche 2</div>
+            <div class="tranche-amount">€675k</div>
+            <div class="tranche-timing">August 2026</div>
+            <div class="tranche-use">Accelerate network capex, start MSP platform development, cover operating costs as team scales.</div>
+          </div>
+          <div class="tranche-card">
+            <div class="tranche-num">3</div>
+            <div class="tranche-name">Tranche 3</div>
+            <div class="tranche-amount">€800k</div>
+            <div class="tranche-timing">January 2027</div>
+            <div class="tranche-use">Onboard Country manager DACH &amp; Nordics. Complete pilot network, finalize and launch MSP platform. Network self-funding from Q4 2027.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       TEAM
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--light" id="team">
+    <div class="container">
+      <div class="section-label">Team growth</div>
+      <h2>From 5 to 11 FTE across Europe</h2>
+      <p class="ic-intro">With this investment, NRG2fly builds the operational foundation for a European electric aviation charging network. We strengthen our capacity in the Netherlands in 2026, place a country manager in DACH &amp; Nordics in 2027, and expand to South Europe in 2028 — self-funded from that point on.</p>
+
+      <div class="team-legend">
+        <div class="team-legend-item">
+          <span style="width:18px;height:18px;border-radius:50%;background:#e6f1fb;display:inline-block;flex-shrink:0;"></span>
+          Core team
+        </div>
+        <div class="team-legend-item">
+          <span style="width:18px;height:18px;border-radius:50%;background:#f1efe8;display:inline-block;flex-shrink:0;"></span>
+          Advisory board
+        </div>
+        <div class="team-legend-item">
+          <span style="width:18px;height:18px;border-radius:50%;background:#e1f5ee;border:1.5px solid #1D9E75;display:inline-block;flex-shrink:0;"></span>
+          New hire
+        </div>
+        <div class="team-legend-item">
+          <span style="width:18px;height:18px;border-radius:4px;background:#faeeda;display:inline-block;flex-shrink:0;"></span>
+          Intern
+        </div>
+      </div>
+
+      <div class="team-wrap">
+        <!-- Phase 1 -->
+        <div class="team-phase">
+          <div class="phase-label">Today</div>
+          <div class="phase-year">2025 — 5 FTE</div>
+          <div class="dot-wrap">
+            <div class="dot dot-e" title="Merlijn van Vliet">MvV</div>
+            <div class="dot dot-e" title="Jacco Bink">JBi</div>
+            <div class="dot dot-e" title="Giel Jan Koek">GJK</div>
+            <div class="dot dot-e" title="Ed Meijer">EMj</div>
+            <div class="dot dot-e" title="Tristan Oppeneer">TOp</div>
+            <div class="dot dot-a" title="Jurjen de Jong">JdJ</div>
+            <div class="dot dot-a" title="Maarten Steinbuch">MSt</div>
+          </div>
+          <div class="intern-label">Interns (2)</div>
+          <div class="dot-wrap">
+            <div class="dot dot-intern">S1</div>
+            <div class="dot dot-intern">S2</div>
+          </div>
+          <div class="role-list">
+            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO / network dev.</span></div>
+            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO / operations</span></div>
+            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
+            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
+            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
+            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-intern"><span class="role-name">2 interns</span><span class="role-title">full-time</span></div>
+          </div>
+        </div>
+
+        <div class="team-arrow">→</div>
+
+        <!-- Phase 2 -->
+        <div class="team-phase">
+          <div class="phase-label">After Tranche 1 + 2</div>
+          <div class="phase-year">2026 — 7 FTE</div>
+          <div class="dot-wrap">
+            <div class="dot dot-e">MvV</div><div class="dot dot-e">JBi</div>
+            <div class="dot dot-e">GJK</div><div class="dot dot-e">EMj</div>
+            <div class="dot dot-e">TOp</div>
+            <div class="dot dot-a">JdJ</div><div class="dot dot-a">MSt</div>
+            <div class="dot dot-n" title="Sr. Consultant ND NL">ND1</div>
+            <div class="dot dot-n" title="Junior consultant">JC</div>
+          </div>
+          <div class="intern-label">Interns (4)</div>
+          <div class="dot-wrap">
+            <div class="dot dot-intern">S1</div><div class="dot dot-intern">S2</div>
+            <div class="dot dot-intern">S3</div><div class="dot dot-intern">S4</div>
+          </div>
+          <div class="role-list">
+            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO / network dev.</span></div>
+            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO / operations</span></div>
+            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
+            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
+            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
+            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND NL</span><span class="role-title">new hire · June</span></div>
+            <div class="role-row role-new"><span class="role-name">Junior consultant</span><span class="role-title">new hire · July</span></div>
+            <div class="role-row role-intern"><span class="role-name">4 interns</span><span class="role-title">full-time</span></div>
+          </div>
+        </div>
+
+        <div class="team-arrow">→</div>
+
+        <!-- Phase 3 -->
+        <div class="team-phase">
+          <div class="phase-label">After Tranche 3</div>
+          <div class="phase-year">2027 — 8 FTE</div>
+          <div class="dot-wrap">
+            <div class="dot dot-e">MvV</div><div class="dot dot-e">JBi</div>
+            <div class="dot dot-e">GJK</div><div class="dot dot-e">EMj</div>
+            <div class="dot dot-e">TOp</div>
+            <div class="dot dot-a">JdJ</div><div class="dot dot-a">MSt</div>
+            <div class="dot dot-n">ND1</div><div class="dot dot-n">JC</div>
+            <div class="dot dot-n" title="Country manager DACH &amp; Nordics">DN</div>
+          </div>
+          <div class="intern-label">Interns (6)</div>
+          <div class="dot-wrap">
+            <div class="dot dot-intern">S1</div><div class="dot dot-intern">S2</div>
+            <div class="dot dot-intern">S3</div><div class="dot dot-intern">S4</div>
+            <div class="dot dot-intern">S5</div><div class="dot dot-intern">S6</div>
+          </div>
+          <div class="role-list">
+            <div class="role-row"><span class="role-name">Merlijn van Vliet</span><span class="role-title">CEO / network dev.</span></div>
+            <div class="role-row"><span class="role-name">Jacco Bink</span><span class="role-title">COO / operations</span></div>
+            <div class="role-row"><span class="role-name">Giel Jan Koek</span><span class="role-title">medior consultant</span></div>
+            <div class="role-row"><span class="role-name">Ed Meijer</span><span class="role-title">technical specialist</span></div>
+            <div class="role-row"><span class="role-name">Tristan Oppeneer</span><span class="role-title">junior consultant</span></div>
+            <div class="role-row role-adv"><span class="role-name">Jurjen de Jong</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-adv"><span class="role-name">Maarten Steinbuch</span><span class="role-title">advisory board</span></div>
+            <div class="role-row role-new"><span class="role-name">Sr. Consultant ND NL</span><span class="role-title">continuing</span></div>
+            <div class="role-row role-new"><span class="role-name">Junior consultant</span><span class="role-title">continuing</span></div>
+            <div class="role-row role-new"><span class="role-name">Country mgr. DACH &amp; N.</span><span class="role-title">new hire</span></div>
+            <div class="role-row role-intern"><span class="role-name">6 interns</span><span class="role-title">full-time</span></div>
+          </div>
+          <p style="font-size:0.72rem;color:var(--text-light);margin-top:0.75rem;line-height:1.5;">+3 more hires in 2028 (self-funded): Sr. Consultant ND EU, Medior technical specialist, Country mgr. South Europe → 11 FTE</p>
+        </div>
+      </div>
+
+      <div class="team-summary">
+        <div><div class="sum-val">5</div><div class="sum-lbl">FTE today</div></div>
+        <div class="sum-div"><div class="sum-val" style="color:#185FA5">+3</div><div class="sum-lbl">Funded hires 2026–27</div></div>
+        <div class="sum-div"><div class="sum-val" style="color:#1D9E75">8</div><div class="sum-lbl">FTE end 2027</div></div>
+        <div class="sum-div"><div class="sum-val" style="color:#BA7517">11</div><div class="sum-lbl">FTE in 2028 (self-funded)</div></div>
+      </div>
+    </div>
+  </section>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       P&L
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--grey" id="pl">
+    <div class="container">
+      <div class="section-label">Financials</div>
+      <h2>Operational P&amp;L — break-even in 2027</h2>
+      <p class="ic-intro">The losses in 2026 and early 2027 are a known and funded cost of the scale-up phase. Covered by the investment, not by future fundraising. From 2027 onward the business is structurally profitable on consulting alone — before CPO and MSP contribute.</p>
+
+      <div class="tbl-wrap">
+        <table class="ic-tbl">
+          <thead>
+            <tr>
+              <th style="width:32%"></th>
+              <th>2025</th><th>2026</th><th>2027</th><th>2028</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-muted">Revenue</td><td>€247k</td><td>€428k</td><td>€820k</td><td>€1.155M</td></tr>
+            <tr><td class="td-muted">Costs</td><td>€421k</td><td>€551k</td><td>€818k</td><td>€1.129M</td></tr>
+            <tr><td class="td-bold">Result</td><td class="td-red">−€174k</td><td class="td-red">−€123k</td><td class="td-green">+€2k</td><td class="td-green">+€26k</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="chart-wrap" style="height:200px; margin:1rem 0 2.5rem;">
+        <canvas id="plChart"></canvas>
+      </div>
+
+      <hr class="ic-divider" style="margin:2.5rem 0;" />
+
+      <h2>Complete business overview</h2>
+      <p class="ic-intro">Revenue streams, investment deployment, and headcount growth in one view. After 2028 the investment is fully deployed and all growth is self-funded by the network.</p>
+
+      <div class="tbl-scroll-hint">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        Scroll right to see the full timeline (2025 → 2035–40)
+      </div>
+      <div class="tbl-wrap tbl-wrap--scrollable" id="overview-tbl-wrap">
+        <table class="ic-tbl">
+          <thead>
+            <tr>
+              <th style="width:22%"></th>
+              <th>2025</th><th>2026</th><th>2027</th><th>2028</th>
+              <th>2029</th><th>2030</th><th>2033</th><th>2035–40</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="row-header"><td colspan="9">Revenue</td></tr>
+            <tr><td class="td-muted col-nd">Consulting</td><td class="col-nd">€247k</td><td class="col-nd">€428k</td><td class="col-nd">€820k</td><td class="col-nd">€1.155M</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td></tr>
+            <tr><td class="td-muted col-cpo">CPO</td><td class="col-cpo">€3k</td><td class="col-cpo">€5k</td><td class="col-cpo">€15–20k</td><td class="col-cpo">€15–20k</td><td class="col-cpo">€60–90k</td><td class="col-cpo">€150–300k</td><td class="col-cpo">€1,5–4M</td><td class="col-cpo">€25–50M</td></tr>
+            <tr><td class="td-muted col-msp">MSP</td><td class="col-msp">n/a</td><td class="col-msp">n/a</td><td class="col-msp">€5–10k</td><td class="col-msp">€5–10k</td><td class="col-msp">€40–60k</td><td class="col-msp">€150–300k</td><td class="col-msp">€1,5–4M</td><td class="col-msp">€25–50M</td></tr>
+            <tr><td class="td-muted col-hw">Hardware margin</td><td class="col-hw">n/a</td><td class="col-hw">€20–40k</td><td class="col-hw">€30–50k</td><td class="col-hw">€40–80k</td><td class="col-hw">€80–150k</td><td class="col-hw">€100–200k</td><td class="col-hw">€0,5–1M</td><td class="col-hw">€5–10M</td></tr>
+            <tr><td class="td-bold col-tot">Total</td><td class="col-tot">€250k</td><td class="col-tot">€453–473k</td><td class="col-tot">€845–880k</td><td class="col-tot">€1.215–1.265M</td><td class="col-tot">€1,5–1,6M</td><td class="col-tot">€1,6–1,8M</td><td class="col-tot">€4,7–10M</td><td class="col-tot">€56–111M</td></tr>
+
+            <tr class="row-header"><td colspan="9">Investment (€1.85M total)</td></tr>
+            <tr><td class="td-muted">People — new hires</td><td>n/a</td><td>€115k</td><td>€296k</td><td>€350k</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-indent">↳ Sr. Consultant ND NL</td><td>n/a</td><td class="td-check">✓</td><td class="td-check">✓</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-indent">↳ Junior consultant</td><td>n/a</td><td class="td-check">✓</td><td class="td-check">✓</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-indent">↳ Country manager DACH &amp; Nordics</td><td>n/a</td><td>n/a</td><td class="td-check">✓</td><td class="td-check">✓</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-indent">↳ Sr. Consultant ND EU</td><td>n/a</td><td>n/a</td><td>n/a</td><td class="td-check">✓</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-indent">↳ Medior technical specialist</td><td>n/a</td><td>n/a</td><td>n/a</td><td class="td-check">✓</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-indent">↳ Country manager South Europe</td><td>n/a</td><td>n/a</td><td>n/a</td><td class="td-check">✓</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-muted">Capex network</td><td>n/a</td><td>€250k</td><td>€250k</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-muted">Platform / other</td><td>n/a</td><td>€100k</td><td>€150k</td><td>€200k</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-bold">Total per year</td><td>n/a</td><td class="td-bold">€465k</td><td class="td-bold">€696k</td><td class="td-bold">€550k</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-muted">Cumulative</td><td>n/a</td><td>€465k</td><td>€1.16M</td><td>€1.71M</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+
+            <tr class="row-header"><td colspan="9">Headcount (excl. interns)</td></tr>
+            <tr><td class="td-bold">FTE</td><td class="td-bold">5</td><td class="td-bold">7</td><td class="td-bold">8</td><td class="td-bold">11</td><td class="td-bold">11</td><td class="td-bold">11+</td><td>n/a</td><td>n/a</td></tr>
+            <tr><td class="td-muted">Interns</td><td class="td-muted">2</td><td class="td-muted">4</td><td class="td-muted">6</td><td class="td-muted">6+</td><td>n/a</td><td>n/a</td><td>n/a</td><td>n/a</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       REVENUE OUTLOOK
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--light" id="revenue">
+    <div class="container">
+      <div class="section-label">Revenue outlook</div>
+      <h2>Network development is the base — CPO &amp; MSP are the scale</h2>
+      <p class="ic-intro">Network development is the stable, profitable base. CPO, MSP and hardware margin grow on top, funded by positions claimed today, not by future fundraising rounds.</p>
+
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="leg-dot" style="background:#185FA5"></span>Consulting</div>
+        <div class="chart-legend-item"><span class="leg-dot" style="background:#1D9E75"></span>CPO</div>
+        <div class="chart-legend-item"><span class="leg-dot" style="background:#BA7517"></span>MSP</div>
+        <div class="chart-legend-item"><span class="leg-dot" style="background:#888780"></span>Hardware margin</div>
+      </div>
+
+      <div class="chart-title">2025 – 2030: build phase</div>
+      <div class="chart-sub">Network development profitable, pilot network live, first CPO/MSP traction</div>
+      <div class="chart-wrap" style="height:260px; margin-bottom:2.5rem;"><canvas id="chart1"></canvas></div>
+
+      <div class="chart-title">2030 – 2040: growth phase</div>
+      <div class="chart-sub">Commercial electric aviation scales, CPO and MSP dominate the revenue mix</div>
+      <div class="chart-wrap" style="height:260px; margin-bottom:1.5rem;"><canvas id="chart2"></canvas></div>
+
+      <div class="tbl-wrap">
+        <table class="ic-tbl">
+          <thead>
+            <tr>
+              <th style="width:18%"></th>
+              <th>2030</th><th>2031</th><th>2032</th><th>2033</th>
+              <th>2034</th><th>2035</th><th>2037</th><th>2040</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="td-muted col-nd">Consulting</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td><td class="col-nd">€1.2M+</td></tr>
+            <tr><td class="td-muted col-cpo">CPO</td><td class="col-cpo">€150–300k</td><td class="col-cpo">€300–600k</td><td class="col-cpo">€600k–1M</td><td class="col-cpo">€1,5–4M</td><td class="col-cpo">€3–8M</td><td class="col-cpo">€5–15M</td><td class="col-cpo">€15–30M</td><td class="col-cpo">€25–50M</td></tr>
+            <tr><td class="td-muted col-msp">MSP</td><td class="col-msp">€150–300k</td><td class="col-msp">€300–600k</td><td class="col-msp">€600k–1M</td><td class="col-msp">€1,5–4M</td><td class="col-msp">€3–8M</td><td class="col-msp">€5–15M</td><td class="col-msp">€15–30M</td><td class="col-msp">€25–50M</td></tr>
+            <tr><td class="td-muted col-hw">Hardware margin</td><td class="col-hw">€100–200k</td><td class="col-hw">€150–300k</td><td class="col-hw">€200–400k</td><td class="col-hw">€500k–1M</td><td class="col-hw">€1–2M</td><td class="col-hw">€2–4M</td><td class="col-hw">€3–6M</td><td class="col-hw">€5–10M</td></tr>
+            <tr><td class="td-bold col-tot">Total</td><td class="col-tot">€1,6–2M</td><td class="col-tot">€2–3,4M</td><td class="col-tot">€2,6–4,6M</td><td class="col-tot">€4,7–10M</td><td class="col-tot">€8,4–19M</td><td class="col-tot">€13,4–31M</td><td class="col-tot">€34,4–67M</td><td class="col-tot">€56–111M</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="chart-note">Ranges reflect uncertainty in adoption pace. Consulting grows beyond €1.2M as the team scales to 11 FTE across NL, DACH &amp; Nordics and EU. CPO and MSP are the scalable infrastructure play from 2029 onward.</p>
+    </div>
+  </section>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       SCENARIOS
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--grey" id="scenarios">
+    <div class="container">
+      <div class="section-label">Timing resilience</div>
+      <h2>The question is not <em>whether</em> — it's <em>when</em></h2>
+      <p class="ic-intro">Electric aviation will happen. Every major OEM, every airport authority, and every national aviation regulator is working toward it. The pace is uncertain — but the direction is not. NRG2fly has built a business model that makes the answer irrelevant.</p>
+
+      <div class="timing-pillars">
+        <div class="timing-pillar">
+          <div class="pillar-icon">📋</div>
+          <div class="pillar-title">Certification &amp; regulation</div>
+          <div class="pillar-body">EASA certification timelines, national airspace rules, and ground handling regulations all affect adoption speed. Our consulting work puts us in the room where these decisions are made — and our network position is the result.</div>
+        </div>
+        <div class="timing-pillar">
+          <div class="pillar-icon">✈️</div>
+          <div class="pillar-title">OEM market entry &amp; scale</div>
+          <div class="pillar-body">Vaeridion, Elysian, Beta, Pipistrel and others are racing toward commercial readiness. Production capacity and delivery timelines drive the kWh volumes on our network. We are already their preferred infrastructure partner.</div>
+        </div>
+        <div class="timing-pillar">
+          <div class="pillar-icon">🏛️</div>
+          <div class="pillar-title">Airport transformation</div>
+          <div class="pillar-body">Airports need power infrastructure, permits, and ground handling transformation before the first electric aircraft can land. NRG2fly guides that process — and claims the charging position in the same motion.</div>
+        </div>
+      </div>
+
+      <div class="chart-legend" style="margin-top:1.5rem;">
+        <div class="chart-legend-item"><span class="leg-line" style="background:#185FA5;"></span>Consulting (identical in both scenarios)</div>
+        <div class="chart-legend-item"><span class="leg-line" style="background:#1D9E75;"></span>CPO + MSP — current plan</div>
+        <div class="chart-legend-item"><span class="leg-dash" style="color:#BA7517;"></span>CPO + MSP — market delayed</div>
+      </div>
+      <div class="chart-wrap" style="height:320px; margin:1rem 0;"><canvas id="scChart"></canvas></div>
+
+      <div class="scenario-grid">
+        <div class="scenario-card scenario-card--green">
+          <div class="scenario-card-title">Current plan — market on schedule</div>
+          <div class="scenario-card-body">Certification, regulation and airport adoption proceed as expected. Electric aircraft manufacturers make their market entry around 2029–2030 and scale production. CPO/MSP grows substantially from 2030. NRG2fly is already positioned at 35+ locations with a locked-in network advantage.</div>
+        </div>
+        <div class="scenario-card scenario-card--amber">
+          <div class="scenario-card-title">Market delayed — everything shifts right</div>
+          <div class="scenario-card-body">Regulation, political will, certification or airport adoption take longer. OEM market entry and production scale-up shift to the right. Everything moves slower and stays lower. Network development continues to run profitably throughout. More positions are claimed at a lower cost. The market position is stronger when the market does break open.</div>
+        </div>
+      </div>
+
+      <div class="ic-callout" style="margin-top:1.5rem;">
+        The network development baseline is identical in both scenarios. The only variable is when and how fast CPO and MSP grow — not whether. NRG2fly is not a bet on timing. It is a bet on direction.
+      </div>
+    </div>
+  </section>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       CASH TIMING
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--light" id="cash">
+    <div class="container">
+      <div class="section-label">Cash position</div>
+      <h2>Cash timing — when capital is needed and why</h2>
+      <p class="ic-intro">Three tranches timed to maintain a positive cash position throughout the build phase. Each tranche is drawn as capital is actively deployed into people, network capex, and platform.</p>
+
+      <div class="chart-legend">
+        <div class="chart-legend-item"><span class="leg-line" style="background:#185FA5;"></span>Actual</div>
+        <div class="chart-legend-item"><span class="leg-dash" style="color:#888780; opacity:0.7;"></span>Without investment (hypothetical)</div>
+        <div class="chart-legend-item"><span class="leg-line" style="background:#1D9E75;"></span>With investment</div>
+      </div>
+      <div class="chart-wrap" style="height:320px;"><canvas id="cashChart"></canvas></div>
+      <p class="chart-note">Actuals through March 2026 (Exact Online). Cash position maintained above €100k throughout. Burn rate includes operating costs, six new hires, pilot network capex (€500k over 2026/2027) and platform development. From Q4 2027, network development revenue covers operating costs.</p>
+    </div>
+  </section>
+
+  <hr class="ic-divider" />
+
+  <!-- ══════════════════════════════════════════════
+       THE ASK
+  ══════════════════════════════════════════════ -->
+  <section class="ic-section ic-section--sage" id="ask">
+    <div class="container">
+      <div class="section-label">The ask</div>
+      <h2>What we are asking for</h2>
+      <p class="ic-intro">NRG2fly is requesting €1.85M structured across three CLAs, deployed over 2026–2028. The investment funds a profitable network development business, a physical charging network across the Netherlands, and the people and platform needed to expand across Europe.</p>
+
+      <div class="ic-callout">
+        With this investment, NRG2fly accelerates what we have already started in Flevoland, building the charging infrastructure backbone for electric aviation across Europe.
+      </div>
+
+      <div class="ic-cards3" style="margin-top:2rem;">
+        <div class="ic-card">
+          <div class="ic-card-badge badge-blue">CLA 1</div>
+          <div class="ic-card-num">€375k</div>
+          <div class="ic-card-label">May 2026 — upon IC approval</div>
+          <div class="ic-card-body">Bridge operating loss. Onboard Sr. Consultant ND NL (June) and Junior consultant (July). Start network capex deployment.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-badge badge-teal">CLA 2</div>
+          <div class="ic-card-num">€675k</div>
+          <div class="ic-card-label">August 2026</div>
+          <div class="ic-card-body">Accelerate network capex. Start MSP platform development. Cover operating costs as team scales.</div>
+        </div>
+        <div class="ic-card">
+          <div class="ic-card-badge badge-amber">CLA 3</div>
+          <div class="ic-card-num">€800k</div>
+          <div class="ic-card-label">January 2027</div>
+          <div class="ic-card-body">Onboard Country manager DACH &amp; Nordics. Complete pilot network. Finalize and launch MSP platform.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+       CONTACT
+  ══════════════════════════════════════════════ -->
+  <section class="ic-contact" id="contact">
+    <div class="section-label">Questions?</div>
+    <h2>We look forward to May 7th</h2>
+    <p>
+      Questions before the meeting? Reach out directly.<br />
+      Everything in this portal is confidential — please do not share or forward.
+    </p>
+    <div class="contact-chips">
+      <a href="mailto:merlijn@nrg2fly.com" class="contact-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        merlijn@nrg2fly.com
+      </a>
+      <a href="tel:+31615896506" class="contact-chip">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14v2.92z"/></svg>
+        +31 6 15 89 65 06
+      </a>
+    </div>
+    <p style="margin-top:2.5rem; font-size:0.78rem; color:rgba(255,255,255,0.25);">
+      NRG2fly B.V. · KvK 89085843 · This document is strictly confidential.
+    </p>
+  </section>
+
+  <script>
+    /* ── Login gate ── */
+    (function () {
+      var PASS = 'letscharge!';
+      var KEY  = 'nrg2fly_ic_auth';
+      var gate  = document.getElementById('login-gate');
+      var input = document.getElementById('pw-input');
+      var btn   = document.getElementById('pw-submit');
+      var err   = document.getElementById('login-error');
+
+      function unlock() {
+        sessionStorage.setItem(KEY, '1');
+        gate.classList.add('hidden');
+        window.scrollTo(0, 0);
+        setTimeout(initCharts, 300);
+      }
+
+      if (sessionStorage.getItem(KEY) === '1') { unlock(); }
+
+      btn.addEventListener('click', function () {
+        if (input.value === PASS) { unlock(); }
+        else { err.textContent = 'Incorrect access code. Try again.'; input.value = ''; input.focus(); }
+      });
+      input.addEventListener('keydown', function (e) { if (e.key === 'Enter') btn.click(); });
+    }());
+
+    /* ── Charts ── */
+    function initCharts() {
+      var textCol = 'rgba(0,0,0,0.38)';
+      var gridCol = 'rgba(0,0,0,0.05)';
+      var grayLine = 'rgba(136,135,128,0.5)';
+
+      function fmt(v) {
+        if (v === null) return 'n/a';
+        if (Math.abs(v) >= 1e6) return '€' + (v/1e6).toFixed(1) + 'M';
+        if (Math.abs(v) >= 1000) return '€' + (v/1000).toFixed(0) + 'k';
+        return '€' + Math.round(v);
+      }
+
+      /* P&L */
+      new Chart(document.getElementById('plChart'), {
+        type: 'bar',
+        data: {
+          labels: ['2025','2026','2027','2028'],
+          datasets: [
+            { label: 'Revenue', data: [247,428,820,1155], backgroundColor: '#185FA5' },
+            { label: 'Costs',   data: [421,551,818,1129], backgroundColor: 'rgba(0,0,0,0.08)' },
+            { label: 'Result',  data: [-174,-123,2,26], backgroundColor: [-174,-123,2,26].map(function(v){ return v>=0?'#1D9E75':'#A32D2D'; }) }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label+': €'+Math.abs(ctx.parsed.y)+'k'+(ctx.parsed.y<0?' (loss)':' (profit)'); } } }
+          },
+          scales: {
+            x: { ticks: { color: textCol, font: { size:12 } }, grid: { color: gridCol } },
+            y: { ticks: { color: textCol, font: { size:11 }, callback: function(v){ return '€'+v+'k'; } }, grid: { color: gridCol } }
+          }
+        }
+      });
+
+      /* Stacked helpers */
+      function mkDs(c,cpo,msp,hw) {
+        return [
+          { label:'Network development', data:c,   backgroundColor:'#185FA5', stack:'s' },
+          { label:'CPO',                 data:cpo,  backgroundColor:'#1D9E75', stack:'s' },
+          { label:'MSP',                 data:msp,  backgroundColor:'#BA7517', stack:'s' },
+          { label:'Hardware',            data:hw,   backgroundColor:'#888780', stack:'s' }
+        ];
+      }
+      function mkOpts(yMax,step) {
+        return {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { callbacks: {
+              label: function(ctx){ return ctx.dataset.label+': '+fmt(ctx.parsed.y); },
+              footer: function(items){ return 'Total: '+fmt(items.reduce(function(s,i){ return s+i.parsed.y; },0)); }
+            }}
+          },
+          scales: {
+            x: { stacked:true, ticks:{ color:textCol, font:{size:12}, autoSkip:false }, grid:{ color:gridCol } },
+            y: { stacked:true, min:0, max:yMax, ticks:{ color:textCol, font:{size:11}, stepSize:step, callback:function(v){ return fmt(v); } }, grid:{ color:gridCol } }
+          }
+        };
+      }
+
+      new Chart(document.getElementById('chart1'), {
+        type: 'bar',
+        data: { labels: ['2025','2026','2027','2028','2029','2030'], datasets: mkDs(
+          [247000,428000,820000,1155000,1200000,1200000],
+          [3000,5000,17500,17500,75000,225000],
+          [0,0,7500,7500,50000,225000],
+          [0,30000,40000,60000,115000,150000]
+        )},
+        options: mkOpts(2000000,250000)
+      });
+
+      new Chart(document.getElementById('chart2'), {
+        type: 'bar',
+        data: { labels: ['2030','2033','2035','2040'], datasets: mkDs(
+          [1000000,1000000,1000000,1000000],
+          [225000,2750000,15000000,50000000],
+          [225000,2750000,15000000,50000000],
+          [150000,750000,3000000,10000000]
+        )},
+        options: mkOpts(115000000,20000000)
+      });
+
+      /* Scenario chart */
+      new Chart(document.getElementById('scChart'), {
+        type: 'line',
+        data: {
+          labels: ['2025','2026','2027','2028','2029','2030','2031','2033','2035','2037','2040'],
+          datasets: [
+            { label:'Consulting', data:[247000,428000,820000,1155000,1200000,1200000,1200000,1200000,1200000,1200000,1200000], borderColor:'#185FA5', borderWidth:3, pointRadius:3, pointBackgroundColor:'#185FA5', fill:false, tension:0.3 },
+            { label:'CPO + MSP (current plan)', data:[3000,5000,25000,35000,125000,600000,2000000,7000000,30000000,60000000,80000000], borderColor:'#1D9E75', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#1D9E75', fill:false, tension:0.4 },
+            { label:'CPO + MSP (market delayed)', data:[3000,5000,15000,20000,40000,80000,150000,500000,2000000,6000000,15000000], borderColor:'#BA7517', borderWidth:2, borderDash:[6,4], pointRadius:3, pointBackgroundColor:'#BA7517', fill:false, tension:0.4 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display:false },
+            tooltip: { callbacks: { label: function(ctx){ return ctx.dataset.label+': '+fmt(ctx.parsed.y); } } }
+          },
+          scales: {
+            x: { ticks:{ color:textCol, font:{size:11}, autoSkip:false, maxRotation:45 }, grid:{ color:gridCol } },
+            y: {
+              type: 'logarithmic', min: 100000,
+              ticks: { color:textCol, font:{size:11}, callback: function(v){
+                var s=[100000,500000,1000000,5000000,10000000,50000000,100000000];
+                if(s.some(function(x){ return Math.abs(v-x)/x<0.01; })) return fmt(v);
+                return '';
+              }},
+              grid: { color:gridCol }
+            }
+          }
+        }
+      });
+
+      /* Cash chart */
+      var cashLabels = ['Jan 26','Feb 26','Mar 26','Apr 26','May 26','Jun 26','Jul 26','Aug 26','Sep 26','Oct 26','Nov 26','Dec 26','Jan 27','Feb 27','Mar 27','Apr 27','May 27','Jun 27','Jul 27','Aug 27','Sep 27','Oct 27','Nov 27','Dec 27'];
+      var actuals    = [128054,93960,105911,71585,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null];
+      var noInvest   = [null,null,null,71585,73315,49664,23078,-1704,-36486,-58350,-83132,-139914,null,null,null,null,null,null,null,null,null,null,null,null];
+      var withInvest = [null,null,null,71585,381585,303585,215585,802585,704585,606585,508585,410585,1100585,960585,820585,680585,530585,380585,250585,150585,110585,100585,100585,120585];
+      var trancheTooltip = {4:'Tranche 1: +€375k', 7:'Tranche 2: +€675k', 12:'Tranche 3: +€800k'};
+      var tranchePlugin = {
+        id: 'trancheBg',
+        beforeDraw: function(chart) {
+          var ctx=chart.ctx, ca=chart.chartArea, sc=chart.scales;
+          if(!ca) return;
+          [[4,1],[7,2],[12,3]].forEach(function(pair){
+            var idx=pair[0];
+            var xC=sc.x.getPixelForValue(idx);
+            var bW=Math.abs(sc.x.getPixelForValue(1)-sc.x.getPixelForValue(0));
+            ctx.save(); ctx.fillStyle='rgba(24,95,165,0.07)';
+            ctx.fillRect(xC-bW*0.5,ca.top,bW,ca.height); ctx.restore();
+            ctx.save(); ctx.font='600 13px sans-serif'; ctx.fillStyle='rgba(24,95,165,0.85)'; ctx.textAlign='center';
+            ctx.fillText(pair[1],xC,ca.top+18); ctx.restore();
+          });
+          var yF=sc.y.getPixelForValue(100000);
+          ctx.save(); ctx.setLineDash([4,4]); ctx.strokeStyle='rgba(186,117,23,0.6)'; ctx.lineWidth=1;
+          ctx.beginPath(); ctx.moveTo(ca.left,yF); ctx.lineTo(ca.right,yF); ctx.stroke(); ctx.restore();
+          ctx.save(); ctx.font='11px sans-serif'; ctx.fillStyle='rgba(186,117,23,0.85)'; ctx.textAlign='center';
+          ctx.fillText('min. buffer €100k',ca.left+(ca.right-ca.left)/2,yF-5); ctx.restore();
+        }
+      };
+
+      new Chart(document.getElementById('cashChart'), {
+        type: 'line',
+        plugins: [tranchePlugin],
+        data: {
+          labels: cashLabels,
+          datasets: [
+            { label:'Actual', data:actuals, borderColor:'#185FA5', borderWidth:3, pointRadius:5, pointBackgroundColor:'#185FA5', fill:false, tension:0.2, spanGaps:false },
+            { label:'Without investment', data:noInvest, borderColor:grayLine, borderWidth:1.5, borderDash:[6,4], pointRadius:3, pointBackgroundColor:grayLine, pointBorderColor:grayLine, fill:false, tension:0.2, spanGaps:false },
+            { label:'With investment', data:withInvest, borderColor:'#1D9E75', borderWidth:2.5, pointRadius:3, pointBackgroundColor:'#1D9E75', fill:{target:'origin',above:'rgba(29,158,117,0.05)',below:'rgba(163,45,45,0.05)'}, tension:0.2, spanGaps:false }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display:false },
+            tooltip: { callbacks: {
+              label: function(ctx){ if(ctx.parsed.y===null) return null; return ctx.dataset.label+': '+fmt(ctx.parsed.y); },
+              afterBody: function(items){ var t=trancheTooltip[items[0]&&items[0].dataIndex]; if(t) return [t]; return []; }
+            }}
+          },
+          scales: {
+            x: { ticks:{ color:textCol, font:{size:10}, autoSkip:false, maxRotation:45 }, grid:{ color:gridCol } },
+            y: { ticks:{ color:textCol, font:{size:11}, callback:function(v){ return fmt(v); } }, grid:{ color:gridCol } }
+          }
+        }
+      });
+    }
+
+    /* ── Table scroll — hide fade when at end ── */
+    (function () {
+      var wrap = document.getElementById('overview-tbl-wrap');
+      if (!wrap) return;
+      function check() {
+        var atEnd = wrap.scrollLeft + wrap.clientWidth >= wrap.scrollWidth - 8;
+        wrap.classList.toggle('at-end', atEnd);
+      }
+      wrap.addEventListener('scroll', check, { passive: true });
+      check();
+    }());
+
+    /* ── Timeline entrance animation ── */
+    (function () {
+      var items = document.querySelectorAll('.home-tl-item');
+      if (!items.length) return;
+      var obs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('tl-visible'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      items.forEach(function (el) { obs.observe(el); });
+    }());
+
+    /* ── Section nav active state ── */
+    (function () {
+      var links = document.querySelectorAll('.section-nav-link');
+      var sections = ['welcome','business-model','investment','team','pl','revenue','scenarios','cash','ask','contact'];
+      function onScroll() {
+        var scrollY = window.scrollY + window.innerHeight * 0.3;
+        var active = sections[0];
+        sections.forEach(function(id) {
+          var el = document.getElementById(id);
+          if (el && el.getBoundingClientRect().top + window.scrollY <= scrollY) active = id;
+        });
+        links.forEach(function(l) {
+          l.classList.toggle('active', l.getAttribute('href') === '#' + active);
+        });
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }());
+
+    /* ── Fun fact: live date + flight data ── */
+    (function () {
+      var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      var dateStr = (new Date()).getDate() + ' ' + months[(new Date()).getMonth()] + ' ' + (new Date()).getFullYear();
+      document.querySelectorAll('#eflight-today, .eflight-today-copy').forEach(function(el) { el.textContent = dateStr; });
+    })();
+
+    (function () {
+      var eflightData = null;
+      var eflightAnimated = false;
+
+      function animateCount(el, target, duration) {
+        var startTime = null;
+        function step(ts) {
+          if (!startTime) startTime = ts;
+          var p = Math.min((ts - startTime) / duration, 1);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(eased * target).toLocaleString('nl-NL');
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      function loadEflightData() {
+        fetch('/eflight-proxy.php')
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            eflightData = {};
+            data.forEach(function(item) {
+              if (item.label === 'Electric flights') eflightData.flights = item.count;
+              if (item.label === 'Distance flown') eflightData.distance = item.count;
+            });
+            if (eflightAnimated) {
+              if (eflightData.flights) document.getElementById('eflight-flights').textContent = eflightData.flights.toLocaleString('nl-NL');
+              if (eflightData.distance) document.getElementById('eflight-distance').textContent = eflightData.distance.toLocaleString('nl-NL');
+            }
+          })
+          .catch(function() {});
+      }
+      loadEflightData();
+      setInterval(loadEflightData, 5 * 60 * 1000);
+
+      var funfactSection = document.getElementById('funfact-section');
+      var funfactObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting && !eflightAnimated) {
+            eflightAnimated = true;
+            if (eflightData) {
+              if (eflightData.flights) animateCount(document.getElementById('eflight-flights'), eflightData.flights, 1800);
+              if (eflightData.distance) animateCount(document.getElementById('eflight-distance'), eflightData.distance, 2200);
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+      if (funfactSection) funfactObserver.observe(funfactSection);
+    }());
+  </script>
+</body>
+</html>
