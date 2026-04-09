@@ -420,16 +420,16 @@
     /* ── Team layout ── */
     .team-wrap {
       display: grid;
-      grid-template-columns: 1fr 28px 1fr 28px 1fr 28px 1fr;
-      gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
       align-items: start;
       margin: 1.5rem 0;
     }
-    @media (max-width: 1100px) {
-      .team-wrap { grid-template-columns: 1fr 1fr; }
-      .team-arrow { display: none; }
+    .team-arrow { display: none; }
+    @media (max-width: 860px) {
+      .team-wrap { grid-template-columns: repeat(2, 1fr); }
     }
-    @media (max-width: 600px) {
+    @media (max-width: 500px) {
       .team-wrap { grid-template-columns: 1fr; }
     }
     .team-phase {
@@ -1312,7 +1312,6 @@
           </div>
         </div>
 
-        <div class="team-arrow">→</div>
 
         <!-- Phase 2 -->
         <div class="team-phase">
@@ -1345,7 +1344,6 @@
           </div>
         </div>
 
-        <div class="team-arrow">→</div>
 
         <!-- Phase 3 -->
         <div class="team-phase">
@@ -1380,7 +1378,6 @@
           </div>
         </div>
 
-        <div class="team-arrow">→</div>
 
         <!-- Phase 4 -->
         <div class="team-phase" style="border-color:#1d9e75;">
